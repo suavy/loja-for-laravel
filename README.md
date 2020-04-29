@@ -21,6 +21,15 @@ composer require suavy/loja-for-laravel
 ### Backend
 Simply include ``todo`` on your existing backpack sidebar, or configure backpack first to get started.
 ### Do It Yourself Frontend
+#### Available routes
+If you want you can add a prefix to every loja routes, change "routes_prefix" on config file.
+
+| / | $featuredProducts |
+| :---: |:---:| :---:|
+| /category/{id} | $featuredProducts |
+| /collection/{id} | $featuredProducts |
+| /product/{id} | $featuredProducts |
+
 #### Helper features
 ```
 loja_categories()
@@ -29,12 +38,4 @@ loja_collections()
 loja_collection($id)
 loja_products()
 loja_product($id)
-```
-#### Available routes
-``` php
-/
-/category/{id}
-/collection/{id}
-/product/{id}
-
 ```
