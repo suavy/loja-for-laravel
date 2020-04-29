@@ -7,6 +7,8 @@
 
 LOJA is a [Laravel](https://laravel.com/) package that help you add eCommerce features to your working Laravel application. LOJA comes with a functional backend (easy to add on existing [Backpack](https://backpackforlaravel.com/) admin panel, or in a new one) and a DIY frontend.
 
+__:warning: THIS IS CURRENTLY IN DEVLOPMENT AND NOT WORKING__
+
 ## Installation
 
 You can install the package via composer:
