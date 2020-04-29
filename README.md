@@ -22,7 +22,7 @@ composer require suavy/loja-for-laravel
 Simply include ``todo`` on your existing backpack sidebar, or configure backpack first to get started.
 ### Do It Yourself Frontend
 #### Helper features
-``` php
+```
 loja_categories()
 loja_category($id)
 loja_collections()
