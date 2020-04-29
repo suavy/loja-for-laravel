@@ -1,11 +1,11 @@
-# Very short description of the package
+# LOJA is the beginning of your custom ecommerce on Laravel
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/suavy/loja-for-laravel.svg?style=flat-square)](https://packagist.org/packages/suavy/loja-for-laravel)
 [![Build Status](https://img.shields.io/travis/suavy/loja-for-laravel/master.svg?style=flat-square)](https://travis-ci.org/suavy/loja-for-laravel)
 [![Quality Score](https://img.shields.io/scrutinizer/g/suavy/loja-for-laravel.svg?style=flat-square)](https://scrutinizer-ci.com/g/suavy/loja-for-laravel)
 [![Total Downloads](https://img.shields.io/packagist/dt/suavy/loja-for-laravel.svg?style=flat-square)](https://packagist.org/packages/suavy/loja-for-laravel)
 
-This is where your description should go. Try and limit it to a paragraph or two, and maybe throw in a mention of what PSRs you support to avoid any confusion with users and contributors.
+LOJA is a [Laravel](https://laravel.com/) package that help you add eCommerce features to your working Laravel application. LOJA comes with a functional backend (easy to add on existing [Backpack](https://backpackforlaravel.com/) admin panel, or in a new one) and a DIY frontend.
 
 ## Installation
 
@@ -16,38 +16,23 @@ composer require suavy/loja-for-laravel
 ```
 
 ## Usage
-
+### Backend
+Simply include ``todo`` on your existing backpack sidebar, or configure backpack first to get started.
+### Do It Yourself Frontend
+#### Helper features
 ``` php
-// Usage description here
+loja_categories()
+loja_category($id)
+loja_collections()
+loja_collection($id)
+loja_products()
+loja_product($id)
 ```
+#### Available routes
+``` php
+/
+/category/{id}
+/collection/{id}
+/product/{id}
 
-### Testing
-
-``` bash
-composer test
 ```
-
-### Changelog
-
-Please see [CHANGELOG](CHANGELOG.md) for more information what has changed recently.
-
-## Contributing
-
-Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
-
-### Security
-
-If you discover any security related issues, please email contact@suavy.be instead of using the issue tracker.
-
-## Credits
-
-- [Suavy](https://github.com/suavy)
-- [All Contributors](../../contributors)
-
-## License
-
-The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
-
-## Laravel Package Boilerplate
-
-This package was generated using the [Laravel Package Boilerplate](https://laravelpackageboilerplate.com).
