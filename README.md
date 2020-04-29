@@ -24,24 +24,21 @@ Simply include ``todo`` on your existing backpack sidebar, or configure backpack
 
 ### Do It Yourself Frontend
 
-blabla
+#### Routes and "views location" (with their variables)
+LOJA don't create views for you, you create the views (at the right location) and you will get all the vars that you need to make your beautiful frontend.
 
-| Route | View | Variables |
+| route | view | variables |
 |---|---|---|
 | / |  | $featuredProducts |
-| /category/{id} |  |  |
-| /collection/{id} |  |  |
-| /product/{id} |  |  |
+| /category/{id} |  |  $category |
+| /collection/{id} |  | $collection |
+| /product/{id} |  | $product |
 
-- If you want you can add a prefix to every loja routes, change "routes_prefix" on config file.
-- aze
+> If you want you can add a prefix to every LOJA routes, simply update ``routes_prefix`` on config file.
 
 #### Helper features
-```
-loja_categories()
-loja_category($id)
-loja_collections()
-loja_collection($id)
-loja_products()
-loja_product($id)
-```
+
+| helper function | description |  |
+|---|---|---|
+| loja_categories | return a Collection of categories| |
+| loja_collections | return a Collection of collections| |
