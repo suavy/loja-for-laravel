@@ -20,25 +20,44 @@ composer require suavy/loja-for-laravel
 ## Usage
 
 ### Backend
-Simply include ``todo`` on your existing backpack sidebar, or configure backpack first to get started.
+The backend is based on [Backpack for Laravel](https://github.com/Laravel-Backpack) which is free for non-commercial use and $69/project for commercial use. Please see [backpackforlaravel.com](https://backpackforlaravel.com/) for more information.
+
+
+To get started, simply include ``@include('.../views/loja-sidebar-content')`` on your backpack sidebar.
+
+> If you never used backpack before, you will need to learn some basics before getting started.
 
 ### Do It Yourself Frontend
 
 #### Routes and "views location" (with their variables)
-LOJA don't create views for you, you create the views (at the right location) and you will get all the vars that you need to make your beautiful frontend.
-
-| route | view | variables |
-|---|---|---|
-| / |  | $featuredProducts |
-| /category/{id} |  |  $category |
-| /collection/{id} |  | $collection |
-| /product/{id} |  | $product |
+LOJA only create empty views for you, but in each view you have access to the needed variables and their attributes to make your beautiful frontend.
 
 > If you want you can add a prefix to every LOJA routes, simply update ``routes_prefix`` on config file.
 
+| route | view | variables |
+|---|---|---|
+| / |  .../home/index.blade.php | $featuredProducts |
+| /cart | .../cart/index.blade.php | $cart |
+| /category/{id} | .../category/show.blade.php |  $category |
+| /collection/{id} | .../collection/show.blade.php | $collection |
+| /product/{id} | .../product/show.blade.php | $product, $relatedProducts |
+| /user/orders | .../user/order/index.blade.php | variables |
+| /user/order/{id} | .../user/order/show.blade.php | variables |
+| route | view | variables |
+| route | view | variables |
+
+
 #### Helper features
 
-| helper function | description |  |
+| helper function | description | additional information |
 |---|---|---|
-| loja_categories | return a Collection of categories| |
-| loja_collections | return a Collection of collections| |
+| loja_cart_button | return the card button html | ... |
+| loja_categories | return a Collection of categories| ... |
+| loja_collections | return a Collection of collections| ... |
+
+#### Trait ...
+| function/attribute | description | additional information |
+|---|---|---|
+|  |  | ... |
+|  |  | ... |
+|  |  | ... |
