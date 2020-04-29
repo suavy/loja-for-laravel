@@ -23,11 +23,11 @@ You need to follow the [Backpack for Laravel](https://backpackforlaravel.com/) i
 
 After having your backpack installation ready:
 
+- Publish config file and configure
 - Include Migrations + php artisan migrate
 - Front routes integration
 - Backpack sidebar inclusion :
 To get started, simply include ``@include('.../views/loja-sidebar-content')`` on your backpack sidebar.
-- Config file configuration
 - Stripe configuration
 - ...
 
@@ -39,8 +39,7 @@ To get started, simply include ``@include('.../views/loja-sidebar-content')`` on
 ### Frontend (Do It Yourself)
 LOJA only create empty views for you, but in each view you have access to the needed variables and their attributes to make your beautiful frontend like you always do.
 
-#### Available routes/views
-> If you want you can add a prefix to every LOJA routes, simply update ``routes_prefix`` on config file.
+#### Available routes/views (with their variables)
 
 | route | route name | view | variables |
 |---|---|---|---|
@@ -52,7 +51,9 @@ LOJA only create empty views for you, but in each view you have access to the ne
 | /user/orders | loja.user.order.index | .../user/order/index.blade.php | $orders |
 | /user/order/{id} | loja.user.order.show | .../user/order/show.blade.php | $order |
 
-#### Helper features
+> You can add a prefix to every LOJA routes updating the ``routes_prefix`` on config file.
+
+#### Helper features (available everywhere)
 
 | helper function | description |
 |---|---|
