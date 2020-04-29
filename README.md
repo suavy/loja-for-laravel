@@ -7,25 +7,32 @@
 
 LOJA is a [Laravel](https://laravel.com/) package that help you add eCommerce features to your working Laravel application. LOJA comes with a functional backend (easy to add on existing [Backpack](https://backpackforlaravel.com/) admin panel, or in a new one) and a DIY frontend.
 
-__:warning: THIS IS CURRENTLY IN DEVLOPMENT AND NOT WORKING__
+__:warning: THIS IS CURRENTLY IN DEVELOPMENT AND NOT WORKING__
 
 ## Installation
 
-You can install the package via composer:
+Install the package via composer:
 
 ```bash
 composer require suavy/loja-for-laravel
 ```
 
+>Please, note that the package comes with [Backpack for Laravel](https://backpackforlaravel.com/) which is free for non-commercial use only.
+
+>You need to follow the [Backpack for Laravel](https://backpackforlaravel.com/) installation first if you don't have it already in your project. If you are not familiar with Backpack, it's time to start!
+
+After having your backpack installation ready, next (todo) :
+
+- Migrations + php artisan migrate
+- Front routes integration
+- Backpack sidebar inclusion :
+To get started, simply include ``@include('.../views/loja-sidebar-content')`` on your backpack sidebar.
+- ...
+
 ## Usage
 
 ### Backend
-The backend is based on [Backpack for Laravel](https://github.com/Laravel-Backpack) which is free for non-commercial use and $69/project for commercial use. Please see [backpackforlaravel.com](https://backpackforlaravel.com/) for more information.
-
-
-To get started, simply include ``@include('.../views/loja-sidebar-content')`` on your backpack sidebar.
-
-> If you never used backpack before, you will need to learn some basics before getting started.
+> Everything was already done during the installation. So you can start using your backend now :money_mouth_face:
 
 ### Do It Yourself Frontend
 
@@ -34,26 +41,24 @@ LOJA only create empty views for you, but in each view you have access to the ne
 
 > If you want you can add a prefix to every LOJA routes, simply update ``routes_prefix`` on config file.
 
-| route | view | variables |
-|---|---|---|
-| / |  .../home/index.blade.php | $featuredProducts |
-| /cart | .../cart/index.blade.php | $cart |
-| /category/{id} | .../category/show.blade.php |  $category |
-| /collection/{id} | .../collection/show.blade.php | $collection |
-| /product/{id} | .../product/show.blade.php | $product, $relatedProducts |
-| /user/orders | .../user/order/index.blade.php | variables |
-| /user/order/{id} | .../user/order/show.blade.php | variables |
-| route | view | variables |
-| route | view | variables |
+| route | route name | view | variables |
+|---|---|---|---|
+| / | loja.home | .../home/index.blade.php | $featuredProducts |
+| /cart | loja.cart | .../cart/index.blade.php | $cart |
+| /category/{id} | loja.category.show | .../category/show.blade.php |  $category |
+| /collection/{id} | loja.collection.show | .../collection/show.blade.php | $collection |
+| /product/{id} | loja.product.show | .../product/show.blade.php | $product, $relatedProducts |
+| /user/orders | loja.user.order.index | .../user/order/index.blade.php | $orders |
+| /user/order/{id} | loja.user.order.show | .../user/order/show.blade.php | $order |
 
 
 #### Helper features
 
 | helper function | description | additional information |
 |---|---|---|
-| loja_cart_button | return the card button html | ... |
 | loja_categories | return a Collection of categories| ... |
 | loja_collections | return a Collection of collections| ... |
+| loja_products(...) | return a Collection of products | ... |
 
 #### Trait ...
 | function/attribute | description | additional information |
