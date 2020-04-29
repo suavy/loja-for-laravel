@@ -19,26 +19,27 @@ composer require suavy/loja-for-laravel
 
 >Please, note that the package comes with [Backpack for Laravel](https://backpackforlaravel.com/) which is free for non-commercial use only.
 
->You need to follow the [Backpack for Laravel](https://backpackforlaravel.com/) installation first if you don't have it already in your project. If you are not familiar with Backpack, it's time to start!
+You need to follow the [Backpack for Laravel](https://backpackforlaravel.com/) installation first if you don't have it already in your project. If you are not familiar with Backpack, it's time to start!
 
-After having your backpack installation ready, next (todo) :
+After having your backpack installation ready:
 
-- Migrations + php artisan migrate
+- Include Migrations + php artisan migrate
 - Front routes integration
 - Backpack sidebar inclusion :
 To get started, simply include ``@include('.../views/loja-sidebar-content')`` on your backpack sidebar.
+- Config file configuration
+- Stripe configuration
 - ...
 
 ## Usage
 
 ### Backend
-> Everything was already done during the installation. So you can start using your backend now :money_mouth_face:
+> Everything was already done during the installation. So you can start using your backend now :rocket:
 
-### Do It Yourself Frontend
+### Frontend (Do It Yourself)
+LOJA only create empty views for you, but in each view you have access to the needed variables and their attributes to make your beautiful frontend like you always do.
 
-#### Routes and "views location" (with their variables)
-LOJA only create empty views for you, but in each view you have access to the needed variables and their attributes to make your beautiful frontend.
-
+#### Available routes/views
 > If you want you can add a prefix to every LOJA routes, simply update ``routes_prefix`` on config file.
 
 | route | route name | view | variables |
@@ -51,18 +52,16 @@ LOJA only create empty views for you, but in each view you have access to the ne
 | /user/orders | loja.user.order.index | .../user/order/index.blade.php | $orders |
 | /user/order/{id} | loja.user.order.show | .../user/order/show.blade.php | $order |
 
-
 #### Helper features
 
-| helper function | description | additional information |
-|---|---|---|
-| loja_categories | return a Collection of categories| ... |
-| loja_collections | return a Collection of collections| ... |
-| loja_products(...) | return a Collection of products | ... |
+| helper function | description |
+|---|---|
+| loja_categories | return a Collection of categories |
+| loja_collections | return a Collection of collections |
+| loja_products(...) | return a Collection of products |
 
-#### Trait ...
-| function/attribute | description | additional information |
-|---|---|---|
-|  |  | ... |
-|  |  | ... |
-|  |  | ... |
+#### Trait (todo) ...
+| function/attribute | description |
+|---|---|
+|  |  |
+|  |  |
