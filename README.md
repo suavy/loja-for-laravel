@@ -17,19 +17,40 @@ Install the package via composer:
 composer require suavy/loja-for-laravel
 ```
 
->Please, note that the package comes with [Backpack for Laravel](https://backpackforlaravel.com/) which is free for non-commercial use only.
+> Please, note that the package comes with [Backpack for Laravel](https://backpackforlaravel.com/) which is free for non-commercial use only.
 
 You need to follow the [Backpack for Laravel](https://backpackforlaravel.com/) installation first if you don't have it already in your project. If you are not familiar with Backpack, it's time to start!
 
-After having your backpack installation ready:
+After having your backpack installation ready, it's time to do the LOJA installation.
 
-- Publish config file and configure
-- Include Migrations + php artisan migrate
-- Front routes integration
-- Backpack sidebar inclusion :
-To get started, simply include ``@include('.../views/loja-sidebar-content')`` on your backpack sidebar.
-- Stripe configuration
-- ...
+Start by publishing the config file, get a look at it and fill it! (Some configuration are required, so don't forget to do it)
+
+```bash
+php artisan vendor:publish ...
+```
+
+Next, publish migrations and migrate.
+```bash
+php artisan vendor:publish ...
+php artisan migrate
+```
+
+Add LOJA front routes to your web file (or custom) aka Front routes integration
+```bash
+...
+```
+
+Add LOJA Backpack sidebar to your current Backpack sidebar :
+```bash
+@include('.../views/loja-sidebar-content')
+```
+
+Add LOJA Backpack routes ....
+```bash
+...
+```
+
+- Stripe configuration ? or already done in main config ?
 
 ## Usage
 
@@ -64,18 +85,10 @@ LOJA only create empty views for you, but in each view you have access to the ne
 | cart.empty | - | empty the cart |
 | cart.product.update-quantity | $product, $diff | update product cart quantity |
 
-
-
 #### Helper features (available everywhere)
 
 | helper function | description |
 |---|---|
 | loja_categories | return a Collection of categories |
 | loja_collections | return a Collection of collections |
-| loja_products(...) | return a Collection of products |
-
-#### Trait (todo) ...
-| function/attribute | description |
-|---|---|
-|  |  |
-|  |  |
+| loja_products($params) | return a Collection of products |
