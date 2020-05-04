@@ -39,9 +39,10 @@ To get started, simply include ``@include('.../views/loja-sidebar-content')`` on
 ### Frontend (Do It Yourself)
 LOJA only create empty views for you, but in each view you have access to the needed variables and their attributes to make your beautiful frontend like you always do.
 
-#### Available routes
 > You can add a prefix to every LOJA routes updating the ``routes_prefix`` on config file.
-##### GET routes
+>
+#### GET routes
+
 | route | route name | view | variables |
 |---|---|---|---|
 | / | loja.home | .../home/index.blade.php | $featuredProducts |
@@ -54,7 +55,7 @@ LOJA only create empty views for you, but in each view you have access to the ne
 
 <!-- todo Missing checkout/payment routes -->
 
-##### POST routes
+#### POST routes
 
 | route name | parameters | description |
 |---|---|---|
