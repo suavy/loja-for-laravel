@@ -14,7 +14,8 @@ class CartController extends Controller
 
     public function index()
     {
-        $cart = "hello";
+        $cart = 'hello';
+
         return view('loja::cart.index', compact('cart'));
     }
 }
