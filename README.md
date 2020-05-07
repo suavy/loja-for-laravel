@@ -17,7 +17,7 @@ Install the package via composer:
 composer require suavy/loja-for-laravel
 ```
 
-> Please, note that the package comes with [Backpack for Laravel](https://backpackforlaravel.com/) which is free for non-commercial use only.
+> Please, note that the package is made for [Backpack for Laravel](https://backpackforlaravel.com/) which is free for non-commercial use only.
 
 You need to follow the [Backpack for Laravel](https://backpackforlaravel.com/) installation first if you don't have it already in your project. If you are not familiar with Backpack, it's time to start!
 
@@ -40,22 +40,26 @@ Publish views
 php artisan vendor:publish --provider="Suavy\LojaForLaravel\LojaForLaravelServiceProvider" --tag="views"
 ```
 
+<!--
 Add LOJA front routes to your web file (or custom) aka Front routes integration
 ```bash
-php artisan vendor:publish --provider="Suavy\LojaForLaravel\LojaForLaravelServiceProvider" --tag="views"
+...
 ```
+-->
 
 Add LOJA Backpack sidebar to your current Backpack sidebar :
 ```bash
-@include('.../views/loja-sidebar-content')
+@include('loja::admin.sidebar')
 ```
 
 Add LOJA Backpack routes ....
 ```bash
-...
+todo
 ```
 
+<!--
 - Stripe configuration ? or already done in main config ?
+-->
 
 ## Usage
 

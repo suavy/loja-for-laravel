@@ -2,13 +2,15 @@
 
 namespace Suavy\LojaForLaravel\Http\Controllers;
 
+use Suavy\LojaForLaravel\Events\ProductWasShown;
 use Suavy\LojaForLaravel\Models\Product;
 
 class ProductController extends Controller
 {
-    public function show()
+    public function show(Product $product)
     {
         $product = new Product();
-        return view('loja-for-laravel::product.show', compact('product'));
+        event(new ProductWasShown($product));
+        return view('loja::product.show', compact('product'));
     }
 }
