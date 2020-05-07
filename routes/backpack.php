@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Suavy\LojaForLaravel\Http\Controllers\Admin\ProductCrudController;
+
 // --------------------------
 // Custom Backpack Routes
 // --------------------------
@@ -17,5 +17,4 @@ Route::group([
     //Route::get('dashboard', 'AdminController@dashboard')->name('admin.dashboard');
     // crud routes
     Route::crud('product', 'ProductCrudController');
-
 }); // this should be the absolute last line of this file

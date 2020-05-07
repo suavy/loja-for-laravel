@@ -67,9 +67,7 @@ class LojaForLaravelServiceProvider extends ServiceProvider
 
         // register the helper functions
         $this->loadHelpers();
-
     }
-
 
     /**
      * Load the Loja helper methods.
@@ -77,7 +75,8 @@ class LojaForLaravelServiceProvider extends ServiceProvider
     public function loadHelpers()
     {
         $path = __DIR__.'/Helpers/ProductHelper.php';
-        if(file_exists($path))
+        if (file_exists($path)) {
             require_once $path;
+        }
     }
 }
