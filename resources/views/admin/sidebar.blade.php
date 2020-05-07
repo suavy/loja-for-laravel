@@ -1,0 +1,1 @@
+<!-- Loja (backpack) sidebar -->
