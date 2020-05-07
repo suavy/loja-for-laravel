@@ -31,7 +31,10 @@
     "autoload-dev": {
         "psr-4": {
             "Suavy\\LojaForLaravel\\Tests\\": "tests"
-        }
+        },
+        "files": [
+            "src/Helpers/ProductHelper.php"
+        ]
     },
     "scripts": {
         "test": "vendor/bin/phpunit",
