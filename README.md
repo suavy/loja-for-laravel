@@ -21,22 +21,31 @@ composer require suavy/loja-for-laravel
 
 After having your backpack installation ready, it's time to do the *LOJA* installation.
 
-Start by publishing the config file, get a look at it and fill it! (Some configuration are required, so don't forget to do it)
+Start by publishing our files (that include config file, migrations and views)
 
 ```bash
-php artisan vendor:publish ...
+php artisan vendor:publish --provider="Suavy\LojaForLaravel\LojaForLaravelServiceProvider"
 ```
+
+> :point_right: Please, before continuing, get a look at ``config/loja.php`` and fill it! Some configuration are required, so don't forget to do it 
 
 Next, publish migrations and migrate.
 ```bash
-php artisan vendor:publish --provider="Suavy\LojaForLaravel\LojaForLaravelServiceProvider" --tag="migrations"
 php artisan migrate
 ```
 
-Publish views
+
+Add LOJA Backpack sidebar to your current Backpack sidebar :
 ```bash
-php artisan vendor:publish --provider="Suavy\LojaForLaravel\LojaForLaravelServiceProvider" --tag="views"
+@include('loja::admin.sidebar')
 ```
+
+<!--
+Add LOJA Backpack routes ....
+```bash
+todo
+```
+-->
 
 <!--
 Add LOJA front routes to your web file (or custom) aka Front routes integration
@@ -44,16 +53,6 @@ Add LOJA front routes to your web file (or custom) aka Front routes integration
 ...
 ```
 -->
-
-Add LOJA Backpack sidebar to your current Backpack sidebar :
-```bash
-@include('loja::admin.sidebar')
-```
-
-Add LOJA Backpack routes ....
-```bash
-todo
-```
 
 <!--
 - Stripe configuration ? or already done in main config ?
