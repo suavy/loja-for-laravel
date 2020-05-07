@@ -19,6 +19,10 @@ class LojaForLaravelServiceProvider extends ServiceProvider
         //$this->loadMigrationsFrom(__DIR__.'/../database/migrations');
         $this->loadRoutesFrom(__DIR__.'../../routes/web.php');
 
+        if (file_exists($file = app_path('src/Helpers/ProductHelper.php'))) {
+            require $file;
+        }
+
         if ($this->app->runningInConsole()) {
             $this->publishes([
                 __DIR__.'/../config/config.php' => config_path('loja-for-laravel.php'),
