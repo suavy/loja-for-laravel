@@ -68,7 +68,7 @@ todo
 LOJA only create empty views for you, but in each view you have access to the needed variables and their attributes to make your beautiful frontend like you always do.
 
 > You can add a prefix to every LOJA routes updating the ``routes_prefix`` on config file.
->
+
 #### GET routes
 
 | route | route name | view | variables |
@@ -78,8 +78,11 @@ LOJA only create empty views for you, but in each view you have access to the ne
 | /category/{id} | loja.category.show | .../category/show.blade.php |  $category |
 | /collection/{id} | loja.collection.show | .../collection/show.blade.php | $collection |
 | /product/{id} | loja.product.show | .../product/show.blade.php | $product, $relatedProducts |
+| /search?... | loja.search | .../search/index.blade.php | $products |
 | /user/orders | loja.user.order.index | .../user/order/index.blade.php | $orders |
 | /user/order/{id} | loja.user.order.show | .../user/order/show.blade.php | $order |
+
+> Empty views are located at ``resources/views/vendor/loja/``
 
 <!-- todo Missing checkout/payment routes -->
 
@@ -87,10 +90,10 @@ LOJA only create empty views for you, but in each view you have access to the ne
 
 | route name | parameters | description |
 |---|---|---|
-| cart.product.add | $product, $quantity | add a product to cart |
-| cart.product.remove | $product | remove a product from cart |
-| cart.empty | - | empty the cart |
-| cart.product.update-quantity | $product, $diff | update product cart quantity |
+| loja.cart.product.add | $product, $quantity | add a product to cart |
+| loja.cart.product.remove | $product | remove a product from cart |
+| loja.cart.empty | - | empty the cart |
+| loja.cart.product.update-quantity | $product, $diff | update product cart quantity |
 
 #### Helper features (available everywhere)
 
