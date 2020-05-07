@@ -31,13 +31,18 @@ php artisan vendor:publish ...
 
 Next, publish migrations and migrate.
 ```bash
-php artisan vendor:publish ...
+php artisan vendor:publish --provider="Suavy\LojaForLaravel\LojaForLaravelServiceProvider" --tag="migrations"
 php artisan migrate
+```
+
+Publish views
+```bash
+php artisan vendor:publish --provider="Suavy\LojaForLaravel\LojaForLaravelServiceProvider" --tag="views"
 ```
 
 Add LOJA front routes to your web file (or custom) aka Front routes integration
 ```bash
-...
+php artisan vendor:publish --provider="Suavy\LojaForLaravel\LojaForLaravelServiceProvider" --tag="views"
 ```
 
 Add LOJA Backpack sidebar to your current Backpack sidebar :

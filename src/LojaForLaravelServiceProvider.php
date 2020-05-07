@@ -15,8 +15,8 @@ class LojaForLaravelServiceProvider extends ServiceProvider
          * Optional methods to load your package assets
          */
         // $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'loja-for-laravel');
-        // $this->loadViewsFrom(__DIR__.'/../resources/views', 'loja-for-laravel');
-        // $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
+        $this->loadViewsFrom(__DIR__.'/../resources/views', 'loja-for-laravel');
+        //$this->loadMigrationsFrom(__DIR__.'/../database/migrations');
         $this->loadRoutesFrom(__DIR__.'../../routes/web.php');
 
         if ($this->app->runningInConsole()) {
@@ -24,10 +24,16 @@ class LojaForLaravelServiceProvider extends ServiceProvider
                 __DIR__.'/../config/config.php' => config_path('loja-for-laravel.php'),
             ], 'config');
 
+            // Publishing the migrations.
+            $this->publishes([
+                __DIR__.'/../database/migrations/create_products_table.php.stub' => database_path('migrations/' . date('Y_m_d_His', time()) . '_create_products_table.php'),
+                // you can add any number of migrations here
+            ], 'migrations');
+
             // Publishing the views.
-            /*$this->publishes([
+            $this->publishes([
                 __DIR__.'/../resources/views' => resource_path('views/vendor/loja-for-laravel'),
-            ], 'views');*/
+            ], 'views');
 
             // Publishing assets.
             /*$this->publishes([
