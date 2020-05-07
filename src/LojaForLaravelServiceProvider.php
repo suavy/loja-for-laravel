@@ -60,5 +60,20 @@ class LojaForLaravelServiceProvider extends ServiceProvider
         $this->app->singleton('loja-for-laravel', function () {
             return new LojaForLaravel;
         });
+
+        // register the helper functions
+        $this->loadHelpers();
+
+    }
+
+
+    /**
+     * Load the Loja helper methods.
+     */
+    public function loadHelpers()
+    {
+        $path = __DIR__.'/Helpers/ProductHelper.php';
+        if(file_exists($path))
+            require_once $path;
     }
 }
