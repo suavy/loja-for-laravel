@@ -9,6 +9,6 @@ class CartController extends Controller
     public function add($product, CartRequest $request)
     {
         dd(loja_products());
-        dd("add ".$product);
+        dd('add '.$product);
     }
 }
