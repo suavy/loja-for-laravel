@@ -9,6 +9,7 @@ class OrderController extends Controller
     public function index()
     {
         $orders = Order::query()->get();
+
         return view('loja::user.order.index', compact('orders'));
     }
 
