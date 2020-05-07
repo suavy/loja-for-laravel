@@ -8,6 +8,7 @@ use Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
 use Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
 use Backpack\CRUD\app\Http\Controllers\Operations\ShowOperation;
 use Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
+use Suavy\LojaForLaravel\Models\Product;
 
 class ProductCrudController extends CrudController
 {
@@ -19,20 +20,17 @@ class ProductCrudController extends CrudController
 
     public function setup()
     {
-        $this->crud->setModel(City::class);
-        $this->crud->setRoute('admin/city');
-        $this->crud->setEntityNameStrings('city', 'cities');
+        $this->crud->setModel(Product::class);
+        $this->crud->setRoute('admin/product');
+        $this->crud->setEntityNameStrings('product', 'products');
     }
 
     protected function setupListOperation()
     {
-        $this->crud->addColumn(['name' => 'id', 'label' => '#']);
-        $this->crud->addColumn(['name' => 'name', 'label' => 'name']);
     }
 
     protected function setupCreateOperation()
     {
-        $this->crud->addField(['name' => 'name_fr', 'label' => 'name fr', 'type' => 'text']);
     }
 
     protected function setupUpdateOperation()
