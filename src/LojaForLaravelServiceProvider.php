@@ -17,7 +17,7 @@ class LojaForLaravelServiceProvider extends ServiceProvider
         // $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'loja-for-laravel');
         // $this->loadViewsFrom(__DIR__.'/../resources/views', 'loja-for-laravel');
         // $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
-        // $this->loadRoutesFrom(__DIR__.'/routes.php');
+        $this->loadRoutesFrom(__DIR__.'../../routes/web.php');
 
         if ($this->app->runningInConsole()) {
             $this->publishes([
