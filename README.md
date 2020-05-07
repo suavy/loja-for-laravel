@@ -29,13 +29,12 @@ php artisan vendor:publish --provider="Suavy\LojaForLaravel\LojaForLaravelServic
 
 > Please, before continuing, get a look at ``config/loja.php`` and fill it! Some configuration are required, so don't forget to do it 
 
-Next, publish migrations and migrate.
+:four: Migrate your database
 ```bash
 php artisan migrate
 ```
 
-
-Add LOJA Backpack sidebar to your current Backpack sidebar :
+:five: Add our LOJA Admin Sidebar to your current Backpack sidebar :
 ```bash
 @include('loja::admin.sidebar')
 ```
