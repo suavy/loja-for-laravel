@@ -28,8 +28,8 @@ class LojaForLaravelServiceProvider extends ServiceProvider
 
             // Publishing the migrations.
             $this->publishes([
-                __DIR__.'/../database/migrations/create_products_table.php.stub' => database_path('migrations/' . date('Y_m_d_His', time()) . '_create_products_table.php'),
-                __DIR__.'/../database/migrations/create_orders_table.php.stub' => database_path('migrations/' . date('Y_m_d_His', time()) . '_create_orders_table.php'),
+                __DIR__.'/../database/migrations/create_products_table.php.stub' => database_path('migrations/'.date('Y_m_d_His', time()).'_create_products_table.php'),
+                __DIR__.'/../database/migrations/create_orders_table.php.stub' => database_path('migrations/'.date('Y_m_d_His', time()).'_create_orders_table.php'),
                 // you can add any number of migrations here
             ], 'migrations');
 

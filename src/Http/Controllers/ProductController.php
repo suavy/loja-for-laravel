@@ -11,6 +11,7 @@ class ProductController extends Controller
     {
         $product = new Product();
         event(new ProductWasShown($product));
+
         return view('loja::product.show', compact('product'));
     }
 }
