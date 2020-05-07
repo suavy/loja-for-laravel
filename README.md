@@ -11,32 +11,40 @@ __:warning: THIS IS CURRENTLY IN DEVELOPMENT AND NOT WORKING__
 
 ## Installation
 
-Install the package via composer:
+:one: Install the package via composer:
 
 ```bash
 composer require suavy/loja-for-laravel
 ```
 
-> Please, note that the package is made for [Backpack for Laravel](https://backpackforlaravel.com/) which is free for non-commercial use only. You need to follow the [Backpack for Laravel](https://backpackforlaravel.com/) installation first if you don't have it already in your project. If you are not familiar with Backpack, it's time to start!
+> Please, note that the package is made for [Backpack for Laravel](https://backpackforlaravel.com/) which is free for non-commercial use only.
 
-After having your backpack installation ready, it's time to do the *LOJA* installation.
+:two: Follow the [Backpack for Laravel](https://backpackforlaravel.com/) installation first if you don't have it already in your project. If you are not familiar with Backpack, it's time to start!
 
-Start by publishing the config file, get a look at it and fill it! (Some configuration are required, so don't forget to do it)
+:three: Start by publishing our files (that include config file, migrations and views)
 
 ```bash
-php artisan vendor:publish ...
+php artisan vendor:publish --provider="Suavy\LojaForLaravel\LojaForLaravelServiceProvider"
 ```
 
-Next, publish migrations and migrate.
+> Please, before continuing, get a look at ``config/loja.php`` and fill it! Some configuration are required, so don't forget to do it 
+
+:four: Migrate your database
 ```bash
-php artisan vendor:publish --provider="Suavy\LojaForLaravel\LojaForLaravelServiceProvider" --tag="migrations"
 php artisan migrate
 ```
 
-Publish views
+:five: Add our LOJA Admin Sidebar to your current Backpack sidebar :
 ```bash
-php artisan vendor:publish --provider="Suavy\LojaForLaravel\LojaForLaravelServiceProvider" --tag="views"
+@include('loja::admin.sidebar')
 ```
+
+<!--
+Add LOJA Backpack routes ....
+```bash
+todo
+```
+-->
 
 <!--
 Add LOJA front routes to your web file (or custom) aka Front routes integration
@@ -44,16 +52,6 @@ Add LOJA front routes to your web file (or custom) aka Front routes integration
 ...
 ```
 -->
-
-Add LOJA Backpack sidebar to your current Backpack sidebar :
-```bash
-@include('loja::admin.sidebar')
-```
-
-Add LOJA Backpack routes ....
-```bash
-todo
-```
 
 <!--
 - Stripe configuration ? or already done in main config ?

@@ -11,4 +11,11 @@ class CartController extends Controller
         dd(loja_products());
         dd('add '.$product);
     }
+
+    public function index()
+    {
+        $cart = 'hello';
+
+        return view('loja::cart.index', compact('cart'));
+    }
 }
