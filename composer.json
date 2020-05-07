@@ -8,6 +8,8 @@
     "homepage": "https://github.com/suavy/loja-for-laravel",
     "license": "MIT",
     "type": "library",
+    "minimum-stability": "dev",
+    "prefer-stable": false,
     "authors": [
         {
             "name": "Suavy",
@@ -16,8 +18,8 @@
         }
     ],
     "require": {
-        "php": "^7.1",
-        "illuminate/support": "^6.0"
+        "php": "^7.2.5",
+        "illuminate/support": "^7.0"
     },
     "require-dev": {
         "orchestra/testbench": "^4.0",
