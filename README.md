@@ -57,6 +57,8 @@ Add LOJA front routes to your web file (or custom) aka Front routes integration
 - Stripe configuration ? or already done in main config ?
 -->
 
+Installation is done now :tada:  
+
 ## Usage
 
 ### Backend
