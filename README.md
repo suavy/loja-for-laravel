@@ -17,11 +17,9 @@ Install the package via composer:
 composer require suavy/loja-for-laravel
 ```
 
-> Please, note that the package is made for [Backpack for Laravel](https://backpackforlaravel.com/) which is free for non-commercial use only.
+> Please, note that the package is made for [Backpack for Laravel](https://backpackforlaravel.com/) which is free for non-commercial use only. You need to follow the [Backpack for Laravel](https://backpackforlaravel.com/) installation first if you don't have it already in your project. If you are not familiar with Backpack, it's time to start!
 
-You need to follow the [Backpack for Laravel](https://backpackforlaravel.com/) installation first if you don't have it already in your project. If you are not familiar with Backpack, it's time to start!
-
-After having your backpack installation ready, it's time to do the LOJA installation.
+After having your backpack installation ready, it's time to do the *LOJA* installation.
 
 Start by publishing the config file, get a look at it and fill it! (Some configuration are required, so don't forget to do it)
 
