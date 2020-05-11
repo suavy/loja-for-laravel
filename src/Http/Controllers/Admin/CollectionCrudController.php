@@ -10,7 +10,6 @@ use Backpack\CRUD\app\Http\Controllers\Operations\ShowOperation;
 use Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
 use Suavy\LojaForLaravel\Models\Category;
 use Suavy\LojaForLaravel\Models\Collection;
-use Suavy\LojaForLaravel\Models\Product;
 
 class CollectionCrudController extends CrudController
 {
@@ -30,7 +29,6 @@ class CollectionCrudController extends CrudController
     protected function setupListOperation()
     {
         $this->crud->column('id');
-
     }
 
     protected function setupCreateOperation()

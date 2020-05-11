@@ -18,7 +18,6 @@ class CategoryCrudController extends CrudController
     use UpdateOperation;
     use DeleteOperation;
     use ShowOperation;
-
     use CreateOperation { store as traitStore; }
     use UpdateOperation { update as traitUpdate; }
 
@@ -47,9 +46,11 @@ class CategoryCrudController extends CrudController
         $this->setupCreateOperation();
     }
 
-    protected function store() {
+    protected function store()
+    {
         $this->crud->getRequest()->request->add(['slug' => Str::slug($this->crud->getRequest()->get('name'))]);
         $response = $this->traitStore();
+
         return $response;
     }
 
@@ -57,7 +58,7 @@ class CategoryCrudController extends CrudController
     {
         $this->crud->getRequest()->request->add(['slug' => Str::slug($this->crud->getRequest()->get('name'))]);
         $response = $this->traitUpdate();
+
         return $response;
     }
-
 }
