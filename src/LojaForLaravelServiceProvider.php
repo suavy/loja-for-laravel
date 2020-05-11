@@ -44,7 +44,6 @@ class LojaForLaravelServiceProvider extends ServiceProvider
             // Publishing the views.
             //$this->publishes([__DIR__.'/../resources/views' => resource_path('views/vendor/loja')], 'views'); // todo removed for test purposes ;
 
-
             // Publishing assets.
             /*$this->publishes([
                 __DIR__.'/../resources/assets' => public_path('vendor/loja'),
