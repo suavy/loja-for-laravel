@@ -17,7 +17,7 @@ Route::get('/', [HomeController::class, 'index'])->name('loja.home');
 Route::get('/product/{id}', [ProductController::class, 'show'])->name('loja.product.show');
 Route::get('/category/{id}', [CategoryController::class, 'show'])->name('loja.category.show');
 Route::get('/collection/{id}', [CollectionController::class, 'show'])->name('loja.collection.show');
-Route::get('/search', [SearchController::class, 'search'])->name('loja.search');
+Route::get('/search', [SearchController::class, 'index'])->name('loja.search');
 
 /*
  * Order routing
