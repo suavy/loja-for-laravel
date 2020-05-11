@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Attribute extends Model
 {
-    protected $table = "loja_attributes";
+    protected $table = 'loja_attributes';
     // Disable Laravel's mass assignment protection
     protected $guarded = [];
 }
