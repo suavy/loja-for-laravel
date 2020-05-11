@@ -6,8 +6,6 @@ class HomeController extends Controller
 {
     public function index()
     {
-        dd('ok');
-
         return view('loja::home.index');
     }
 }
