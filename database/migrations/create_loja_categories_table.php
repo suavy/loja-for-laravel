@@ -20,6 +20,6 @@ class CreateLojaCategoriesTable extends Migration
 
     public function down()
     {
-        Schema::dropIfExists('products');
+        Schema::dropIfExists('loja_categories');
     }
 }

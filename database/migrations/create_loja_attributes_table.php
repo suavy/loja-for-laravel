@@ -4,22 +4,20 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateLojaCollectionsTable extends Migration
+class CreateLojaAttributesTable extends Migration
 {
     public function up()
     {
-        Schema::create('loja_collections', function (Blueprint $table) {
+        Schema::create('loja_attributes', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('slug');
+            $table->string('type')->nullable();
             $table->string('name');
-            $table->longText('description')->nullable();
-            $table->boolean('enabled')->default(false);
             $table->timestamps();
         });
     }
 
     public function down()
     {
-        Schema::dropIfExists('loja_collections');
+        Schema::dropIfExists('loja_attributes');
     }
 }

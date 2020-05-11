@@ -18,6 +18,6 @@ class CreateLojaTaxesTable extends Migration
 
     public function down()
     {
-        Schema::dropIfExists('taxes');
+        Schema::dropIfExists('loja_taxes');
     }
 }
