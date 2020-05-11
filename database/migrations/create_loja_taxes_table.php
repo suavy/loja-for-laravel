@@ -4,11 +4,11 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTaxesTable extends Migration
+class CreateLojaTaxesTable extends Migration
 {
     public function up()
     {
-        Schema::create('taxes', function (Blueprint $table) {
+        Schema::create('loja_taxes', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
             $table->decimal('value', 13, 2)->default(0.00);
@@ -18,6 +18,6 @@ class CreateTaxesTable extends Migration
 
     public function down()
     {
-        Schema::dropIfExists('taxes');
+        Schema::dropIfExists('loja_taxes');
     }
 }
