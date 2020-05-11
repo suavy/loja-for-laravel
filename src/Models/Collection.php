@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Collection extends Model
 {
-    protected $table = "loja_collections";
+    protected $table = 'loja_collections';
     // Disable Laravel's mass assignment protection
     protected $guarded = [];
 
