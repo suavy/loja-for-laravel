@@ -9,9 +9,10 @@ use Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
 use Backpack\CRUD\app\Http\Controllers\Operations\ShowOperation;
 use Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
 use Suavy\LojaForLaravel\Models\Category;
+use Suavy\LojaForLaravel\Models\Collection;
 use Suavy\LojaForLaravel\Models\Product;
 
-class ProductCrudController extends CrudController
+class CollectionCrudController extends CrudController
 {
     use ListOperation;
     use CreateOperation;
@@ -21,31 +22,15 @@ class ProductCrudController extends CrudController
 
     public function setup()
     {
-        $this->crud->setModel(Product::class);
-        $this->crud->setRoute('admin/product');
-        $this->crud->setEntityNameStrings('product', 'products');
+        $this->crud->setModel(Collection::class);
+        $this->crud->setRoute('admin/collection');
+        $this->crud->setEntityNameStrings('collection', 'collections');
     }
 
     protected function setupListOperation()
     {
         $this->crud->column('id');
 
-        /*
-        $table->bigIncrements('id');
-        $table->string('slug');
-        $table->string('name');
-        $table->longText('description')->nullable();
-        $table->foreignId('category_id')->nullable();
-        $table->foreign('category_id')->references('id')->on('loja_categories');
-        $table->foreignId('collection_id')->nullable();
-        $table->foreign('collection_id')->references('id')->on('loja_collections');
-        $table->foreignId('tax_id');
-        $table->foreign('tax_id')->references('id')->on('loja_taxes');
-        $table->decimal('price', 13, 2)->nullable();
-        $table->unsignedBigInteger('stock')->default(0);
-        $table->boolean('enabled')->default(false);
-        $table->timestamps();
-        */
     }
 
     protected function setupCreateOperation()

@@ -17,4 +17,7 @@ Route::group([
     //Route::get('dashboard', 'AdminController@dashboard')->name('admin.dashboard');
     // crud routes
     Route::crud('product', 'ProductCrudController');
+    Route::crud('taxe', 'TaxeCrudController');
+    Route::crud('collection', 'CollectionCrudController');
+    Route::crud('category', 'CategoryCrudController');
 }); // this should be the absolute last line of this file
