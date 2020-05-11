@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
-    protected $table = "loja_products";
+    protected $table = 'loja_products';
     // Disable Laravel's mass assignment protection
     protected $guarded = [];
 
@@ -29,6 +29,4 @@ class Product extends Model
     {
         return $this->belongsToMany(Order::class)->withPivot('quantity', 'price', 'price_with_tax');
     }
-
-
 }
