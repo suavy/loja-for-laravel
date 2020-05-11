@@ -2,14 +2,16 @@
 
 namespace Suavy\LojaForLaravel\Http\Controllers;
 
+use Illuminate\Http\Request;
 use Suavy\LojaForLaravel\Http\Requests\CartRequest;
+use Suavy\LojaForLaravel\Models\Product;
 
 class CartController extends Controller
 {
-    public function add($product, CartRequest $request)
+
+    public function empty(Request $request)
     {
-        dd(loja_products());
-        dd('add '.$product);
+
     }
 
     public function index()
@@ -18,4 +20,21 @@ class CartController extends Controller
 
         return view('loja::cart.index', compact('cart'));
     }
+
+    public function productAdd(Product $product,Request $request)
+    {
+
+    }
+
+    public function productUpdateQuantity(Product $product,Request $request)
+    {
+
+    }
+
+    public function productRemove(Product $product)
+    {
+
+    }
+
+
 }
