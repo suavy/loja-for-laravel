@@ -13,8 +13,8 @@ class CreateLojaProductsTable extends Migration
             $table->string('slug');
             $table->string('name');
             $table->longText('description')->nullable();
-            $table->foreignId('categoriy_id')->nullable();
-            $table->foreign('categoriy_id')->references('id')->on('loja_categories');
+            $table->foreignId('category_id')->nullable();
+            $table->foreign('category_id')->references('id')->on('loja_categories');
             $table->foreignId('collection_id')->nullable();
             $table->foreign('collection_id')->references('id')->on('loja_collections');
             $table->foreignId('tax_id');

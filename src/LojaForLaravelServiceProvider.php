@@ -29,13 +29,21 @@ class LojaForLaravelServiceProvider extends ServiceProvider
 
             // Publishing the migrations.
             $this->publishes([
-                __DIR__.'/../database/migrations/create_products_table.php.stub' => database_path('migrations/'.date('Y_m_d_His', time()).'_create_products_table.php'),
-                __DIR__.'/../database/migrations/create_orders_table.php.stub' => database_path('migrations/'.date('Y_m_d_His', time()).'_create_orders_table.php'),
+                //__DIR__.'/../database/migrations/' => database_path('migrations/'.date('Y_m_d_His', time()).'_create_orders_table.php'),
+                __DIR__.'/../database/migrations/create_loja_categories_table.php.stub' => database_path('migrations/'.date('Y_m_d_His', time()).'_create_orders_table.php'),
+                __DIR__.'/../database/migrations/create_loja_collections_table.php.stub' => database_path('migrations/'.date('Y_m_d_His', time()).'_create_orders_table.php'),
+                __DIR__.'/../database/migrations/create_loja_order_product_table.php.stub' => database_path('migrations/'.date('Y_m_d_His', time()).'_create_orders_table.php'),
+                __DIR__.'/../database/migrations/create_loja_order_statuses_table.php.stub' => database_path('migrations/'.date('Y_m_d_His', time()).'_create_orders_table.php'),
+                __DIR__.'/../database/migrations/create_loja_orders_table.php.stub' => database_path('migrations/'.date('Y_m_d_His', time()).'_create_orders_table.php'),
+                __DIR__.'/../database/migrations/create_loja_products_table.php.stub' => database_path('migrations/'.date('Y_m_d_His', time()).'_create_products_table.php'),
+                __DIR__.'/../database/migrations/create_loja_taxes_table.php.stub' => database_path('migrations/'.date('Y_m_d_His', time()).'_create_products_table.php'),
+
                 // you can add any number of migrations here
             ], 'migrations');
 
             // Publishing the views.
-            $this->publishes([__DIR__.'/../resources/views' => resource_path('views/vendor/loja')], 'views');
+            //$this->publishes([__DIR__.'/../resources/views' => resource_path('views/vendor/loja')], 'views'); // todo removed for test purposes ;
+
 
             // Publishing assets.
             /*$this->publishes([
