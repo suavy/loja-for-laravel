@@ -8,7 +8,6 @@ use Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
 use Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
 use Backpack\CRUD\app\Http\Controllers\Operations\ShowOperation;
 use Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
-use Suavy\LojaForLaravel\Models\Category;
 use Suavy\LojaForLaravel\Models\Collection;
 
 class CollectionCrudController extends CrudController
@@ -28,16 +27,17 @@ class CollectionCrudController extends CrudController
 
     protected function setupListOperation()
     {
-        $this->crud->column('id');
+        $this->crud->column('id')->label('#');
+        $this->crud->column('name')->label('Nom');
+        $this->crud->column('slug')->label('Slug');
+        $this->crud->column('enabled')->type('check')->label('Activé');
     }
 
     protected function setupCreateOperation()
     {
-        $this->crud->field('slug')->type('text')->label('Slug');
         $this->crud->field('name')->type('text')->label('Nom');
         $this->crud->field('description')->type('textarea')->label('Description');
-
-        $this->crud->field('category_id')->label('Catégorie')->type('select')->entity('category')->model(Category::class)->attribute('name');
+        $this->crud->field('enabled')->type('checkbox')->label('Activer');
     }
 
     protected function setupUpdateOperation()

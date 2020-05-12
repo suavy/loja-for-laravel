@@ -8,7 +8,6 @@ use Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
 use Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
 use Backpack\CRUD\app\Http\Controllers\Operations\ShowOperation;
 use Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
-use Suavy\LojaForLaravel\Models\Category;
 use Suavy\LojaForLaravel\Models\Product;
 
 class ProductCrudController extends CrudController
@@ -28,19 +27,10 @@ class ProductCrudController extends CrudController
 
     protected function setupListOperation()
     {
-        $this->crud->column('id');
-
+        $this->crud->column('id')->label('#');
+        $this->crud->column('name')->label('Nom');
+        $this->crud->column('slug')->label('Slug');
         /*
-        $table->bigIncrements('id');
-        $table->string('slug');
-        $table->string('name');
-        $table->longText('description')->nullable();
-        $table->foreignId('category_id')->nullable();
-        $table->foreign('category_id')->references('id')->on('loja_categories');
-        $table->foreignId('collection_id')->nullable();
-        $table->foreign('collection_id')->references('id')->on('loja_collections');
-        $table->foreignId('tax_id');
-        $table->foreign('tax_id')->references('id')->on('loja_taxes');
         $table->decimal('price', 13, 2)->nullable();
         $table->unsignedBigInteger('stock')->default(0);
         $table->boolean('enabled')->default(false);
@@ -50,11 +40,20 @@ class ProductCrudController extends CrudController
 
     protected function setupCreateOperation()
     {
-        $this->crud->field('slug')->type('text')->label('Slug');
         $this->crud->field('name')->type('text')->label('Nom');
         $this->crud->field('description')->type('textarea')->label('Description');
+        $this->crud->field('price')->type('number')->label('Prix')->attributes(['step'=>'any'])->suffix('€')->wrapper(['class'=>'form-group col-md-6']);
+        $this->crud->field('stock')->type('number')->label('Stock')->wrapper(['class'=>'form-group col-md-6']);
 
-        $this->crud->field('category_id')->label('Catégorie')->type('select')->entity('category')->model(Category::class)->attribute('name');
+        $this->crud->field('category_id')->type('select2')->label('Catégorie')->entity('category')->attribute('name')->options(function ($query) {
+            return $query->orderBy('name', 'ASC')->get();
+        });
+        $this->crud->field('collection_id')->type('select2')->label('Collection')->entity('collection')->attribute('name')->options(function ($query) {
+            return $query->orderBy('name', 'ASC')->get();
+        });
+        $this->crud->field('tax_id')->type('select2')->label('Taxe')->entity('taxe')->attribute('name')->options(function ($query) {
+            return $query->orderBy('name', 'ASC')->get();
+        });
     }
 
     protected function setupUpdateOperation()

@@ -4,10 +4,12 @@ namespace Suavy\LojaForLaravel\Models;
 
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Illuminate\Database\Eloquent\Model;
+use Suavy\LojaForLaravel\Traits\HasSlug;
 
 class Product extends Model
 {
     use CrudTrait;
+    use HasSlug;
 
     protected $table = 'loja_products';
 

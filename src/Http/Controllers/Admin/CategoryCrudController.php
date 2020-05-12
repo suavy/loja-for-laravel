@@ -8,7 +8,6 @@ use Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
 use Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
 use Backpack\CRUD\app\Http\Controllers\Operations\ShowOperation;
 use Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
-use Illuminate\Support\Str;
 use Suavy\LojaForLaravel\Models\Category;
 
 class CategoryCrudController extends CrudController
@@ -18,8 +17,6 @@ class CategoryCrudController extends CrudController
     use UpdateOperation;
     use DeleteOperation;
     use ShowOperation;
-    use CreateOperation { store as traitStore; }
-    use UpdateOperation { update as traitUpdate; }
 
     public function setup()
     {
@@ -30,8 +27,10 @@ class CategoryCrudController extends CrudController
 
     protected function setupListOperation()
     {
-        $this->crud->column('id');
-        $this->crud->column('name');
+        $this->crud->column('id')->label('#');
+        $this->crud->column('name')->label('Nom');
+        $this->crud->column('slug')->label('Slug');
+        $this->crud->column('enabled')->type('check')->label('Activé');
     }
 
     protected function setupCreateOperation()
@@ -44,21 +43,5 @@ class CategoryCrudController extends CrudController
     protected function setupUpdateOperation()
     {
         $this->setupCreateOperation();
-    }
-
-    protected function store()
-    {
-        $this->crud->getRequest()->request->add(['slug' => Str::slug($this->crud->getRequest()->get('name'))]);
-        $response = $this->traitStore();
-
-        return $response;
-    }
-
-    public function update()
-    {
-        $this->crud->getRequest()->request->add(['slug' => Str::slug($this->crud->getRequest()->get('name'))]);
-        $response = $this->traitUpdate();
-
-        return $response;
     }
 }
