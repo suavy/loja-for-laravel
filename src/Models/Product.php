@@ -36,8 +36,8 @@ class Product extends Model
         return $this->belongsToMany(Order::class)->withPivot('quantity', 'price', 'price_with_tax');
     }
 
-    public function taxe()
+    public function tax()
     {
-        return $this->belongsTo(Taxe::class);
+        return $this->belongsTo(Tax::class);
     }
 }

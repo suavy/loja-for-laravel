@@ -72,7 +72,10 @@ class LojaForLaravelServiceProvider extends ServiceProvider
             return new LojaForLaravel;
         });
 
-        // register the helper functions
+        // Register the model factories
+        $this->app->make('Illuminate\Database\Eloquent\Factory')->load(__DIR__.'/../database/factories');
+
+        // Register the helper functions
         $this->loadHelpers();
     }
 

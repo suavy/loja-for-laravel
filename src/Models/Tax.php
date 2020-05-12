@@ -5,7 +5,7 @@ namespace Suavy\LojaForLaravel\Models;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Illuminate\Database\Eloquent\Model;
 
-class Taxe extends Model
+class Tax extends Model
 {
 
     use CrudTrait;
