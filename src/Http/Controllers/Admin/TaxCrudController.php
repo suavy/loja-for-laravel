@@ -8,9 +8,9 @@ use Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
 use Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
 use Backpack\CRUD\app\Http\Controllers\Operations\ShowOperation;
 use Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
-use Suavy\LojaForLaravel\Models\Taxe;
+use Suavy\LojaForLaravel\Models\Tax;
 
-class TaxeCrudController extends CrudController
+class TaxCrudController extends CrudController
 {
     use ListOperation;
     use CreateOperation;
@@ -20,8 +20,8 @@ class TaxeCrudController extends CrudController
 
     public function setup()
     {
-        $this->crud->setModel(Taxe::class);
-        $this->crud->setRoute('admin/taxe');
+        $this->crud->setModel(Tax::class);
+        $this->crud->setRoute('admin/tax');
         $this->crud->setEntityNameStrings('taxe', 'taxes');
     }
 

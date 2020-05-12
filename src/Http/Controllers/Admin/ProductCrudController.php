@@ -52,7 +52,7 @@ class ProductCrudController extends CrudController
         $this->crud->field('collection_id')->type('select2')->label('Collection')->entity('collection')->attribute('name')->options(function ($query){
             return $query->orderBy('name','ASC')->get();
         });
-        $this->crud->field('tax_id')->type('select2')->label('Taxe')->entity('taxe')->attribute('name')->options(function ($query){
+        $this->crud->field('tax_id')->type('select2')->label('Taxe')->entity('tax')->attribute('name')->options(function ($query){
             return $query->orderBy('name','ASC')->get();
         });
 
