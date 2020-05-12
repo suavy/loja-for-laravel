@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Tax extends Model
 {
-
     use CrudTrait;
 
     protected $table = 'loja_taxes';

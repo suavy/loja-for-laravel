@@ -34,10 +34,8 @@ class TaxeCrudController extends CrudController
 
     protected function setupCreateOperation()
     {
-
         $this->crud->field('name')->type('text')->label('Nom');
         $this->crud->field('value')->type('number')->label('Valeur')->attributes(['step'=>'any'])->suffix('%');
-
     }
 
     protected function setupUpdateOperation()
