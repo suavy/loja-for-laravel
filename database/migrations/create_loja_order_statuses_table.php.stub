@@ -14,10 +14,38 @@ class CreateLojaOrderStatusesTable extends Migration
             $table->string('name');
             $table->boolean('notification')->default(false);
         });
+        $this->defaultSeed();
     }
 
     public function down()
     {
         Schema::dropIfExists('loja_order_statuses');
+    }
+
+    public function defaultSeed()
+    {
+        $orderStatuses = [
+            [
+                'slug' => 'pending',
+                'name' => 'Pending',
+                'notification' => 1,
+            ],
+            [
+                'slug' => 'processed',
+                'name' => 'Processed',
+                'notification' => 1,
+            ],
+            [
+                'slug' => 'delivered',
+                'name' => 'Delivered',
+                'notification' => 1,
+            ],
+            [
+                'slug' => 'archived',
+                'name' => 'Archived',
+                'notification' => 0,
+            ],
+        ];
+        DB::table('loja_order_statuses')->insert($orderStatuses);
     }
 }
