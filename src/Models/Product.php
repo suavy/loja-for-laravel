@@ -4,10 +4,12 @@ namespace Suavy\LojaForLaravel\Models;
 
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Illuminate\Database\Eloquent\Model;
+use Suavy\LojaForLaravel\Traits\HasSlug;
 
 class Product extends Model
 {
     use CrudTrait;
+    use HasSlug;
 
     protected $table = 'loja_products';
 
@@ -32,5 +34,10 @@ class Product extends Model
     public function orders()
     {
         return $this->belongsToMany(Order::class)->withPivot('quantity', 'price', 'price_with_tax');
+    }
+
+    public function taxe()
+    {
+        return $this->belongsTo(Taxe::class);
     }
 }
