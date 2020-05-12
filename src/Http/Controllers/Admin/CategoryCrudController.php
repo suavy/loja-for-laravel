@@ -18,7 +18,6 @@ class CategoryCrudController extends CrudController
     use DeleteOperation;
     use ShowOperation;
 
-
     public function setup()
     {
         $this->crud->setModel(Category::class);
@@ -32,8 +31,6 @@ class CategoryCrudController extends CrudController
         $this->crud->column('name')->label('Nom');
         $this->crud->column('slug')->label('Slug');
         $this->crud->column('enabled')->type('check')->label('Activé');
-
-
     }
 
     protected function setupCreateOperation()
@@ -47,5 +44,4 @@ class CategoryCrudController extends CrudController
     {
         $this->setupCreateOperation();
     }
-
 }

@@ -8,7 +8,6 @@ use Suavy\LojaForLaravel\Traits\HasSlug;
 
 class Collection extends Model
 {
-
     use CrudTrait;
     use HasSlug;
 
