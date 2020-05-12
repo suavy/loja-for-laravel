@@ -2,8 +2,8 @@
 
 namespace Suavy\LojaForLaravel\Database\Factories;
 
-use Suavy\LojaForLaravel\Models\Tax;
 use Faker\Generator as Faker;
+use Suavy\LojaForLaravel\Models\Tax;
 
 $factory->define(Tax::class, function (Faker $faker) {
     return [
