@@ -10,17 +10,15 @@ class CreateLojaCollectionsTable extends Migration
     {
         Schema::create('loja_collections', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->boolean('enabled')->default(false);
             $table->string('slug');
             $table->string('name');
             $table->longText('description')->nullable();
-            // Reorder
             $table->integer('lft')->default(0);
             $table->integer('rgt')->default(0);
             $table->integer('depth')->default(0);
             $table->foreignId('parent_id')->nullable();
             $table->foreign('parent_id')->references('id')->on('loja_collections');
-
+            $table->boolean('enabled')->default(false);
             $table->timestamps();
         });
     }
