@@ -18,8 +18,21 @@ class CartController extends Controller
         return view('loja::cart.index', compact('cart'));
     }
 
-    public function productAdd(Product $product, Request $request)
+    public function productAdd($id, Request $request)
     {
+        //todo add request protection quantity etc
+        $product = Product::query()->findOrFail($id);
+        $quantity = $request->input('quantity');
+        //dd($product->id,$quantity);
+
+        //todo add to cart system
+
+        //if problem
+        //return response()->json(['error' => 'invalid'], 401);
+
+        //if everything is ok
+        //todo return new quantity available
+        return response()->json(['success' => 'success'], 200);
     }
 
     public function productUpdateQuantity(Product $product, Request $request)

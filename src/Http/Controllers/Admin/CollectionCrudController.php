@@ -44,4 +44,13 @@ class CollectionCrudController extends CrudController
     {
         $this->setupCreateOperation();
     }
+
+    protected function setupReorderOperation()
+    {
+        // define which model attribute will be shown on draggable elements
+        $this->crud->set('reorder.label', 'name');
+        // define how deep the admin is allowed to nest the items
+        // for infinite levels, set it to 0
+        $this->crud->set('reorder.max_level', 1);
+    }
 }

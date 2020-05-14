@@ -14,7 +14,9 @@ class Product extends Model
     protected $table = 'loja_products';
 
     // Disable Laravel's mass assignment protection
-    protected $guarded = [];
+    //protected $guarded = [];
+
+    protected $fillable = ['id'];
 
     /*
     |--------------------------------------------------------------------------
