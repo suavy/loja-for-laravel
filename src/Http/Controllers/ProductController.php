@@ -11,6 +11,7 @@ class ProductController extends Controller
     {
         $product = Product::query()->findOrFail($id);
         event(new ProductWasShown($product));
+
         return view('loja::product.show', compact('product'));
     }
 }
