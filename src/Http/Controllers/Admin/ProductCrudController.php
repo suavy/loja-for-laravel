@@ -8,7 +8,6 @@ use Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
 use Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
 use Backpack\CRUD\app\Http\Controllers\Operations\ShowOperation;
 use Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
-use Suavy\LojaForLaravel\Models\Category;
 use Suavy\LojaForLaravel\Models\Product;
 
 class ProductCrudController extends CrudController
@@ -46,16 +45,15 @@ class ProductCrudController extends CrudController
         $this->crud->field('price')->type('number')->label('Prix')->attributes(['step'=>'any'])->suffix('€')->wrapper(['class'=>'form-group col-md-6']);
         $this->crud->field('stock')->type('number')->label('Stock')->wrapper(['class'=>'form-group col-md-6']);
 
-        $this->crud->field('category_id')->type('select2')->label('Catégorie')->entity('category')->attribute('name')->options(function ($query){
-            return $query->orderBy('name','ASC')->get();
+        $this->crud->field('category_id')->type('select2')->label('Catégorie')->entity('category')->attribute('name')->options(function ($query) {
+            return $query->orderBy('name', 'ASC')->get();
         });
-        $this->crud->field('collection_id')->type('select2')->label('Collection')->entity('collection')->attribute('name')->options(function ($query){
-            return $query->orderBy('name','ASC')->get();
+        $this->crud->field('collection_id')->type('select2')->label('Collection')->entity('collection')->attribute('name')->options(function ($query) {
+            return $query->orderBy('name', 'ASC')->get();
         });
-        $this->crud->field('tax_id')->type('select2')->label('Taxe')->entity('tax')->attribute('name')->options(function ($query){
-            return $query->orderBy('name','ASC')->get();
+        $this->crud->field('tax_id')->type('select2')->label('Taxe')->entity('tax')->attribute('name')->options(function ($query) {
+            return $query->orderBy('name', 'ASC')->get();
         });
-
     }
 
     protected function setupUpdateOperation()

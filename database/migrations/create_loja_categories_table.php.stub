@@ -13,6 +13,11 @@ class CreateLojaCategoriesTable extends Migration
             $table->string('slug');
             $table->string('name');
             $table->longText('description')->nullable();
+            $table->integer('lft')->default(0);
+            $table->integer('rgt')->default(0);
+            $table->integer('depth')->default(0);
+            $table->foreignId('parent_id')->nullable();
+            $table->foreign('parent_id')->references('id')->on('loja_categories');
             $table->boolean('enabled')->default(false);
             $table->timestamps();
         });

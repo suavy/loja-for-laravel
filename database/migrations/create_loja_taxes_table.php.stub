@@ -14,10 +14,30 @@ class CreateLojaTaxesTable extends Migration
             $table->decimal('value', 13, 2)->default(0.00);
             $table->timestamps();
         });
+        $this->defaultSeed();
     }
 
     public function down()
     {
         Schema::dropIfExists('loja_taxes');
+    }
+
+    public function defaultSeed()
+    {
+        $taxes = [
+            [
+                'name' => 'TVA Normal (20%)',
+                'value' => 20.0,
+            ],
+            [
+                'name' => 'TVA Intermédiaire (10%)',
+                'value' => 10.0,
+            ],
+            [
+                'name' => 'Taux réduit (5,5%)',
+                'value' => 5.5,
+            ],
+        ];
+        DB::table('loja_taxes')->insert($taxes);
     }
 }
