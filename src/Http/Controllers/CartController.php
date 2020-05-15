@@ -25,6 +25,7 @@ class CartController extends Controller
         $quantity = $request->input('quantity');
         //dd($product->id,$quantity);
 
+
         //todo add to cart system
 
         //if problem
