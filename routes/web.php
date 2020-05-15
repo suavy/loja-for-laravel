@@ -9,8 +9,7 @@ use Suavy\LojaForLaravel\Http\Controllers\OrderController;
 use Suavy\LojaForLaravel\Http\Controllers\ProductController;
 use Suavy\LojaForLaravel\Http\Controllers\SearchController;
 
-Route::group(['middleware' => 'web'],function() {
-
+Route::group(['middleware' => 'web'], function () {
     Route::get('/', [HomeController::class, 'index'])->name('loja.home');
 
     /*
@@ -35,6 +34,4 @@ Route::group(['middleware' => 'web'],function() {
     Route::post('/cart/update/{id}', [CartController::class, 'productUpdateQuantity'])->name('loja.cart.product.update.quantity');
     Route::post('/cart/remove/{id}', [CartController::class, 'productRemove'])->name('loja.cart.product.remove');
     Route::post('/cart/empty', [CartController::class, 'empty'])->name('loja.cart.empty');
-
-
 });

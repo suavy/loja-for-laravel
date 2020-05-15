@@ -35,6 +35,7 @@ class ProductController extends Controller
 
         dd($items = \Cart::getContent());
         event(new ProductWasShown($product));
+
         return view('loja::product.show', compact('product'));
     }
 }
