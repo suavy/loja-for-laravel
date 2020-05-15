@@ -13,25 +13,25 @@ class ProductController extends Controller
         dd(session()->getId());
         dd(session('key'));
         $product = Product::query()->findOrFail($id);
-        \Cart::add(array(
-            array(
+        \Cart::add([
+            [
                 'id' => 456,
                 'name' => 'Sample Item 1',
                 'price' => 67.99,
                 'quantity' => 4,
-                'attributes' => array()
-            ),
-            array(
+                'attributes' => [],
+            ],
+            [
                 'id' => 568,
                 'name' => 'Sample Item 2',
                 'price' => 69.25,
                 'quantity' => 4,
-                'attributes' => array(
+                'attributes' => [
                     'size' => 'L',
-                    'color' => 'blue'
-                )
-            ),
-        ));
+                    'color' => 'blue',
+                ],
+            ],
+        ]);
 
         dd($items = \Cart::getContent());
         event(new ProductWasShown($product));
