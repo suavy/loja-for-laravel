@@ -1,61 +1,57 @@
-<main>
-    <div class="container" >
-    <!-- Product Wrapper -->
-    @if(\Cart::isEmpty())
-        @include('loja::cart.empty-cart')
-    @else
-        @csrf
-        <div class="cart">
-            @foreach($cartItems as $item)
-                <div class="cart__item js-cart-product" data-id="{{ $item->id }}" data-quantity-max="10">
-                    <div class="cart__item__picture">
-                        <img src="" />
-                    </div><!--
-                    --><div class="cart__item__content">
-                        <div class="cart__item__content__price">{{ $item->price }}</div>
-                        <div class="cart__item__content__name">{{ $item->name }}</div>
-                        <div class="cart__item__content__quantity">
-                            <span class="cart__item__content__quantity__update cart__item__content__quantity__update--less js-cart-update" data-update="less">-</span>
-                            <span class="cart__item__content__quantity__current js-cart-quantity">{{ $item->quantity }}</span>
-                            <span class="cart__item__content__quantity__update cart__item__content__quantity__update--more js-cart-update" data-update="add">+</span>
-                        </div>
-                    </div><!--
-                    --><div class="cart__item__remove">
-                        <i class="far fa-fw fa-trash-alt js-cart-remove"></i>
+@if(\Cart::isEmpty())
+    @include('loja::cart.empty-cart')
+@else
+    @csrf
+    <div class="cart">
+        @foreach($cartItems as $item)
+            <div class="cart__item js-cart-product" data-id="{{ $item->id }}" data-quantity-max="10">
+                <div class="cart__item__picture">
+                    <img src="" />
+                </div><!--
+                --><div class="cart__item__content">
+                    <div class="cart__item__content__price">{{ $item->price }}</div>
+                    <div class="cart__item__content__name">{{ $item->name }}</div>
+                    <div class="cart__item__content__quantity">
+                        <span class="cart__item__content__quantity__update cart__item__content__quantity__update--less js-cart-update" data-update="less">-</span>
+                        <span class="cart__item__content__quantity__current js-cart-quantity">{{ $item->quantity }}</span>
+                        <span class="cart__item__content__quantity__update cart__item__content__quantity__update--more js-cart-update" data-update="add">+</span>
                     </div>
+                </div><!--
+                --><div class="cart__item__remove">
+                    <i class="far fa-fw fa-trash-alt js-cart-remove"></i>
                 </div>
-            @endforeach
-        </div>
-
-        {{-- todo I DON'T KNOW IF THIS WILL KEEP ON THIS VIEW - Or elsewhere
-             @include('loja::cart.empty-cart-button')
-        --}}
-
-        {{-- todo Move this to is own view
-             @include('loja::cart.cart-summary')
-         --}}
-
-        {{-- todo old code to remove when ok (for Christophe or Matthieu)
-            <table id="js-cart">
-                <tr class="cart-table">
-                    <td style="width: 200px">Produit</td>
-                    <td style="width: 200px">---Quantité</td>
-                    <td style="width: 200px">---Prix</td>
-                    <td style="width: 200px">---Supprimer</td>
-                </tr>
-                @foreach($cartItems as $item)
-                    <tr style="text-align: right" class="js-cart-product" data-id="{{ $item->id }}" data-quantity-max="10">
-                        <td>{{ $item->name }}</td>
-                        <td><span class="js-cart-quantity">{{ $item->quantity }}</span> <span class="js-cart-update" data-update="add">+</span> <span class="js-cart-update" data-update="less"> - </span></td>
-                        <td><span class="js-cart-price" > {{ $item->price }}</span></td>
-                        <td><span class="js-cart-remove">X</span> </td>
-                    </tr>
-                @endforeach
-            </table>
-        --}}
-    @endif
+            </div>
+        @endforeach
     </div>
-</main>
+@endif
+
+{{-- todo I DON'T KNOW IF THIS WILL KEEP ON THIS VIEW
+     @include('loja::cart.empty-cart-button')
+--}}
+
+{{-- todo I DON'T KNOW IF THIS WILL KEEP ON THIS VIEW
+     @include('loja::cart.cart-summary')
+ --}}
+
+{{-- todo old code to remove when ok (for Matthieu)
+    <table id="js-cart">
+        <tr class="cart-table">
+            <td style="width: 200px">Produit</td>
+            <td style="width: 200px">---Quantité</td>
+            <td style="width: 200px">---Prix</td>
+            <td style="width: 200px">---Supprimer</td>
+        </tr>
+        @foreach($cartItems as $item)
+            <tr style="text-align: right" class="js-cart-product" data-id="{{ $item->id }}" data-quantity-max="10">
+                <td>{{ $item->name }}</td>
+                <td><span class="js-cart-quantity">{{ $item->quantity }}</span> <span class="js-cart-update" data-update="add">+</span> <span class="js-cart-update" data-update="less"> - </span></td>
+                <td><span class="js-cart-price" > {{ $item->price }}</span></td>
+                <td><span class="js-cart-remove">X</span> </td>
+            </tr>
+        @endforeach
+    </table>
+--}}
+
 
 @push('after-foot-scripts')
     <script>
