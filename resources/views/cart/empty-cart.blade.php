@@ -1,0 +1,1 @@
+Le panier est vide.

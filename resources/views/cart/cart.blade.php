@@ -2,12 +2,39 @@
     <div class="container" >
     <!-- Product Wrapper -->
     @if(\Cart::isEmpty())
-        Le panier est vide.
+        @include('loja::cart.empty-cart')
     @else
         @csrf
+        <div class="cart">
+            @foreach($cartItems as $item)
+                <div class="cart__item js-cart-product" data-id="{{ $item->id }}" data-quantity-max="10">
+                    <div class="cart__item__picture">
+                        <img src="" />
+                    </div>
+                    <div class="cart__item__content">
+                        <div class="cart__item__content__price">{{ $item->price }}</div>
+                        <div class="cart__item__content__name">{{ $item->name }}</div>
+                        <div class="cart__item__content__quantity">
+                            <span class="cart__item__content__quantity__update cart__item__content__quantity__update--less js-cart-update" data-update="less">-</span>
+                            <span class="cart__item__content__quantity__current js-cart-quantity">{{ $item->quantity }}</span>
+                            <span class="cart__item__content__quantity__update cart__item__content__quantity__update--more js-cart-update" data-update="add">+</span>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
+        </div>
 
+        {{-- todo I DON'T KNOW IF THIS WILL KEEP ON THIS VIEW - Or elsewhere
+             @include('loja::cart.empty-cart-button')
+        --}}
+
+        {{-- todo Move this to is own view
+             @include('loja::cart.cart-summary')
+         --}}
+
+        {{-- todo old code to remove when ok (for Christophe or Matthieu)
             <table id="js-cart">
-                <tr >
+                <tr class="cart-table">
                     <td style="width: 200px">Produit</td>
                     <td style="width: 200px">---Quantité</td>
                     <td style="width: 200px">---Prix</td>
@@ -22,9 +49,7 @@
                     </tr>
                 @endforeach
             </table>
-            <h1>Sous Total: <span id="js-cart-sub-total">{{ \Cart::getTotal() }}</span> €</h1><br/>
-            <h1 id="js-empty-cart">Vider mon panier</h1>
-
+        --}}
     @endif
     </div>
 </main>
