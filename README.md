@@ -75,7 +75,9 @@ LOJA only create empty views for you, but in each view you have access to the ne
 |---|---|---|---|
 | / | loja.home | .../home/index.blade.php | $featuredProducts |
 | /cart | loja.cart.index | .../cart/index.blade.php | $cart |
+| /categories | loja.category.index | .../category/index.blade.php |  $category |
 | /category/{category} | loja.category.show | .../category/show.blade.php |  $category |
+| /collections | loja.collection.index | .../collection/index.blade.php | $collection |
 | /collection/{collection} | loja.collection.show | .../collection/show.blade.php | $collection |
 | /product/{product} | loja.product.show | .../product/show.blade.php | $product, $relatedProducts |
 | /search?... | loja.search | .../search/index.blade.php | $products |
