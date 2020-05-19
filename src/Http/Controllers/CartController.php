@@ -9,38 +9,51 @@ class CartController extends Controller
 {
     public function empty(Request $request)
     {
+        \Cart::session(session()->getId())->clear();
+        return response()->json(['status' => 'success'], 200);
     }
 
     public function index()
     {
-        $cart = 'hello';
+        $cartItems = \Cart::session(session()->getId())->getContent();
 
-        return view('loja::cart.index', compact('cart'));
+        return view('loja::cart.index', compact('cartItems'));
     }
 
-    public function productAdd($id, Request $request)
+    public function productAdd(Product $product, Request $request)
     {
-        //todo add request protection quantity etc
-        $product = Product::query()->findOrFail($id);
         $quantity = $request->input('quantity');
         //dd($product->id,$quantity);
 
 
-        //todo add to cart system
+        //todo check quantity $product->hasEnoughQuantity($quantity)
+        //todo return response()->json(['status' => 'error','message' => "la quantitée demandé n'est pas disponible"],500);
+
+        $product->cartAdd($quantity);
 
         //if problem
         //return response()->json(['error' => 'invalid'], 401);
 
         //if everything is ok
         //todo return new quantity available
-        return response()->json(['success' => 'success'], 200);
+        return response()->json(['status' => 'success'], 200);
     }
 
     public function productUpdateQuantity(Product $product, Request $request)
     {
+        if($request->input('update_mode') == "add")
+            $product->cartAddQuantity();
+        else
+            $product->cartLessQuantity();
+
+        return response()->json(['status' => 'success','subTotal'=>\Cart::getTotal()], 200);
     }
 
     public function productRemove(Product $product)
     {
+        $product->cartRemove();
+
+
+        return response()->json(['status' => 'success','subTotal'=>\Cart::getTotal()], 200);
     }
 }

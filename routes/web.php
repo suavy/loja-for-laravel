@@ -15,7 +15,7 @@ Route::group(['middleware' => 'web'], function () {
     /*
      * Product, Category, Collection routing
      */
-    Route::get('/product/{id}', [ProductController::class, 'show'])->name('loja.product.show');
+    Route::get('/product/{product}', [ProductController::class, 'show'])->name('loja.product.show');
     Route::get('/category/{id}', [CategoryController::class, 'show'])->name('loja.category.show');
     Route::get('/collection/{id}', [CollectionController::class, 'show'])->name('loja.collection.show');
     Route::get('/search', [SearchController::class, 'index'])->name('loja.search');
@@ -30,8 +30,8 @@ Route::group(['middleware' => 'web'], function () {
      * Cart routing
      */
     Route::get('/cart', [CartController::class, 'index'])->name('loja.cart.index');
-    Route::post('/cart/add/{id}', [CartController::class, 'productAdd'])->name('loja.cart.product.add');
-    Route::post('/cart/update/{id}', [CartController::class, 'productUpdateQuantity'])->name('loja.cart.product.update.quantity');
-    Route::post('/cart/remove/{id}', [CartController::class, 'productRemove'])->name('loja.cart.product.remove');
+    Route::post('/cart/add/{product}', [CartController::class, 'productAdd'])->name('loja.cart.product.add');
+    Route::post('/cart/update/{product}', [CartController::class, 'productUpdateQuantity'])->name('loja.cart.product.update.quantity');
+    Route::post('/cart/remove/{product}', [CartController::class, 'productRemove'])->name('loja.cart.product.remove');
     Route::post('/cart/empty', [CartController::class, 'empty'])->name('loja.cart.empty');
 });

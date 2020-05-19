@@ -1,4 +1,4 @@
-<form method="POST" id="product-add-cart" action="{{ route('loja.cart.product.add',['id'=>$product->id]) }}">
+<form method="POST" id="product-add-cart" action="{{ route('loja.cart.product.add',$product) }}">
     @csrf
     <input type="text" name="quantity" value="1" id="product-quantity">
     <input type="text" value="10" id="product-quantity-total">

@@ -5,10 +5,12 @@ namespace Suavy\LojaForLaravel\Models;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Illuminate\Database\Eloquent\Model;
 use Suavy\LojaForLaravel\Traits\HasSlug;
+use Suavy\LojaForLaravel\Traits\Products\HasCart;
 
 class Product extends Model
 {
     use CrudTrait;
+    use HasCart;
     use HasSlug;
 
     protected $table = 'loja_products';
@@ -42,4 +44,14 @@ class Product extends Model
     {
         return $this->belongsTo(Tax::class);
     }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Functions
+    |--------------------------------------------------------------------------
+    */
+    public function hasEnoughQuantity($quantity){
+        return $this->quantity >= $quantity;
+    }
+
 }
