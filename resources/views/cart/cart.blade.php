@@ -10,8 +10,8 @@
                 <div class="cart__item js-cart-product" data-id="{{ $item->id }}" data-quantity-max="10">
                     <div class="cart__item__picture">
                         <img src="" />
-                    </div>
-                    <div class="cart__item__content">
+                    </div><!--
+                    --><div class="cart__item__content">
                         <div class="cart__item__content__price">{{ $item->price }}</div>
                         <div class="cart__item__content__name">{{ $item->name }}</div>
                         <div class="cart__item__content__quantity">
@@ -19,6 +19,9 @@
                             <span class="cart__item__content__quantity__current js-cart-quantity">{{ $item->quantity }}</span>
                             <span class="cart__item__content__quantity__update cart__item__content__quantity__update--more js-cart-update" data-update="add">+</span>
                         </div>
+                    </div><!--
+                    --><div class="cart__item__remove">
+                        <i class="far fa-fw fa-trash-alt js-cart-remove"></i>
                     </div>
                 </div>
             @endforeach
