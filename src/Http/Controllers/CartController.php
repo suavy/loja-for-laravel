@@ -10,6 +10,7 @@ class CartController extends Controller
     public function empty(Request $request)
     {
         \Cart::session(session()->getId())->clear();
+
         return response()->json(['status' => 'success'], 200);
     }
 
@@ -24,7 +25,6 @@ class CartController extends Controller
     {
         $quantity = $request->input('quantity');
         //dd($product->id,$quantity);
-
 
         //todo check quantity $product->hasEnoughQuantity($quantity)
         //todo return response()->json(['status' => 'error','message' => "la quantitée demandé n'est pas disponible"],500);
@@ -41,19 +41,19 @@ class CartController extends Controller
 
     public function productUpdateQuantity(Product $product, Request $request)
     {
-        if($request->input('update_mode') == "add")
+        if ($request->input('update_mode') == 'add') {
             $product->cartAddQuantity();
-        else
+        } else {
             $product->cartLessQuantity();
+        }
 
-        return response()->json(['status' => 'success','subTotal'=>\Cart::getTotal()], 200);
+        return response()->json(['status' => 'success', 'subTotal'=>\Cart::getTotal()], 200);
     }
 
     public function productRemove(Product $product)
     {
         $product->cartRemove();
 
-
-        return response()->json(['status' => 'success','subTotal'=>\Cart::getTotal()], 200);
+        return response()->json(['status' => 'success', 'subTotal'=>\Cart::getTotal()], 200);
     }
 }

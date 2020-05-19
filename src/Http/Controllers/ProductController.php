@@ -2,7 +2,6 @@
 
 namespace Suavy\LojaForLaravel\Http\Controllers;
 
-use Illuminate\Support\Facades\Session;
 use Suavy\LojaForLaravel\Events\ProductWasShown;
 use Suavy\LojaForLaravel\Models\Product;
 
