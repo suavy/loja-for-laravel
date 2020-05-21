@@ -34,18 +34,23 @@ trait HasCart
         ]);
     }
 
-    public function hasEnoughQuantityAvailable($quantityAdd){
+    public function hasEnoughQuantityAvailable($quantityAdd)
+    {
         $fakeTotalQuantity = 5; //todo replace fake totalQuantity
         return $fakeTotalQuantity - $this->cartQuantity() + $quantityAdd > 0;
     }
 
-    public function hasEnoughQuantityMaximum($quantityAdd){
+    public function hasEnoughQuantityMaximum($quantityAdd)
+    {
         $quantityMaximum = 10;
+
         return $quantityMaximum - $this->cartQuantity() + $quantityAdd > 0;
     }
 
-    public function cartQuantity(){
+    public function cartQuantity()
+    {
         $item = \Cart::session(session()->getId())->get($this->id);
+
         return is_null($item) ? 0 : $item->quantity;
     }
 }

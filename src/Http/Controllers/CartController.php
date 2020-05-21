@@ -20,6 +20,7 @@ class CartController extends Controller
             return view('loja::cart.empty');
         } else {
             $cartItems = \Cart::session(session()->getId())->getContent();
+
             return view('loja::cart.index', compact('cartItems'));
         }
     }
@@ -28,12 +29,12 @@ class CartController extends Controller
     {
         $quantity = $request->input('quantity');
 
-        if(!$product->hasEnoughQuantityAvailable($quantity)){
-            return response()->json(['status' => 'error','message' => "la quantitée demandé n'est pas disponible"]);
+        if (! $product->hasEnoughQuantityAvailable($quantity)) {
+            return response()->json(['status' => 'error', 'message' => "la quantitée demandé n'est pas disponible"]);
         }
 
-        if(!$product->hasEnoughQuantityMaximum($quantity)){
-            return response()->json(['status' => 'error','message' => "Désolé, vous avez ajouté la quantitée maximum pour ce produit."]);
+        if (! $product->hasEnoughQuantityMaximum($quantity)) {
+            return response()->json(['status' => 'error', 'message' => 'Désolé, vous avez ajouté la quantitée maximum pour ce produit.']);
         }
 
         $product->cartAdd($quantity);
@@ -47,13 +48,12 @@ class CartController extends Controller
     public function productUpdateQuantity(Product $product, Request $request)
     {
         if ($request->input('update_mode') == 'add') {
-
-            if(!$product->hasEnoughQuantityAvailable(+1)){
-                return response()->json(['status' => 'error','message' => "la quantitée demandé n'est pas disponible"]);
+            if (! $product->hasEnoughQuantityAvailable(+1)) {
+                return response()->json(['status' => 'error', 'message' => "la quantitée demandé n'est pas disponible"]);
             }
 
-            if(!$product->hasEnoughQuantityMaximum(+1)){
-                return response()->json(['status' => 'error','message' => "Désolé, vous avez ajouté la quantitée maximum pour ce produit."]);
+            if (! $product->hasEnoughQuantityMaximum(+1)) {
+                return response()->json(['status' => 'error', 'message' => 'Désolé, vous avez ajouté la quantitée maximum pour ce produit.']);
             }
 
             $product->cartAddQuantity();
@@ -63,7 +63,7 @@ class CartController extends Controller
 
         return response()->json([
             'status' => 'success',
-            'subTotal'=>round(\Cart::getTotal(),2),
+            'subTotal'=>round(\Cart::getTotal(), 2),
             'cartQuantity'=>\Cart::session(session()->getId())->getTotalQuantity(),
         ], 200);
     }
@@ -74,7 +74,7 @@ class CartController extends Controller
 
         return response()->json([
             'status' => 'success',
-            'subTotal'=>round(\Cart::getTotal(),2),
-            'cartQuantity'=>\Cart::session(session()->getId())->getTotalQuantity()], 200);
+            'subTotal'=>round(\Cart::getTotal(), 2),
+            'cartQuantity'=>\Cart::session(session()->getId())->getTotalQuantity(), ], 200);
     }
 }
