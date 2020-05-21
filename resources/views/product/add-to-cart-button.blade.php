@@ -9,11 +9,6 @@
     </div>
 </form>
 
-<!-- Cart quantity  todo to move on the header-->
-<div>
-   Cart quantity: <span id="cart-quantity">0</span>
-</div>
-
 @push('after-foot-scripts')
     <script>
 
@@ -21,15 +16,14 @@
         let $loading_add_cart = $('#loading-add-cart');
         let $product_quantity_text = $('#product-quantity-text');
         let $product_quantity = $('#product-quantity');
-        let $cart_quantity = $('#cart-quantity');
+        let $cart_quantity = $('#js-cart-quantity');
 
         let quantity_total = parseInt($('#product-quantity-total').val());
         let quantity = parseInt($product_quantity.val());
         let cart_quantity = parseInt($cart_quantity.text());
 
 
-        function update_cart_quantity(){
-            cart_quantity += quantity;
+        function update_cart_quantity(cart_quantity){
             $cart_quantity.text(cart_quantity);
         }
 
@@ -74,7 +68,7 @@
                     $product_button.show();
                     $loading_add_cart.hide();
 
-                    update_cart_quantity();
+                    update_cart_quantity(data.cartQuantity);
                     reset_quantity_product();
 
 

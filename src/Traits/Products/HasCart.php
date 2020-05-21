@@ -33,4 +33,8 @@ trait HasCart
             'quantity' => -1,
         ]);
     }
+
+    public function cartQuantityAvailable(){
+
+    }
 }

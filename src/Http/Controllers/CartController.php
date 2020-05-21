@@ -23,6 +23,8 @@ class CartController extends Controller
 
     public function productAdd(Product $product, Request $request)
     {
+        $fakeQuantityProduct = 10;
+
         $quantity = $request->input('quantity');
         //dd($product->id,$quantity);
 
@@ -36,7 +38,7 @@ class CartController extends Controller
 
         //if everything is ok
         //todo return new quantity available
-        return response()->json(['status' => 'success'], 200);
+        return response()->json(['status' => 'success','cartQuantity'=>\Cart::session(session()->getId())->getContent()->count()], 200);
     }
 
     public function productUpdateQuantity(Product $product, Request $request)
