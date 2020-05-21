@@ -50,8 +50,4 @@ class Product extends Model
     | Functions
     |--------------------------------------------------------------------------
     */
-    public function hasEnoughQuantity($quantity)
-    {
-        return $this->quantity >= $quantity;
-    }
 }

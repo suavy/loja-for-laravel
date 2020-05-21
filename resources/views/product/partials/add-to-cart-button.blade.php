@@ -8,6 +8,7 @@
         <span id="loading-add-cart" style="display: none">...</span>
     </div>
 </form>
+<span class="" id="error-message">TEST</span>
 
 @push('after-foot-scripts')
     <script>
@@ -17,6 +18,7 @@
         let $product_quantity_text = $('#product-quantity-text');
         let $product_quantity = $('#product-quantity');
         let $cart_quantity = $('#js-cart-quantity');
+        let $error_message = $('#error-message');
 
         let quantity_total = parseInt($('#product-quantity-total').val());
         let quantity = parseInt($product_quantity.val());
@@ -62,18 +64,15 @@
                 url: $(this).attr('action'),
                 data: $(this).serializeArray(),
                 success: function (data) {
-                    console.log(data);
+                    if(data.status === "error"){
+                        $error_message.text(data.message)
+                    }else {
+                        update_cart_quantity(data.cartQuantity);
+                    }
 
-                    //show button
                     $product_button.show();
                     $loading_add_cart.hide();
-
-                    update_cart_quantity(data.cartQuantity);
                     reset_quantity_product();
-
-
-                    //todo set new quantity total with json response
-
 
                 },
                 error: function(data){

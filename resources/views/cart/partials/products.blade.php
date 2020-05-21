@@ -1,29 +1,29 @@
-@if(\Cart::isEmpty())
-    @include('loja::cart.empty-cart')
-@else
+{{-- @if(\Cart::isEmpty())
+    @include('loja::cart.empty')
+@else  todo to remove and put on controller --}}
     @csrf
-    <div class="cart">
+    <div class="cart-products">
         @foreach($cartItems as $item)
-            <div class="cart__item js-cart-product" data-id="{{ $item->id }}" data-quantity-max="10">
-                <div class="cart__item__picture">
+            <div class="cart-product js-cart-product" data-id="{{ $item->id }}" data-quantity-max="10">
+                <div class="cart-product__picture">
                     <img src="" />
                 </div><!--
-                --><div class="cart__item__content">
-                    <div class="cart__item__content__price">{{ $item->price }}</div>
-                    <div class="cart__item__content__name">{{ $item->name }}</div>
-                    <div class="cart__item__content__quantity">
-                        <span class="cart__item__content__quantity__update cart__item__content__quantity__update--less js-cart-update" data-update="less">-</span>
-                        <span class="cart__item__content__quantity__current js-cart-quantity">{{ $item->quantity }}</span>
-                        <span class="cart__item__content__quantity__update cart__item__content__quantity__update--more js-cart-update" data-update="add">+</span>
+                --><div class="cart-product__content">
+                    <div class="cart-product__content__price">{{ $item->price }}</div>
+                    <div class="cart-product__content__name">{{ $item->name }}</div>
+                    <div class="quantity cart-product__content__quantity">
+                        <span class="quantity__update quantity__update--less js-cart-update" data-update="less">-</span>
+                        <span class="quantity__current js-cart-quantity">{{ $item->quantity }}</span>
+                        <span class="quantity__update quantity__update--more js-cart-update" data-update="add">+</span>
                     </div>
                 </div><!--
-                --><div class="cart__item__remove">
+                --><div class="cart-product__remove">
                     <i class="far fa-fw fa-trash-alt js-cart-remove"></i>
                 </div>
             </div>
         @endforeach
     </div>
-@endif
+{{-- @endif  todo to remove and put on controller (endif) --}}
 
 {{-- todo I DON'T KNOW IF THIS WILL KEEP ON THIS VIEW
      @include('loja::cart.empty-cart-button')
@@ -59,6 +59,7 @@
 
             let $subTotal = $('#js-cart-sub-total');
             let $cart = $('#js-cart');
+            let $cartQuantity = $('#js-cart-quantity');
 
             let cart_is_updating = false;
             let url_cart_product_remove = '/cart/remove/';
@@ -75,6 +76,7 @@
                     data: {_token:csrf},
                     success: function (data) {
                         $cart.html('').text('Le panier est vide.');
+                        $cartQuantity.text(data.cartQuantity);
                         cart_is_updating = false;
                     },
                     error: function(data){
@@ -118,8 +120,10 @@
                     url: url_cart_product_update+$product.data('id'),
                     data: {_token:csrf,update_mode:update_mode},
                     success: function (data) {
+                        console.log(data);
                         $productQuantity.text(quantity_update);
                         $subTotal.text(data.subTotal);
+                        $cartQuantity.html(data.cartQuantity);
                         cart_is_updating = false;
                     },
                     error: function(data){
@@ -140,6 +144,7 @@
                     success: function (data) {
                         $product.remove();
                         $subTotal.text(data.subTotal);
+                        $cartQuantity.text(data.cartQuantity);
                     },
                     error: function(data){
                         console.log(data);
