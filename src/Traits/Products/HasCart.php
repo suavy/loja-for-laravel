@@ -34,6 +34,16 @@ trait HasCart
         ]);
     }
 
+    public function cartUpdateQuantityWithTotalQuantityProduct(){
+        $fakeQuantity = 2;
+        \Cart::session(session()->getId())->update($this->id, array(
+            'quantity' => array(
+                'relative' => false,
+                'value' => $fakeQuantity
+            ),
+        ));
+    }
+
     public function hasEnoughQuantityAvailable($quantityAdd){
         $fakeTotalQuantity = 5; //todo replace fake totalQuantity
         return $fakeTotalQuantity - $this->cartQuantity() + $quantityAdd > 0;

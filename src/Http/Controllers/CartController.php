@@ -16,12 +16,33 @@ class CartController extends Controller
 
     public function index()
     {
-        if (\Cart::session(session()->getId())->isEmpty()) {
-            return view('loja::cart.empty');
-        } else {
-            $cartItems = \Cart::session(session()->getId())->getContent();
-            return view('loja::cart.index', compact('cartItems'));
+
+        $cartItems = \Cart::session(session()->getId())->getContent();
+        $cartItemsProblemQuantity = collect();
+        $cartItemsRemoved = collect();
+        //check if quantity is available
+        foreach ($cartItems as $item){
+
+            //todo use true quantity $item->associatedModel->quantity
+            $fakeQuantity = 10;
+            if($item->quantity > $fakeQuantity){ //si la quantité du panier est trop grande par rapport à la quantité restante du produit
+                if($fakeQuantity == 0){ //si il n'y a plus de quantity, on retire l'item du panier
+                    $cartItemsRemoved->put($item->id,$item);
+                    $item->associatedModel->cartRemove();
+                }else{
+                    $cartItemsProblemQuantity->put($item->id,$item);
+                    $item->associatedModel->cartUpdateQuantityWithTotalQuantityProduct();
+                }
+            }
+
         }
+
+        if (\Cart::session(session()->getId())->isEmpty()) {
+            return view('loja::cart.empty',compact('cartItemsRemoved'));
+        }else {
+            $cartItems = \Cart::session(session()->getId())->getContent();
+            return view('loja::cart.index', compact('cartItems', 'cartItemsProblemQuantity', 'cartItemsRemoved'));
+            }
     }
 
     public function productAdd(Product $product, Request $request)

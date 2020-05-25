@@ -1,57 +1,37 @@
-{{-- @if(\Cart::isEmpty())
-    @include('loja::cart.empty')
-@else  todo to remove and put on controller --}}
-    @csrf
-    <div class="cart-products">
-        @foreach($cartItems as $item)
-            <div class="cart-product js-cart-product" data-id="{{ $item->id }}" data-quantity-max="10">
-                <div class="cart-product__picture">
-                    <img src="" />
-                </div><!--
-                --><div class="cart-product__content">
-                    <div class="cart-product__content__price">{{ $item->price }}</div>
-                    <div class="cart-product__content__name">{{ $item->name }}</div>
-                    <div class="quantity cart-product__content__quantity">
-                        <span class="quantity__update quantity__update--less js-cart-update" data-update="less">-</span>
-                        <span class="quantity__current js-cart-quantity">{{ $item->quantity }}</span>
-                        <span class="quantity__update quantity__update--more js-cart-update" data-update="add">+</span>
-                    </div>
-                </div><!--
-                --><div class="cart-product__remove">
-                    <i class="far fa-fw fa-trash-alt js-cart-remove"></i>
+@csrf
+@if($cartItemsRemoved->count())
+    <ul>
+    @foreach($cartItemsRemoved as $item)
+         <li>Le produit {{ $item->name }} n'est plus disponible nous l'avons supprimé du panier.</li>
+    @endforeach
+    </ul>
+@endif
+<div class="cart-products">
+</div>
+<div class="cart-products">
+    @foreach($cartItems as $item)
+        <div class="cart-product js-cart-product" data-id="{{ $item->id }}" data-quantity-max="10">
+            <div class="cart-product__picture">
+                <img src="" />
+            </div><!--
+            --><div class="cart-product__content">
+                <div class="cart-product__content__price">{{ $item->price }}</div>
+                <div class="cart-product__content__name">{{ $item->name }}</div>
+                <div class="quantity cart-product__content__quantity">
+                    <span class="quantity__update quantity__update--less js-cart-update" data-update="less">-</span>
+                    <span class="quantity__current js-cart-quantity">{{ $item->quantity }}</span>
+                    <span class="quantity__update quantity__update--more js-cart-update" data-update="add">+</span>
                 </div>
-            </div>
-        @endforeach
-    </div>
-{{-- @endif  todo to remove and put on controller (endif) --}}
-
-{{-- todo I DON'T KNOW IF THIS WILL KEEP ON THIS VIEW
-     @include('loja::cart.empty-cart-button')
---}}
-
-{{-- todo I DON'T KNOW IF THIS WILL KEEP ON THIS VIEW
-     @include('loja::cart.cart-summary')
- --}}
-
-{{-- todo old code to remove when ok (for Matthieu)
-    <table id="js-cart">
-        <tr class="cart-table">
-            <td style="width: 200px">Produit</td>
-            <td style="width: 200px">---Quantité</td>
-            <td style="width: 200px">---Prix</td>
-            <td style="width: 200px">---Supprimer</td>
-        </tr>
-        @foreach($cartItems as $item)
-            <tr style="text-align: right" class="js-cart-product" data-id="{{ $item->id }}" data-quantity-max="10">
-                <td>{{ $item->name }}</td>
-                <td><span class="js-cart-quantity">{{ $item->quantity }}</span> <span class="js-cart-update" data-update="add">+</span> <span class="js-cart-update" data-update="less"> - </span></td>
-                <td><span class="js-cart-price" > {{ $item->price }}</span></td>
-                <td><span class="js-cart-remove">X</span> </td>
-            </tr>
-        @endforeach
-    </table>
---}}
-
+            </div><!--
+            --><div class="cart-product__remove">
+                <i class="far fa-fw fa-trash-alt js-cart-remove"></i>
+            </div><!--
+            -->@if($cartItemsProblemQuantity->has($item->id))<div>
+                La quantité demandé n'est plus disponible, nous avons mis à jour le panier avec la quantité restante.
+            </div>@endif
+        </div>
+    @endforeach
+</div>
 
 @push('after-foot-scripts')
     <script>
