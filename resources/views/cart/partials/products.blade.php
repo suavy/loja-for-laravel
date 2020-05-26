@@ -10,7 +10,7 @@
 </div>
 <div class="cart-products">
     @foreach($cartItems as $item)
-        <div class="cart-product js-cart-product" data-id="{{ $item->id }}" data-quantity-max="10">
+        <div class="cart-product js-cart-product" data-id="{{ $item->id }}" data-quantity-max="100">
             <div class="cart-product__picture">
                 <img src="" />
             </div><!--

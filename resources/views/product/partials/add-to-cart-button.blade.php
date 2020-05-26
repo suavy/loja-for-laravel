@@ -1,14 +1,19 @@
+<!-- TODO USE THIS BLOCK -->
+<div class="quantity">
+    <span class="quantity__update quantity__update--less js-quantity-update" data-update="less">-</span>
+    <span class="quantity__current" id="product-quantity-text">1</span>
+    <span class="quantity__update quantity__update--more js-quantity-update" data-update="add">+</span>
+</div>
 <form method="POST" id="product-add-cart" action="{{ route('loja.cart.product.add',$product) }}">
     @csrf
-    <input type="text" name="quantity" value="1" id="product-quantity">
-    <input type="text" value="10" id="product-quantity-total">
-    <span>Quantité <span id="product-quantity-add">+</span><span id="product-quantity-text">1</span><span id="product-quantity-less">-</span></span>
+    <input type="hidden" name="quantity" value="1" id="product-quantity">
     <div class="form-group">
         <button id="product-button" class="btn btn-success btn-submit">Ajouter au panier</button>
         <span id="loading-add-cart" style="display: none">...</span>
     </div>
 </form>
-<span class="" id="error-message">TEST</span>
+<!-- todo tant que la quantité n'est pas géré, le message d'erreur est inutile -->
+<span class="" id="error-message"></span>
 
 @push('after-foot-scripts')
     <script>
@@ -35,23 +40,24 @@
             $product_quantity.val(quantity);
         }
 
-        $('#product-quantity-add').click(function(){
-            if(quantity+1 > quantity_total){
+        $('.js-quantity-update').click(function(){
+            let update_mode = $(this).data('update');
+            let quantity_update;
+
+            if(update_mode === "add")
+                quantity_update = 1;
+            else
+                quantity_update = -1;
+
+            if(quantity+quantity_update < 1) {
                 return false;
             }
-            quantity += 1;
+
+            quantity += quantity_update;
             $product_quantity_text.text(quantity);
             $product_quantity.val(quantity);
         });
 
-        $('#product-quantity-less').click(function(){
-            if(quantity-1 < 1){
-                return false;
-            }
-            quantity -= 1;
-            $product_quantity_text.text(quantity);
-            $product_quantity.val(quantity);
-        });
 
         $('#product-add-cart').submit(function (e) {
             e.preventDefault(false);

@@ -20,7 +20,9 @@ class CartController extends Controller
         $cartItems = \Cart::session(session()->getId())->getContent();
         $cartItemsProblemQuantity = collect();
         $cartItemsRemoved = collect();
-        //check if quantity is available
+
+        /* TODO use this when quantity is available
+         * check if quantity is available
         foreach ($cartItems as $item){
 
             //todo use true quantity $item->associatedModel->quantity
@@ -36,13 +38,14 @@ class CartController extends Controller
             }
 
         }
+        */
 
         if (\Cart::session(session()->getId())->isEmpty()) {
             return view('loja::cart.empty',compact('cartItemsRemoved'));
         }else {
             $cartItems = \Cart::session(session()->getId())->getContent();
             return view('loja::cart.index', compact('cartItems', 'cartItemsProblemQuantity', 'cartItemsRemoved'));
-            }
+        }
     }
 
     public function productAdd(Product $product, Request $request)

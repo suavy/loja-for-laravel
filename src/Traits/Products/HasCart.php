@@ -45,11 +45,13 @@ trait HasCart
     }
 
     public function hasEnoughQuantityAvailable($quantityAdd){
+        return true; //todo pour l'instant on ne gère pas la qtt
         $fakeTotalQuantity = 5; //todo replace fake totalQuantity
         return $fakeTotalQuantity - $this->cartQuantity() + $quantityAdd > 0;
     }
 
     public function hasEnoughQuantityMaximum($quantityAdd){
+        return true; //todo pour l'instant on ne gère pas la qtt
         $quantityMaximum = 10;
         return $quantityMaximum - $this->cartQuantity() + $quantityAdd > 0;
     }
