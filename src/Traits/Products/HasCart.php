@@ -34,30 +34,36 @@ trait HasCart
         ]);
     }
 
-    public function cartUpdateQuantityWithTotalQuantityProduct(){
+    public function cartUpdateQuantityWithTotalQuantityProduct()
+    {
         $fakeQuantity = 2;
-        \Cart::session(session()->getId())->update($this->id, array(
-            'quantity' => array(
+        \Cart::session(session()->getId())->update($this->id, [
+            'quantity' => [
                 'relative' => false,
-                'value' => $fakeQuantity
-            ),
-        ));
+                'value' => $fakeQuantity,
+            ],
+        ]);
     }
 
-    public function hasEnoughQuantityAvailable($quantityAdd){
+    public function hasEnoughQuantityAvailable($quantityAdd)
+    {
         return true; //todo pour l'instant on ne gère pas la qtt
         $fakeTotalQuantity = 5; //todo replace fake totalQuantity
         return $fakeTotalQuantity - $this->cartQuantity() + $quantityAdd > 0;
     }
 
-    public function hasEnoughQuantityMaximum($quantityAdd){
+    public function hasEnoughQuantityMaximum($quantityAdd)
+    {
         return true; //todo pour l'instant on ne gère pas la qtt
         $quantityMaximum = 10;
+
         return $quantityMaximum - $this->cartQuantity() + $quantityAdd > 0;
     }
 
-    public function cartQuantity(){
+    public function cartQuantity()
+    {
         $item = \Cart::session(session()->getId())->get($this->id);
+
         return is_null($item) ? 0 : $item->quantity;
     }
 }
