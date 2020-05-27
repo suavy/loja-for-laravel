@@ -14,8 +14,9 @@ class CountryDelivery extends Model
     // Disable Laravel's mass assignment protection
     protected $guarded = [];
 
-    public function getNameAttribute(){
-        return (new Countries())->where('cca2',$this->cca2)->first()->name->common;
+    public function getNameAttribute()
+    {
+        return (new Countries())->where('cca2', $this->cca2)->first()->name->common;
     }
 
     /*
@@ -23,15 +24,18 @@ class CountryDelivery extends Model
     | Functions
     |--------------------------------------------------------------------------
     */
-    public static function countriesCca2(){
+    public static function countriesCca2()
+    {
         return self::all()->pluck('cca2');
     }
 
-    public static function countriesNotSelected(){
+    public static function countriesNotSelected()
+    {
         $countriesCca2ToIgnore = self::countriesCca2();
-        return (new Countries())->all()->filter(function ($value) use ($countriesCca2ToIgnore){
+
+        return (new Countries())->all()->filter(function ($value) use ($countriesCca2ToIgnore) {
             return ! ($countriesCca2ToIgnore->contains($value->cca2));
-        })->pluck('name.common','cca2')->toArray();
+        })->pluck('name.common', 'cca2')->toArray();
 
         /*
         Doesnt work.. but better
@@ -42,5 +46,4 @@ class CountryDelivery extends Model
         ->pluck('name.common','cca2')
         */
     }
-
 }
