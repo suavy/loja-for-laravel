@@ -20,7 +20,8 @@
         "backpack/crud": "4.1.*",
         "cartalyst/stripe-laravel": "^12.0",
         "darryldecode/cart": "^4.1",
-        "illuminate/support": "^7.0"
+        "illuminate/support": "^7.0",
+        "pragmarx/countries": "^0.7.0"
     },
     "require-dev": {
         "orchestra/testbench": "^5.0",
