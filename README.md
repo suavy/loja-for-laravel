@@ -21,7 +21,12 @@ composer require suavy/loja-for-laravel
 
 :two: Follow the [Backpack for Laravel](https://backpackforlaravel.com/) installation first if you don't have it already in your project. If you are not familiar with Backpack, it's time to start!
 
-:three: Start by publishing our files (that include config file, migrations and views)
+:three: Publish BackpackSettings files (official Backpack addon)
+```bash
+php artisan vendor:publish --provider="Backpack\Settings\SettingsServiceProvider"
+```
+
+:four: Publish our files (that include config file, migrations and views)
 
 ```bash
 php artisan vendor:publish --provider="Suavy\LojaForLaravel\LojaForLaravelServiceProvider"
@@ -29,12 +34,12 @@ php artisan vendor:publish --provider="Suavy\LojaForLaravel\LojaForLaravelServic
 
 > Please, before continuing, get a look at ``config/loja.php`` and fill it! Some configuration are required, so don't forget to do it 
 
-:four: Migrate your database
+:five: Migrate your database
 ```bash
 php artisan migrate
 ```
 
-:five: Add our LOJA Admin Sidebar to your current Backpack sidebar :
+:six: Add our LOJA Admin Sidebar to your current Backpack sidebar :
 ```bash
 @include('loja::admin.sidebar')
 ```
