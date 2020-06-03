@@ -49,6 +49,7 @@ trait HasCart
     {
         return true; //todo pour l'instant on ne gère pas la qtt
         $fakeTotalQuantity = 5; //todo replace fake totalQuantity
+
         return $fakeTotalQuantity - $this->cartQuantity() + $quantityAdd > 0;
     }
 
