@@ -1,0 +1,43 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+class SeedLojaSettings extends Migration
+{
+    public function up()
+    {
+        $settings = [
+            [
+                'key' => 'delibery_to_all_countries',
+                'name' => "Livraison sur tous les pays du monde",
+                'description' => "Cocher pour activer la livraison sur tous les pays du monde (si non le réglage 'Pays de livraisons' sera pris en compte)",
+                'value' => false,
+                'field' => json_encode([
+                    'name'  => 'delibery_to_all_countries',
+                    'label' => "Cocher pour activer la livraison sur tous les pays du monde!",
+                    'type'  => 'checkbox'
+                ]),
+                'active' => true,
+            ],
+            [
+                'key' => 'delivery_available_countries',
+                'name' => 'Pays de livraisons',
+                'description' => 'Selectionnez ici tous les pays ou vous souhaitez livrez vos produits',
+                'value' => '',
+                'field' => json_encode([
+                    'name'  => 'delivery_available_countries',
+                    'label' => "Sélectionnez les pays de livraisons",
+                    'type'  => 'select2_from_array',
+                    'options'     => ['one' => 'One', 'two' => 'Two', 'three' => 'Three'],
+                    'allows_null' => true,
+                    'allows_multiple' => true,
+                ]),
+                'active' => true,
+            ],
+        ];
+        DB::table('settings')->insert($settings);
+    }
+
+}
