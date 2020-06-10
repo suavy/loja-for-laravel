@@ -32,6 +32,7 @@ Route::group(['middleware' => 'web'], function () {
      * Cart routing
      */
     Route::get('/cart', [CartController::class, 'index'])->name('loja.cart.index');
+    Route::get('/payment', [CartController::class, 'payment'])->name('loja.cart.payment');
     Route::post('/cart/add/{product}', [CartController::class, 'productAdd'])->name('loja.cart.product.add');
     Route::post('/cart/update/{product}', [CartController::class, 'productUpdateQuantity'])->name('loja.cart.product.update.quantity');
     Route::post('/cart/remove/{product}', [CartController::class, 'productRemove'])->name('loja.cart.product.remove');

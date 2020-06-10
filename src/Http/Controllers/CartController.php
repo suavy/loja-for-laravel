@@ -48,6 +48,17 @@ class CartController extends Controller
         }
     }
 
+    public function payment() {
+        $cartItems = \Cart::session(session()->getId())->getContent();
+        $cartItemsProblemQuantity = collect();
+        $cartItemsRemoved = collect();
+        if (\Cart::session(session()->getId())->isEmpty()) {
+            return back();
+        } else {
+            return view('loja::cart.payment', compact('cartItems'));
+        }
+    }
+
     public function productAdd(Product $product, Request $request)
     {
         $quantity = $request->input('quantity');

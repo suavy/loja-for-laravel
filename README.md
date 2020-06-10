@@ -80,6 +80,8 @@ LOJA only create empty views for you, but in each view you have access to the ne
 |---|---|---|---|
 | / | loja.home | .../home/index.blade.php | $featuredProducts |
 | /cart | loja.cart.index | .../cart/index.blade.php | $cart |
+| - | - | .../cart/empty.blade.php | * when $cart is empty * |
+| /payment | loja.cart.payment | .../cart/payment.blade.php | $cart |
 | /categories | loja.category.index | .../category/index.blade.php |  $category |
 | /category/{category} | loja.category.show | .../category/show.blade.php |  $category |
 | /collections | loja.collection.index | .../collection/index.blade.php | $collection |
