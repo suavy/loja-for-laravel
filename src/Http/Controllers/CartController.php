@@ -48,7 +48,8 @@ class CartController extends Controller
         }
     }
 
-    public function payment() {
+    public function payment()
+    {
         $cartItems = \Cart::session(session()->getId())->getContent();
         $cartItemsProblemQuantity = collect();
         $cartItemsRemoved = collect();
