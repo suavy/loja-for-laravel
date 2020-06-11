@@ -21,4 +21,5 @@ Route::group([
     Route::crud('collection', 'CollectionCrudController');
     Route::crud('category', 'CategoryCrudController');
     Route::crud('country-delivery', 'CountryDeliveryCrudController');
+    Route::get('country-delivery/{id}/toggle-country', 'CountryDeliveryCrudController@toggleCountry');
 }); // this should be the absolute last line of this file

@@ -6,11 +6,11 @@ use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Illuminate\Database\Eloquent\Model;
 use PragmaRX\Countries\Package\Countries;
 
-class CountryDelivery extends Model
+class Country extends Model
 {
     use CrudTrait;
 
-    protected $table = 'loja_country_deliveries';
+    protected $table = 'loja_countries';
     // Disable Laravel's mass assignment protection
     protected $guarded = [];
 
@@ -29,14 +29,19 @@ class CountryDelivery extends Model
         return self::all()->pluck('cca2');
     }
 
-    public static function countriesNotSelected()
+    public static function countriesSeed()
     {
-        $countriesCca2ToIgnore = self::countriesCca2();
+        $datas = [];
+        $countries =  (new Countries())->all()->pluck('name.common', 'cca2')->toArray();
 
-        return (new Countries())->all()->filter(function ($value) use ($countriesCca2ToIgnore) {
-            return ! ($countriesCca2ToIgnore->contains($value->cca2));
-        })->pluck('name.common', 'cca2')->toArray();
+        foreach ($countries as $key => $country){
+            $datas[] = [
+                'cca2' => $key,
+                'name' => $country
+            ];
+        }
 
+        self::query()->insert($datas);
         /*
         Doesnt work.. but better
         ->map(function($country){
