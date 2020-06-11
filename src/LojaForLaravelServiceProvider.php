@@ -42,7 +42,7 @@ class LojaForLaravelServiceProvider extends ServiceProvider
                 __DIR__.'/../database/migrations/create_loja_order_statuses_table.php.stub' => database_path('migrations/'.date('Y_m_d_His', time() + 0).'_create_loja_order_statuses_table.php'),
                 __DIR__.'/../database/migrations/create_loja_products_table.php.stub' => database_path('migrations/'.date('Y_m_d_His', time() + 1).'_create_loja_products_table.php'),
                 __DIR__.'/../database/migrations/create_loja_taxes_table.php.stub' => database_path('migrations/'.date('Y_m_d_His', time() + 0).'_create_loja_taxes_table.php'),
-                __DIR__.'/../database/migrations/create_loja_country_deliveries_table.php.stub' => database_path('migrations/'.date('Y_m_d_His', time() + 0).'_create_loja_country_deliveries_table.php'),
+                __DIR__ . '/../database/migrations/create_loja_countries_table.php.stub' => database_path('migrations/'.date('Y_m_d_His', time() + 0).'_create_loja_country_deliveries_table.php'),
                 __DIR__.'/../database/migrations/seed_loja_settings.php.stub' => database_path('migrations/'.date('Y_m_d_His', time() + 0).'_seed_loja_settings.php'),
 
 
