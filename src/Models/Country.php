@@ -32,12 +32,12 @@ class Country extends Model
     public static function countriesSeed()
     {
         $datas = [];
-        $countries =  (new Countries())->all()->pluck('name.common', 'cca2')->toArray();
+        $countries = (new Countries())->all()->pluck('name.common', 'cca2')->toArray();
 
-        foreach ($countries as $key => $country){
+        foreach ($countries as $key => $country) {
             $datas[] = [
                 'cca2' => $key,
-                'name' => $country
+                'name' => $country,
             ];
         }
 
