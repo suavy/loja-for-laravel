@@ -29,22 +29,22 @@ class CountryDeliveryCrudController extends CrudController
 
     protected function setupListOperation()
     {
-        $this->crud->removeButton("delete");
-        $this->crud->removeButton("show");
-        $this->crud->removeButton("update");
+        $this->crud->removeButton('delete');
+        $this->crud->removeButton('show');
+        $this->crud->removeButton('update');
         $this->crud->orderBy('delivery');
-
-
 
         $this->crud->column('id')->label('#');
         $this->crud->column('name')->label('Nom');
         $this->crud->column('delivery')->type('check')->label('Livraison Disponible ?');
     }
 
-    public function toggleCountry($id){
+    public function toggleCountry($id)
+    {
         $country = Country::query()->findOrFail($id);
-        $country->delivery = !$country->delivery;
+        $country->delivery = ! $country->delivery;
         $country->save();
+
         return redirect()->back();
     }
 

@@ -45,7 +45,6 @@ class LojaForLaravelServiceProvider extends ServiceProvider
                 __DIR__ . '/../database/migrations/create_loja_countries_table.php.stub' => database_path('migrations/'.date('Y_m_d_His', time() + 0).'_create_loja_country_deliveries_table.php'),
                 __DIR__.'/../database/migrations/seed_loja_settings.php.stub' => database_path('migrations/'.date('Y_m_d_His', time() + 0).'_seed_loja_settings.php'),
 
-
                 // you can add any number of migrations here
             ], 'migrations');
 
