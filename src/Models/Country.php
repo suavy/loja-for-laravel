@@ -14,21 +14,22 @@ class Country extends Model
     // Disable Laravel's mass assignment protection
     protected $guarded = [];
 
-
     /*
     |--------------------------------------------------------------------------
     | Functions
     |--------------------------------------------------------------------------
     */
 
-    public static function forSelect(){
-        $query = self::query()->select(['name','id']);
-        if(\Config::get('settings.delibery_to_all_countries')){
+    public static function forSelect()
+    {
+        $query = self::query()->select(['name', 'id']);
+        if (\Config::get('settings.delibery_to_all_countries')) {
             $query = $query->get();
-        }else{
-            $query = $query->where('delivery',1)->get();
+        } else {
+            $query = $query->where('delivery', 1)->get();
         }
-        return $query->pluck('name','id');
+
+        return $query->pluck('name', 'id');
     }
 
     public static function countriesCca2()

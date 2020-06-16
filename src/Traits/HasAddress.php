@@ -2,23 +2,27 @@
 
 namespace Suavy\LojaForLaravel\Traits;
 
-use Illuminate\Support\Str;
 use Suavy\LojaForLaravel\Models\Address;
 
 trait HasAddress
 {
-    public function addresses(){   return $this->hasMany(Address::class,'user_id');}
+    public function addresses()
+    {
+        return $this->hasMany(Address::class, 'user_id');
+    }
 
-
-    public function hasAddress(){
+    public function hasAddress()
+    {
         return $this->addresses()->exists();
     }
 
-    public function address(){
+    public function address()
+    {
         return $this->addresses()->first();
     }
 
-    public function updateAddress($address){
+    public function updateAddress($address)
+    {
         $this->hasAddress() ? $this->address()->update($address) : (new Address($address))->user()->associate($this)->save();
     }
 }

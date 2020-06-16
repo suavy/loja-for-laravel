@@ -9,6 +9,4 @@ class Attribute extends Model
     protected $table = 'loja_attributes';
     // Disable Laravel's mass assignment protection
     protected $guarded = [];
-
-
 }
