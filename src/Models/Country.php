@@ -14,16 +14,23 @@ class Country extends Model
     // Disable Laravel's mass assignment protection
     protected $guarded = [];
 
-    public function getNameAttribute()
-    {
-        return (new Countries())->where('cca2', $this->cca2)->first()->name->common;
-    }
 
     /*
     |--------------------------------------------------------------------------
     | Functions
     |--------------------------------------------------------------------------
     */
+
+    public static function forSelect(){
+        $query = self::query()->select(['name','id']);
+        if(\Config::get('settings.delibery_to_all_countries')){
+            $query = $query->get();
+        }else{
+            $query = $query->where('delivery',1)->get();
+        }
+        return $query->pluck('name','id');
+    }
+
     public static function countriesCca2()
     {
         return self::all()->pluck('cca2');
@@ -40,15 +47,6 @@ class Country extends Model
                 'name' => $country,
             ];
         }
-
         self::query()->insert($datas);
-        /*
-        Doesnt work.. but better
-        ->map(function($country){
-            return [$country->cca2 => $country->name->common." - ".$country->cca2];
-        })->values()->toArray()
-        instead of
-        ->pluck('name.common','cca2')
-        */
     }
 }

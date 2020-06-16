@@ -62,6 +62,11 @@ Add LOJA front routes to your web file (or custom) aka Front routes integration
 - Stripe configuration ? or already done in main config ?
 -->
 
+:seven: Add button to backpack admin in views/vendor/backpack/crud/buttons/toggle-country.blade.php
+```bash
+@include('loja::admin.crud.buttons.toggle-country')
+```
+
 Installation is done now :tada:  
 
 ## Usage

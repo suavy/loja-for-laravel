@@ -2,7 +2,11 @@
 
 namespace Suavy\LojaForLaravel\Http\Controllers;
 
+use Former\Facades\Former;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Suavy\LojaForLaravel\Http\Requests\PaymentRequest;
+use Suavy\LojaForLaravel\Models\Address;
 use Suavy\LojaForLaravel\Models\Product;
 
 class CartController extends Controller
@@ -16,10 +20,6 @@ class CartController extends Controller
 
     public function index()
     {
-        $cartItems = \Cart::session(session()->getId())->getContent();
-        $cartItemsProblemQuantity = collect();
-        $cartItemsRemoved = collect();
-
         /* TODO use this when quantity is available
          * check if quantity is available
         foreach ($cartItems as $item){
@@ -39,17 +39,35 @@ class CartController extends Controller
         }
         */
 
+        $countriesSelect = \Suavy\LojaForLaravel\Models\Country::forSelect();
+
+        $cartItems = \Cart::session(session()->getId())->getContent();
+        $cartItemsProblemQuantity = collect();
+        $cartItemsRemoved = collect();
+
+        //populate address for user
+        if(Auth::check() && Auth::user()->hasAddress()){
+            Former::populate(['address'=>Auth::user()->address()]);
+        }
+
+
         if (\Cart::session(session()->getId())->isEmpty()) {
             return view('loja::cart.empty', compact('cartItemsRemoved'));
         } else {
             $cartItems = \Cart::session(session()->getId())->getContent();
 
-            return view('loja::cart.index', compact('cartItems', 'cartItemsProblemQuantity', 'cartItemsRemoved'));
+            return view('loja::cart.index', compact('cartItems', 'cartItemsProblemQuantity', 'cartItemsRemoved','countriesSelect'));
         }
     }
 
-    public function payment()
+    public function payment(PaymentRequest $request)
     {
+
+        if($request->has('address')){
+            Auth::user()->updateAddress($request->input('address'));
+            return back();
+        }
+
         $cartItems = \Cart::session(session()->getId())->getContent();
         $cartItemsProblemQuantity = collect();
         $cartItemsRemoved = collect();

@@ -17,7 +17,7 @@ class SeedLojaSettings extends Migration
                 'description' => "Cocher pour activer la livraison sur tous les pays du monde (si non le réglage 'Pays de livraisons' sera pris en compte)",
                 'value' => false,
                 'field' => json_encode([
-                    'name'  => 'delibery_to_all_countries',
+                    'name'  => 'value',
                     'label' => "Cocher pour activer la livraison sur tous les pays du monde!",
                     'type'  => 'checkbox'
                 ]),
