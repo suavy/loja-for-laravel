@@ -5,7 +5,6 @@ namespace Suavy\LojaForLaravel\Models;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User;
-use Suavy\LojaForLaravel\Traits\HasSlug;
 
 class Address extends Model
 {
@@ -21,6 +20,8 @@ class Address extends Model
     |--------------------------------------------------------------------------
     */
 
-    public function user(){ return $this->belongsTo(User::class); }
-
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

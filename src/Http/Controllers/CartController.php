@@ -46,25 +46,24 @@ class CartController extends Controller
         $cartItemsRemoved = collect();
 
         //populate address for user
-        if(Auth::check() && Auth::user()->hasAddress()){
+        if (Auth::check() && Auth::user()->hasAddress()) {
             Former::populate(['address'=>Auth::user()->address()]);
         }
-
 
         if (\Cart::session(session()->getId())->isEmpty()) {
             return view('loja::cart.empty', compact('cartItemsRemoved'));
         } else {
             $cartItems = \Cart::session(session()->getId())->getContent();
 
-            return view('loja::cart.index', compact('cartItems', 'cartItemsProblemQuantity', 'cartItemsRemoved','countriesSelect'));
+            return view('loja::cart.index', compact('cartItems', 'cartItemsProblemQuantity', 'cartItemsRemoved', 'countriesSelect'));
         }
     }
 
     public function payment(PaymentRequest $request)
     {
-
-        if($request->has('address')){
+        if ($request->has('address')) {
             Auth::user()->updateAddress($request->input('address'));
+
             return back();
         }
 

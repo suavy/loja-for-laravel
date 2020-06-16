@@ -10,21 +10,21 @@ use HtmlObject\Input;
 use Illuminate\Container\Container;
 
 /**
- * Custom HTML5 forms
+ * Custom HTML5 forms.
  */
-class CustomFormer extends Framework implements FrameworkInterface {
-
+class CustomFormer extends Framework implements FrameworkInterface
+{
     /**
-     * The field states available
+     * The field states available.
      *
      * @var array
      */
-    protected $states = array(
+    protected $states = [
         'error',
-    );
+    ];
 
     /**
-     * Create a new Nude instance
+     * Create a new Nude instance.
      *
      * @param Container $app
      */
@@ -52,7 +52,7 @@ class CustomFormer extends Framework implements FrameworkInterface {
     ///////////////////////////// ADD CLASSES //////////////////////////
     ////////////////////////////////////////////////////////////////////
 
-    public function getFieldClasses(Field $field, $classes = array())
+    public function getFieldClasses(Field $field, $classes = [])
     {
         $classes = $this->filterFieldClasses($classes);
 
@@ -64,28 +64,31 @@ class CustomFormer extends Framework implements FrameworkInterface {
         return $field;
     }
 
-    public function getGroupClasses() {
+    public function getGroupClasses()
+    {
         return 'input-container';
     }
 
-    public function getLabelClasses() {
+    public function getLabelClasses()
+    {
         return 'label';
     }
 
-    public function getUneditableClasses() {
-        return null;
+    public function getUneditableClasses()
+    {
     }
 
-    public function getPlainTextClasses() {
-        return null;
+    public function getPlainTextClasses()
+    {
     }
 
-    public function getFormClasses($type) {
+    public function getFormClasses($type)
+    {
         return $type ? 'form form--'.$type : 'form';
     }
 
-    public function getActionClasses() {
-        return null;
+    public function getActionClasses()
+    {
     }
 
     ////////////////////////////////////////////////////////////////////
@@ -93,15 +96,15 @@ class CustomFormer extends Framework implements FrameworkInterface {
     ////////////////////////////////////////////////////////////////////
 
     /**
-     * Create an help text
+     * Create an help text.
      */
-    public function createHelp($text, $attributes = array())
+    public function createHelp($text, $attributes = [])
     {
         return Element::create('div', $text, $attributes)->addClass('help');
     }
 
     /**
-     * Render a disabled field
+     * Render a disabled field.
      *
      * @param Field $field
      *
@@ -116,7 +119,7 @@ class CustomFormer extends Framework implements FrameworkInterface {
 
     /**
      * Render a plain text field
-     * Which fallback to a disabled field
+     * Which fallback to a disabled field.
      *
      * @param Field $field
      *
@@ -132,7 +135,7 @@ class CustomFormer extends Framework implements FrameworkInterface {
     ////////////////////////////////////////////////////////////////////
 
     /**
-     * Wrap an item to be prepended or appended to the current field
+     * Wrap an item to be prepended or appended to the current field.
      *
      * @param  string $item
      *
@@ -144,7 +147,7 @@ class CustomFormer extends Framework implements FrameworkInterface {
     }
 
     /**
-     * Wrap a field with prepended and appended items
+     * Wrap a field with prepended and appended items.
      *
      * @param  Field $field
      * @param  array $prepend
@@ -152,24 +155,24 @@ class CustomFormer extends Framework implements FrameworkInterface {
      *
      * @return string A field concatented with prepended and/or appended items
      */
-    public function prependAppend($field, $prepend, $append) {
-
-        $groupClass = "input-addon-container";
-        if(!empty($prepend)) {
+    public function prependAppend($field, $prepend, $append)
+    {
+        $groupClass = 'input-addon-container';
+        if (! empty($prepend)) {
             $prependValue = $prepend[0]->getValue();
             $prepend[0]->setValue("<div class='input-addon input-addon--left'>$prependValue</div>");
-            $groupClass .= " input-addon-container--left";
+            $groupClass .= ' input-addon-container--left';
         }
-        if(!empty($append)) {
+        if (! empty($append)) {
             $appendValue = $append[0]->getValue();
             $append[0]->setValue("<div class='input-addon input-addon--right'>$appendValue</div>");
-            $groupClass .= " input-addon-container--right";
+            $groupClass .= ' input-addon-container--right';
         }
         $return = "<div class='$groupClass'>";
-        $return .= join(null, $prepend);
+        $return .= implode(null, $prepend);
         $return .= $field->render();
-        $return .= join(null, $append);
-        $return .= "</div>";
+        $return .= implode(null, $append);
+        $return .= '</div>';
 
         return $return;
     }
@@ -187,7 +190,7 @@ class CustomFormer extends Framework implements FrameworkInterface {
     }
 
     /**
-     * Wrap actions block with potential additional tags
+     * Wrap actions block with potential additional tags.
      *
      * @param  Actions $actions
      *
@@ -198,4 +201,3 @@ class CustomFormer extends Framework implements FrameworkInterface {
         return $actions;
     }
 }
-
