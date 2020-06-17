@@ -6,6 +6,7 @@ use Suavy\LojaForLaravel\Http\Controllers\CategoryController;
 use Suavy\LojaForLaravel\Http\Controllers\CollectionController;
 use Suavy\LojaForLaravel\Http\Controllers\HomeController;
 use Suavy\LojaForLaravel\Http\Controllers\OrderController;
+use Suavy\LojaForLaravel\Http\Controllers\PaymentController;
 use Suavy\LojaForLaravel\Http\Controllers\ProductController;
 use Suavy\LojaForLaravel\Http\Controllers\SearchController;
 
@@ -32,9 +33,16 @@ Route::group(['middleware' => 'web'], function () {
      * Cart routing
      */
     Route::get('/cart', [CartController::class, 'index'])->name('loja.cart.index');
-    Route::post('/payment', [CartController::class, 'payment'])->name('loja.cart.payment');
     Route::post('/cart/add/{product}', [CartController::class, 'productAdd'])->name('loja.cart.product.add');
     Route::post('/cart/update/{product}', [CartController::class, 'productUpdateQuantity'])->name('loja.cart.product.update.quantity');
     Route::post('/cart/remove/{product}', [CartController::class, 'productRemove'])->name('loja.cart.product.remove');
     Route::get('/cart/empty', [CartController::class, 'empty'])->name('loja.cart.empty');
+
+    /*
+     * Payment routing
+     */
+    Route::post('/payment', [PaymentController::class, 'index'])->name('loja.payment.index');
+    Route::post('/charge', [PaymentController::class, 'charge'])->name('loja.payment.charge');
+
+
 });
