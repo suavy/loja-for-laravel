@@ -36,7 +36,7 @@ class AttributeCrudController extends CrudController
 
     protected function setupCreateOperation()
     {
-        $this->crud->field('tyme')->type('text')->label('Type');
+        $this->crud->field('type')->type('text')->label('Type');
         $this->crud->field('name')->type('text')->label('Nom');
     }
 
