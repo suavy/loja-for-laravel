@@ -9,4 +9,14 @@ class AttributeValue extends Model
     protected $table = 'loja_attribute_values';
     // Disable Laravel's mass assignment protection
     protected $guarded = [];
+
+    /*
+    |--------------------------------------------------------------------------
+    | Relations
+    |--------------------------------------------------------------------------
+    */
+    public function attribute()
+    {
+        return $this->belongsTo(Attribute::class);
+    }
 }
