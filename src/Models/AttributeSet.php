@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class AttributeSet extends Model
 {
-
     use CrudTrait;
 
     protected $table = 'loja_attribute_sets';
