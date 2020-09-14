@@ -9,7 +9,7 @@ use Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
 use Backpack\CRUD\app\Http\Controllers\Operations\ReorderOperation;
 use Backpack\CRUD\app\Http\Controllers\Operations\ShowOperation;
 use Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
-use Suavy\LojaForLaravel\Models\AttributeSet;
+use Suavy\LojaForLaravel\Models\Attribute;
 
 class AttributeCrudController extends CrudController
 {
@@ -22,7 +22,7 @@ class AttributeCrudController extends CrudController
 
     public function setup()
     {
-        $this->crud->setModel(AttributeSet::class);
+        $this->crud->setModel(Attribute::class);
         $this->crud->setRoute('admin/attribute');
         $this->crud->setEntityNameStrings('attribut', 'attributs');
     }
