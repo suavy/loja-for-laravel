@@ -16,10 +16,13 @@ Route::group([
     // custom routes
     //Route::get('dashboard', 'AdminController@dashboard')->name('admin.dashboard');
     // crud routes
-    Route::crud('product', 'ProductCrudController');
-    Route::crud('tax', 'TaxCrudController');
-    Route::crud('collection', 'CollectionCrudController');
+    Route::crud('attribute', 'AttributeCrudController');
+    Route::crud('attribute-set', 'AttributeSetCrudController');
+    Route::crud('attribute-value', 'AttributeValueCrudController');
     Route::crud('category', 'CategoryCrudController');
+    Route::crud('collection', 'CollectionCrudController');
     Route::crud('country-delivery', 'CountryDeliveryCrudController');
     Route::get('country-delivery/{id}/toggle-country', 'CountryDeliveryCrudController@toggleCountry');
+    Route::crud('product', 'ProductCrudController');
+    Route::crud('tax', 'TaxCrudController');
 }); // this should be the absolute last line of this file
