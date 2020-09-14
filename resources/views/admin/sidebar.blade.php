@@ -5,3 +5,8 @@
 <li class="nav-item"><a class="nav-link" href="{{ backpack_url('collection') }}"><i class="la la-tag nav-icon"></i> Collections</a></li>
 <li class="nav-item"><a class="nav-link" href="{{ backpack_url('tax') }}"><i class="la la-percentage nav-icon"></i> Taxes</a></li>
 <li class="nav-item"><a class="nav-link" href="{{ backpack_url('setting') }}"><i class="la la-cog nav-icon"></i> Settings</a></li>
+<li class="nav-title">Attributs</li>
+<li class="nav-item"><a class="nav-link" href="{{ backpack_url('attribute') }}"><i class="la la-cog nav-icon"></i> Attributs</a></li>
+<li class="nav-item"><a class="nav-link" href="{{ backpack_url('attribute-value') }}"><i class="la la-cog nav-icon"></i> Valeurs d'attribut</a></li>
+<li class="nav-item"><a class="nav-link" href="{{ backpack_url('attribute-set') }}"><i class="la la-cog nav-icon"></i> Sets d'attributs</a></li>
+
