@@ -22,4 +22,9 @@ class Attribute extends Model
     {
         return $this->belongsToMany(AttributeSet::class, 'loja_attribute_attribute_set');
     }
+
+    public function values()
+    {
+        return $this->hasMany(AttributeValue::class);
+    }
 }

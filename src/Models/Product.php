@@ -40,7 +40,7 @@ class Product extends Model
         return $this->belongsToMany(Order::class)->withPivot('quantity', 'price', 'price_with_tax');
     }
 
-    public function attriuteSet()
+    public function attributeSet()
     {
         return $this->belongsTo(AttributeSet::class);
     }
