@@ -36,6 +36,7 @@ class AttributeSetCrudController extends CrudController
     protected function setupCreateOperation()
     {
         $this->crud->field('name')->type('text')->label('Nom');
+        $this->crud->field('attributes')->type('select2_multiple')->label('Attributs')->name('attributes');
     }
 
     protected function setupUpdateOperation()

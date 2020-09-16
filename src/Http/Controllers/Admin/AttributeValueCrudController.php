@@ -36,7 +36,9 @@ class AttributeValueCrudController extends CrudController
 
     protected function setupCreateOperation()
     {
-        $this->crud->field('attribute.name')->type('text')->label('Attribut');
+        $this->crud->field('attribute_id')->type('select2')->label('Attribut')->entity('attribute')->attribute('name')->options(function ($query) {
+            return $query->orderBy('name', 'ASC')->get();
+        });
         $this->crud->field('value')->type('text')->label('Valeur');
     }
 
