@@ -20,6 +20,6 @@ class Attribute extends Model
     */
     public function attributeSets()
     {
-        return $this->belongsToMany(AttributeSet::class);
+        return $this->belongsToMany(AttributeSet::class, "loja_attribute_attribute_set");
     }
 }
