@@ -18,6 +18,8 @@ class CreateLojaProductsTable extends Migration
             $table->foreign('category_id')->references('id')->on('loja_categories');
             $table->foreignId('collection_id')->nullable();
             $table->foreign('collection_id')->references('id')->on('loja_collections');
+            $table->foreignId('attribute_set_id')->nullable();
+            $table->foreign('attribute_set_id')->references('id')->on('loja_attribute_sets');
             $table->foreignId('tax_id');
             $table->foreign('tax_id')->references('id')->on('loja_taxes');
             $table->decimal('price', 13, 2)->nullable();

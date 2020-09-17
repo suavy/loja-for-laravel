@@ -30,11 +30,10 @@ class LojaForLaravelServiceProvider extends ServiceProvider
             // Publishing the migrations.
             $this->publishes([
                 //__DIR__.'/../database/migrations/' => database_path('migrations/'.date('Y_m_d_His', time()).'_create_orders_table.php'),
-                __DIR__.'/../database/migrations/create_loja_attribute_attribute_set_table.php.stub' => database_path('migrations/'.date('Y_m_d_His', time() + 3).'_create_loja_attribute_attribute_set_table.php'),
-                __DIR__.'/../database/migrations/create_loja_attribute_product_value_table.php.stub' => database_path('migrations/'.date('Y_m_d_His', time() + 3).'_create_loja_attribute_product_value_table.php'),
-                __DIR__.'/../database/migrations/create_loja_attribute_sets_table.php.stub' => database_path('migrations/'.date('Y_m_d_His', time() + 2).'_create_loja_attribute_sets_table.php'),
-                __DIR__.'/../database/migrations/create_loja_attribute_values_table.php.stub' => database_path('migrations/'.date('Y_m_d_His', time() + 3).'_create_loja_attribute_values_table.php'),
-                __DIR__.'/../database/migrations/create_loja_attributes_table.php.stub' => database_path('migrations/'.date('Y_m_d_His', time() + 2).'_create_loja_attributes_table.php'),
+                __DIR__.'/../database/migrations/create_loja_attribute_attribute_set_table.php.stub' => database_path('migrations/'.date('Y_m_d_His', time() + 2).'_create_loja_attribute_attribute_set_table.php'),
+                __DIR__.'/../database/migrations/create_loja_attribute_sets_table.php.stub' => database_path('migrations/'.date('Y_m_d_His', time() + 0).'_create_loja_attribute_sets_table.php'),
+                __DIR__.'/../database/migrations/create_loja_attribute_values_table.php.stub' => database_path('migrations/'.date('Y_m_d_His', time() + 2).'_create_loja_attribute_values_table.php'),
+                __DIR__.'/../database/migrations/create_loja_attributes_table.php.stub' => database_path('migrations/'.date('Y_m_d_His', time() + 1).'_create_loja_attributes_table.php'),
                 __DIR__.'/../database/migrations/create_loja_categories_table.php.stub' => database_path('migrations/'.date('Y_m_d_His', time() + 0).'_create_loja_categories_table.php'),
                 __DIR__.'/../database/migrations/create_loja_collections_table.php.stub' => database_path('migrations/'.date('Y_m_d_His', time() + 0).'_create_loja_collections_table.php'),
                 __DIR__.'/../database/migrations/create_loja_orders_table.php.stub' => database_path('migrations/'.date('Y_m_d_His', time() + 1).'_create_loja_orders_table.php'),
