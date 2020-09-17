@@ -12,6 +12,7 @@ class CreateLojaProductsTable extends Migration
             $table->bigIncrements('id');
             $table->string('slug');
             $table->string('name');
+            $table->text('images')->nullable();
             $table->longText('description')->nullable();
             $table->foreignId('category_id')->nullable();
             $table->foreign('category_id')->references('id')->on('loja_categories');

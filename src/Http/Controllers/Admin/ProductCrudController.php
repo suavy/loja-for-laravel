@@ -54,6 +54,7 @@ class ProductCrudController extends CrudController
         $this->crud->field('tax_id')->type('select2')->label('Taxe')->entity('tax')->attribute('name')->options(function ($query) {
             return $query->orderBy('name', 'ASC')->get();
         });
+        $this->crud->field('images')->label('Images')->type('browse_multiple')->sortable(true)->mimeTypes('images');
     }
 
     protected function setupUpdateOperation()
