@@ -23,4 +23,9 @@ class PaymentController extends Controller
             return view('loja::cart.payment', compact('cartItems'));
         }
     }
+
+    public function charge()
+    {
+
+    }
 }

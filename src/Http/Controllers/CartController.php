@@ -59,24 +59,6 @@ class CartController extends Controller
         }
     }
 
-    public function payment(PaymentRequest $request)
-    {
-        if ($request->has('address')) {
-            Auth::user()->updateAddress($request->input('address'));
-
-            return back();
-        }
-
-        $cartItems = \Cart::session(session()->getId())->getContent();
-        $cartItemsProblemQuantity = collect();
-        $cartItemsRemoved = collect();
-        if (\Cart::session(session()->getId())->isEmpty()) {
-            return back();
-        } else {
-            return view('loja::cart.payment', compact('cartItems'));
-        }
-    }
-
     public function productAdd(Product $product, Request $request)
     {
         $quantity = $request->input('quantity');
