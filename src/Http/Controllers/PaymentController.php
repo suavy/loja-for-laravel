@@ -9,6 +9,7 @@ class PaymentController extends Controller
 {
     public function index(PaymentRequest $request)
     {
+        dd("ok");
         if ($request->has('address')) {
             Auth::user()->updateAddress($request->input('address'));
 
