@@ -6,20 +6,20 @@ use Suavy\LojaForLaravel\Models\AttributeValue;
 
 trait HasCart
 {
-
-    private function getUniqueId($attributeValues=[]){
+    private function getUniqueId($attributeValues = [])
+    {
         $uniqueId = $this->id;
-        if(count($attributeValues)){
+        if (count($attributeValues)) {
             $attributeValues = collect($attributeValues);
             $attributeValues = $attributeValues->implode('-');
             $uniqueId .= '-'.$attributeValues;
         }
+
         return $uniqueId;
     }
 
-    public function cartAdd($quantity,$attributeValues=[])
+    public function cartAdd($quantity, $attributeValues = [])
     {
-
         $cartDatas = [
             'id' => $this->getUniqueId($attributeValues), // inique row ID
             'name' => $this->name,
@@ -27,7 +27,7 @@ trait HasCart
             'quantity' => $quantity,
             'associatedModel' => $this,
         ];
-        if(count($attributeValues)) {
+        if (count($attributeValues)) {
             $cartDatas['attributes'] = AttributeValue::query()->with('attribute')->whereIn('id', $attributeValues)->get()->pluck('readable', 'id');
         }
 

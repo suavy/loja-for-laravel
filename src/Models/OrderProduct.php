@@ -20,7 +20,8 @@ class OrderProduct extends Model
         return $this->belongsTo(Product::class);
     }
 
-    public function attributeValues(){
-        return $this->belongsToMany(AttributeValue::class,'loja_order_product_attribute_value');
+    public function attributeValues()
+    {
+        return $this->belongsToMany(AttributeValue::class, 'loja_order_product_attribute_value');
     }
 }
