@@ -1,0 +1,24 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+class CreateLojaOrderProductAttributeValueTable extends Migration
+{
+    public function up()
+    {
+        Schema::create('loja_order_product_attribute_value', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->foreignId('order_product_id')->nullable();
+            $table->foreign('order_product_id')->references('id')->on('loja_order_product');
+            $table->foreignId('attribute_value_id')->nullable();
+            $table->foreign('attribute_value_id')->references('id')->on('loja_attribute_values');
+        });
+    }
+
+    public function down()
+    {
+        Schema::dropIfExists('loja_order_product_attribute_value');
+    }
+}

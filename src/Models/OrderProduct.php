@@ -4,9 +4,9 @@ namespace Suavy\LojaForLaravel\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Order extends Model
+class OrderProduct extends Model
 {
-    protected $table = 'loja_orders';
+    protected $table = 'loja_order_products';
     // Disable Laravel's mass assignment protection
     protected $guarded = [];
 
@@ -15,12 +15,12 @@ class Order extends Model
     | Relations
     |--------------------------------------------------------------------------
     */
-    public function products()
+    public function product()
     {
-        return $this->belongsToMany(Product::class)->withPivot('quantity', 'price', 'price_with_tax');
+        return $this->belongsTo(Product::class);
     }
 
-    public function orderProducts(){
-        return $this->hasMany(OrderProduct::class);
+    public function attributeValues(){
+        return $this->belongsToMany(AttributeValue::class,'loja_order_product_attribute_value');
     }
 }

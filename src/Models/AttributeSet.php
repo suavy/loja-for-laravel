@@ -12,7 +12,7 @@ class AttributeSet extends Model
     protected $table = 'loja_attribute_sets';
     // Disable Laravel's mass assignment protection
     protected $guarded = [];
-
+    protected $fillable = ['id','type','name'];
     /*
     |--------------------------------------------------------------------------
     | Relations
@@ -21,5 +21,9 @@ class AttributeSet extends Model
     public function attributes()
     {
         return $this->belongsToMany(Attribute::class, 'loja_attribute_attribute_set');
+    }
+    public function products()
+    {
+        return $this->hasMany(Product::class);
     }
 }

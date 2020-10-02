@@ -22,4 +22,13 @@ class AttributeValue extends Model
     {
         return $this->belongsTo(Attribute::class);
     }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Accessors
+    |--------------------------------------------------------------------------
+    */
+    public function getReadableAttribute(){
+        return $this->attribute->name.' : '.strtolower($this->value);
+    }
 }

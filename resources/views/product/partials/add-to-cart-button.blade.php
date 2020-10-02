@@ -24,6 +24,7 @@
         let $product_quantity = $('#product-quantity');
         let $cart_quantity = $('#js-cart-quantity');
         let $error_message = $('#error-message');
+        let $selects_attribute = $('.js-select-attribute');
 
         let quantity_total = parseInt($('#product-quantity-total').val());
         let quantity = parseInt($product_quantity.val());
@@ -62,13 +63,21 @@
         $('#product-add-cart').submit(function (e) {
             e.preventDefault(false);
 
+            let form_data = $(this).serializeArray();
+
             $product_button.hide();
             $loading_add_cart.show();
+
+            //add all attribute value id to form data
+            $selects_attribute.each(function(){
+                console.log($(this).val());
+                form_data.push({name:'attribute_values[]',value:$(this).val()});
+            });
 
             $.ajax({
                 type: "POST",
                 url: $(this).attr('action'),
-                data: $(this).serializeArray(),
+                data: form_data,
                 success: function (data) {
                     if(data.status === "error"){
                         $error_message.text(data.message)
@@ -86,6 +95,7 @@
                 },
                 dataType: 'JSON'
             });
+
 
             return false;
         });

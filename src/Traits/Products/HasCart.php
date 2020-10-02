@@ -2,17 +2,36 @@
 
 namespace Suavy\LojaForLaravel\Traits\Products;
 
+use Suavy\LojaForLaravel\Models\AttributeValue;
+
 trait HasCart
 {
-    public function cartAdd($quantity)
+
+    private function getUniqueId($attributeValues=[]){
+        $uniqueId = $this->id;
+        if(count($attributeValues)){
+            $attributeValues = collect($attributeValues);
+            $attributeValues = $attributeValues->implode('-');
+            $uniqueId .= '-'.$attributeValues;
+        }
+        return $uniqueId;
+    }
+
+    public function cartAdd($quantity,$attributeValues=[])
     {
-        \Cart::session(session()->getId())->add([
-            'id' => $this->id, // inique row ID
+
+        $cartDatas = [
+            'id' => $this->getUniqueId($attributeValues), // inique row ID
             'name' => $this->name,
             'price' => $this->price,
             'quantity' => $quantity,
             'associatedModel' => $this,
-        ]);
+        ];
+        if(count($attributeValues)) {
+            $cartDatas['attributes'] = AttributeValue::query()->with('attribute')->whereIn('id', $attributeValues)->get()->pluck('readable', 'id');
+        }
+
+        \Cart::session(session()->getId())->add($cartDatas);
     }
 
     public function cartRemove()

@@ -79,6 +79,9 @@ class CartController extends Controller
 
     public function productAdd(Product $product, Request $request)
     {
+
+        $attributeValues = $request->input('attribute_values',[]);
+
         $quantity = $request->input('quantity');
 
         if (! $product->hasEnoughQuantityAvailable($quantity)) {
@@ -89,7 +92,7 @@ class CartController extends Controller
             return response()->json(['status' => 'error', 'message' => 'Désolé, vous avez ajouté la quantitée maximum pour ce produit.']);
         }
 
-        $product->cartAdd($quantity);
+        $product->cartAdd($quantity,$attributeValues);
 
         return response()->json([
             'status' => 'success',

@@ -22,7 +22,7 @@ class Product extends Model
     //protected $guarded = [];
 
     protected $fillable = ['id','name','description','slug','stock','price','enabled','images',
-        'tax_id','category_id','collection_id',''];
+        'tax_id','category_id','collection_id','attribute_set_id'];
     protected $casts = ['images'=>'array'];
 
     /*
@@ -30,6 +30,11 @@ class Product extends Model
     | Relations
     |--------------------------------------------------------------------------
     */
+    public function attributeSet()
+    {
+        return $this->belongsTo(AttributeSet::class);
+    }
+
     public function category()
     {
         return $this->belongsTo(Category::class);
@@ -43,11 +48,6 @@ class Product extends Model
     public function orders()
     {
         return $this->belongsToMany(Order::class)->withPivot('quantity', 'price', 'price_with_tax');
-    }
-
-    public function attributeSet()
-    {
-        return $this->belongsTo(AttributeSet::class);
     }
 
     public function tax()

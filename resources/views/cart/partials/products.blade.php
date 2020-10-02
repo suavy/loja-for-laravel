@@ -12,15 +12,18 @@
     @foreach($cartItems as $item)
         <div class="cart-product js-cart-product" data-id="{{ $item->id }}" data-quantity-max="100">
             <div class="cart-product__picture">
-                <img src="" />
+                <img src="{!! $item->associatedModel->cover !!}" />
             </div><!--
             --><div class="cart-product__content">
                 <div class="cart-product__content__price">{{ $item->price }}</div>
                 <div class="cart-product__content__name">{{ $item->name }}</div>
+                @foreach($item->attributes as $attribute)
+                    <div class="cart-product__content__name">{{ $attribute }}</div>
+                @endforeach
                 <div class="quantity cart-product__content__quantity">
-                    <span class="quantity__update quantity__update--less js-cart-update" data-update="less">-</span>
-                    <span class="quantity__current js-cart-quantity">{{ $item->quantity }}</span>
-                    <span class="quantity__update quantity__update--more js-cart-update" data-update="add">+</span>
+                    <!--<span class="quantity__update quantity__update--less js-cart-update" data-update="less">-</span>-->
+                    <span class="quantity__current js-cart-quantity">Quantité : {{ $item->quantity }}</span>
+                    <!--<span class="quantity__update quantity__update--more js-cart-update" data-update="add">+</span>-->
                 </div>
             </div><!--
             --><div class="cart-product__remove">
