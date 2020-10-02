@@ -2,7 +2,6 @@
 
 namespace Suavy\LojaForLaravel\Http\Controllers;
 
-use Cartalyst\Stripe\Api\PaymentIntents;
 use Cartalyst\Stripe\Stripe;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -12,7 +11,6 @@ class PaymentController extends Controller
 {
     public function index(PaymentRequest $request)
     {
-
         if ($request->has('address')) {
             Auth::user()->updateAddress($request->input('address'));
             //return back();
@@ -32,8 +30,8 @@ class PaymentController extends Controller
                 'card',
             ],
         ]);
-        return view('loja::cart.payment', compact('cartItems', 'paymentIntent'));
 
+        return view('loja::cart.payment', compact('cartItems', 'paymentIntent'));
     }
 
     public function charge(Request $request)
