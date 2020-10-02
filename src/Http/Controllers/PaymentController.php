@@ -11,8 +11,7 @@ class PaymentController extends Controller
     {
         if ($request->has('address')) {
             Auth::user()->updateAddress($request->input('address'));
-
-            return back();
+            //return back();
         }
 
         $cartItems = \Cart::session(session()->getId())->getContent();
@@ -23,5 +22,9 @@ class PaymentController extends Controller
         } else {
             return view('loja::cart.payment', compact('cartItems'));
         }
+    }
+
+    public function charge()
+    {
     }
 }
