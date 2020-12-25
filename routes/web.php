@@ -10,7 +10,10 @@ use Suavy\LojaForLaravel\Http\Controllers\PaymentController;
 use Suavy\LojaForLaravel\Http\Controllers\ProductController;
 use Suavy\LojaForLaravel\Http\Controllers\SearchController;
 
-Route::group(['middleware' => 'web'], function () {
+Route::group([
+        'middleware' => 'web',
+        'prefix' => config('loja.prefix'),
+    ], function () {
     Route::get('/', [HomeController::class, 'index'])->name('loja.home');
 
     /*
