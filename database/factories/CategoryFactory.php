@@ -2,14 +2,20 @@
 
 namespace Suavy\LojaForLaravel\Database\Factories;
 
-use Faker\Generator as Faker;
+use Illuminate\Database\Eloquent\Factories\Factory;
 use Suavy\LojaForLaravel\Models\Category;
 
-$factory->define(Category::class, function (Faker $faker) {
-    return [
-        'name' => $name = $faker->words(1, true),
-        'slug' => str_slug($name),
-        'description' => $faker->paragraph,
-        'enabled' => $faker->boolean(80),
-    ];
-});
+class CategoryFactory extends Factory
+{
+    protected $model = Category::class;
+
+    public function definition()
+    {
+        return [
+            'name' => $name = $this->faker->words(1, true),
+            'slug' => str_slug($name),
+            'description' => $this->faker->paragraph,
+            'enabled' => $this->faker->boolean(80),
+        ];
+    }
+}
