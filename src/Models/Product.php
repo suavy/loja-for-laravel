@@ -21,8 +21,8 @@ class Product extends Model
     // Disable Laravel's mass assignment protection
     //protected $guarded = [];
 
-    protected $fillable = ['id','name','description','slug','stock','price','enabled','images',
-        'tax_id','category_id','collection_id','attribute_set_id'];
+    protected $fillable = ['id', 'name', 'description', 'slug', 'stock', 'price', 'enabled', 'images',
+        'tax_id', 'category_id', 'collection_id', 'attribute_set_id', ];
     protected $casts = ['images'=>'array'];
 
     /*
@@ -54,6 +54,7 @@ class Product extends Model
     {
         return $this->belongsTo(Tax::class);
     }
+
     /*
     |--------------------------------------------------------------------------
     | Accesors
@@ -70,7 +71,6 @@ class Product extends Model
         $this->attributes['name'] = $value;
         $this->attributes['slug'] = Str::slug($value);
     }
-
 
     /*
     |--------------------------------------------------------------------------

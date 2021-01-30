@@ -28,7 +28,8 @@ class AttributeValue extends Model
     | Accessors
     |--------------------------------------------------------------------------
     */
-    public function getReadableAttribute(){
+    public function getReadableAttribute()
+    {
         return $this->attribute->name.' : '.strtolower($this->value);
     }
 }
