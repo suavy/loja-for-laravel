@@ -17,6 +17,7 @@ Route::group(['middleware' => 'web'], function () {
      * Product, Category, Collection routing
      */
     Route::get('/product/{product}', [ProductController::class, 'show'])->name('loja.product.show');
+    Route::get('/product', [ProductController::class, 'show'])->name('loja.cart.payment');
     Route::get('/categories', [CategoryController::class, 'index'])->name('loja.category.index');
     Route::get('/category/{id}', [CategoryController::class, 'show'])->name('loja.category.show');
     Route::get('/collections', [CollectionController::class, 'index'])->name('loja.collection.index');
