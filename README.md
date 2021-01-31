@@ -61,8 +61,19 @@ Add LOJA front routes to your web file (or custom) aka Front routes integration
 <!--
 - Stripe configuration ? or already done in main config ?
 -->
+:seven: We use [Laravel Livewire]() for some dynamic components (instead of Vue or React), to make theses components work, you need to first include their javascript using their custom blade directives.
+```html
+<head>
+    ...
+    @livewireStyles
+</head>
+<body>
+    ...
+    @livewireScripts
+</body>
+```
 
-:seven: Add button to backpack admin in views/vendor/backpack/crud/buttons/toggle-country.blade.php
+:eight: Add button to backpack admin in views/vendor/backpack/crud/buttons/toggle-country.blade.php // TODO Trie to remove this step
 ```bash
 @include('loja::admin.crud.buttons.toggle-country')
 ```
@@ -81,6 +92,10 @@ LOJA only create empty views for you, but in each view you have access to the ne
 
 #### GET routes
 
+// todo remove LOJA.HOME route 
+
+// todo Missing checkout/payment routes
+
 | route | route name | view | variables |
 |---|---|---|---|
 | / | loja.home | .../home/index.blade.php | $featuredProducts |
@@ -98,7 +113,11 @@ LOJA only create empty views for you, but in each view you have access to the ne
 
 > Empty views are located at ``resources/views/vendor/loja/``
 
-<!-- todo Missing checkout/payment routes -->
+#### Components
+
+| name | description |
+|---|---|
+| "Loja Add To Cart" | this components must be added in every product page (loja.product.show) |
 
 #### POST routes
 
