@@ -3,12 +3,14 @@
 namespace Suavy\LojaForLaravel\Models;
 
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Suavy\LojaForLaravel\Traits\HasSlug;
 
 class Category extends Model
 {
     use CrudTrait;
+    use HasFactory;
     use HasSlug;
 
     protected $table = 'loja_categories';

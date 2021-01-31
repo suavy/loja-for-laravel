@@ -3,6 +3,7 @@
 namespace Suavy\LojaForLaravel\Models;
 
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 use Suavy\LojaForLaravel\Traits\HasSlug;
@@ -13,6 +14,7 @@ class Product extends Model
 {
     use CrudTrait;
     use HasCart;
+    use HasFactory;
     use HasSlug;
     use HasImages;
 
