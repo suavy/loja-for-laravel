@@ -39,7 +39,7 @@ php artisan vendor:publish --provider="Suavy\LojaForLaravel\LojaForLaravelServic
 php artisan migrate
 ```
 
-:six: Add our LOJA Admin Sidebar to your current Backpack sidebar :
+:six: Add our LOJA Admin Sidebar to your current Backpack sidebar (located at ``ressources/views/vendor/backpack/base/inc/sidebar_content.blade.php``)
 ```bash
 @include('loja::admin.sidebar')
 ```
