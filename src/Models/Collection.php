@@ -3,14 +3,13 @@
 namespace Suavy\LojaForLaravel\Models;
 
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Suavy\LojaForLaravel\Traits\HasSlug;
 
 class Collection extends Model
 {
     use CrudTrait;
-    use HasFactory;
+    use HasPackageFactory;
     use HasSlug;
 
     protected $table = 'loja_collections';
