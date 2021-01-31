@@ -38,7 +38,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Suavy\\LojaForLaravel\\Tests\\": "tests",
+            "Suavy\\LojaForLaravel\\Tests\\": "tests"
         }
     },
     "scripts": {
