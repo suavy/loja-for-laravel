@@ -3,13 +3,15 @@
 namespace Suavy\LojaForLaravel\Models;
 
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Suavy\LojaForLaravel\Database\Factories\CollectionFactory;
 use Suavy\LojaForLaravel\Traits\HasSlug;
 
 class Collection extends Model
 {
     use CrudTrait;
-    use HasPackageFactory;
+    use HasFactory;
     use HasSlug;
 
     protected $table = 'loja_collections';
@@ -25,4 +27,14 @@ class Collection extends Model
     {
         return $this->hasMany(Product::class);
     }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Functions
+    |--------------------------------------------------------------------------
+    */
+    protected static function newFactory() {
+        return CollectionFactory::new();
+    }
+
 }

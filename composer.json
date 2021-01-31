@@ -32,12 +32,13 @@
     },
     "autoload": {
         "psr-4": {
-            "Suavy\\LojaForLaravel\\": "src"
+            "Suavy\\LojaForLaravel\\": "src",
+            "Suavy\\LojaForLaravel\\Database\\Factories\\": "database/factories"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Suavy\\LojaForLaravel\\Tests\\": "tests"
+            "Suavy\\LojaForLaravel\\Tests\\": "tests",
         }
     },
     "scripts": {
