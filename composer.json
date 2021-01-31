@@ -33,7 +33,7 @@
     "autoload": {
         "psr-4": {
             "Suavy\\LojaForLaravel\\": "src",
-            "Suavy\\LojaForLaravel\\Database\\Factories\\": "database/factories"
+            "Suavy\\LojaForLaravel\\Database\\Factories\\": "database/factories/"
         }
     },
     "autoload-dev": {
