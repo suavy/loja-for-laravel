@@ -17,6 +17,7 @@ class Category extends Model
     protected $table = 'loja_categories';
     // Disable Laravel's mass assignment protection
     protected $guarded = [];
+
     /*
     |--------------------------------------------------------------------------
     | Relations
@@ -32,8 +33,8 @@ class Category extends Model
     | Functions
     |--------------------------------------------------------------------------
     */
-    protected static function newFactory() {
+    protected static function newFactory()
+    {
         return CategoryFactory::new();
     }
-
 }
