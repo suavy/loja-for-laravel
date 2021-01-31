@@ -33,8 +33,8 @@ class Collection extends Model
     | Functions
     |--------------------------------------------------------------------------
     */
-    protected static function newFactory() {
+    protected static function newFactory()
+    {
         return CollectionFactory::new();
     }
-
 }
