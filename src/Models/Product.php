@@ -57,7 +57,10 @@ class Product extends Model
     {
         return $this->belongsTo(Tax::class);
     }
-
+    public function redirectToProductPage()
+    {
+        return '<a href="'. route('loja.product.show', $this->id) . '" target="_blank">Voir la page</a>';
+    }
     /*
     |--------------------------------------------------------------------------
     | Accesors

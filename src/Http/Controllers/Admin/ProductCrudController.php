@@ -28,6 +28,7 @@ class ProductCrudController extends CrudController
 
     protected function setupListOperation()
     {
+        $this->crud->addButtonFromModelFunction('line', 'redirect-to-show', 'redirectToProductPage', 'beginning');
         $this->crud->column('id')->label('#');
         $this->crud->column('name')->label('Nom');
         $this->crud->column('slug')->label('Slug');
