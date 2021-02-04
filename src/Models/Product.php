@@ -3,8 +3,10 @@
 namespace Suavy\LojaForLaravel\Models;
 
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
+use Suavy\LojaForLaravel\Database\Factories\CollectionFactory;
 use Suavy\LojaForLaravel\Traits\HasSlug;
 use Suavy\LojaForLaravel\Traits\Products\HasCart;
 use Suavy\LojaForLaravel\Traits\Products\HasImages;
@@ -13,6 +15,7 @@ class Product extends Model
 {
     use CrudTrait;
     use HasCart;
+    use HasFactory;
     use HasSlug;
     use HasImages;
 
@@ -77,4 +80,8 @@ class Product extends Model
     | Functions
     |--------------------------------------------------------------------------
     */
+    protected static function newFactory()
+    {
+        return CollectionFactory::new();
+    }
 }

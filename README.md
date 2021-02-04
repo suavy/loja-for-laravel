@@ -39,7 +39,7 @@ php artisan vendor:publish --provider="Suavy\LojaForLaravel\LojaForLaravelServic
 php artisan migrate
 ```
 
-:six: Add our LOJA Admin Sidebar to your current Backpack sidebar :
+:six: Add our LOJA Admin Sidebar to your current Backpack sidebar (located at ``ressources/views/vendor/backpack/base/inc/sidebar_content.blade.php``)
 ```bash
 @include('loja::admin.sidebar')
 ```
@@ -61,8 +61,19 @@ Add LOJA front routes to your web file (or custom) aka Front routes integration
 <!--
 - Stripe configuration ? or already done in main config ?
 -->
+:seven: We use [Laravel Livewire]() for some dynamic components (instead of Vue or React), to make theses components work, you need to first include their javascript using their custom blade directives.
+```html
+<head>
+    ...
+    @livewireStyles
+</head>
+<body>
+    ...
+    @livewireScripts
+</body>
+```
 
-:seven: Add button to backpack admin in views/vendor/backpack/crud/buttons/toggle-country.blade.php
+:eight: Add button to backpack admin in views/vendor/backpack/crud/buttons/toggle-country.blade.php // TODO Trie to remove this step
 ```bash
 @include('loja::admin.crud.buttons.toggle-country')
 ```
@@ -81,15 +92,19 @@ LOJA only create empty views for you, but in each view you have access to the ne
 
 #### GET routes
 
+// todo remove LOJA.HOME route 
+
+// todo Missing checkout/payment routes
+
 | route | route name | view | variables |
 |---|---|---|---|
 | / | loja.home | .../home/index.blade.php | $featuredProducts |
 | /cart | loja.cart.index | .../cart/index.blade.php | $cart |
-| - | - | .../cart/empty.blade.php | * when $cart is empty * |
+| - | - | .../cart/empty.blade.php | |
 | /payment | loja.cart.payment | .../cart/payment.blade.php | $cart |
-| /categories | loja.category.index | .../category/index.blade.php |  $category |
+| /categories | loja.category.index | .../category/index.blade.php |  $categories |
 | /category/{category} | loja.category.show | .../category/show.blade.php |  $category |
-| /collections | loja.collection.index | .../collection/index.blade.php | $collection |
+| /collections | loja.collection.index | .../collection/index.blade.php | $collections |
 | /collection/{collection} | loja.collection.show | .../collection/show.blade.php | $collection |
 | /product/{product} | loja.product.show | .../product/show.blade.php | $product, $relatedProducts |
 | /search?... | loja.search | .../search/index.blade.php | $products |
@@ -98,7 +113,11 @@ LOJA only create empty views for you, but in each view you have access to the ne
 
 > Empty views are located at ``resources/views/vendor/loja/``
 
-<!-- todo Missing checkout/payment routes -->
+#### Components
+
+| name | description |
+|---|---|
+| "Loja Add To Cart" | this components must be added in every product page (loja.product.show) |
 
 #### POST routes
 

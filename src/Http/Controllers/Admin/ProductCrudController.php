@@ -52,7 +52,7 @@ class ProductCrudController extends CrudController
         $this->crud->field('collection_id')->type('select2')->label('Collection')->entity('collection')->attribute('name')->options(function ($query) {
             return $query->orderBy('name', 'ASC')->get();
         });
-        $this->crud->field('attribute_set_id')->type('select2')->label("Set d'attributes")->entity('attributeSet')->attribute('name')->model(AttributeSet::class)->options(function ($query) {
+        $this->crud->field('attribute_set_id')->type('select2')->model(AttributeSet::class)->label("Set d'attributes")->attribute('name')->model(AttributeSet::class)->options(function ($query) {
             return $query->orderBy('name', 'ASC')->get();
         });
         $this->crud->field('tax_id')->type('select2')->label('Taxe')->entity('tax')->attribute('name')->options(function ($query) {
