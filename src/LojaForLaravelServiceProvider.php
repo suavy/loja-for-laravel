@@ -14,7 +14,6 @@ class LojaForLaravelServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-
         Livewire::component('cart-counter', CartCounter::class);
         Livewire::component('cart-add-button', CartAddButton::class);
         /*
