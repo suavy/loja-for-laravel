@@ -73,7 +73,16 @@ Add LOJA front routes to your web file (or custom) aka Front routes integration
 </body>
 ```
 
-:eight: Add button to backpack admin in views/vendor/backpack/crud/buttons/toggle-country.blade.php // TODO Trie to remove this step
+:eight: Add HasAddress trait to user model
+```bash
+use Suavy\LojaForLaravel\Traits\HasAddress;
+
+class User extends ...
+{
+    use HasAddress;
+}
+```
+:nine: Add button to backpack admin in views/vendor/backpack/crud/buttons/toggle-country.blade.php // TODO Trie to remove this step
 ```bash
 @include('loja::admin.crud.buttons.toggle-country')
 ```
