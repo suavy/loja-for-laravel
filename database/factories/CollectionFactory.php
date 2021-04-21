@@ -12,7 +12,7 @@ class CollectionFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $name = "TEST AB",
+            'name' => $name = $this->faker->words(1, true),
             'slug' => str_slug($name),
             'description' => $this->faker->paragraph,
             'enabled' => $this->faker->boolean(80),
