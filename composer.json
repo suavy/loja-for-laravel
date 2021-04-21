@@ -16,7 +16,7 @@
         }
     ],
     "require": {
-        "php": "^7.3",
+        "php": "^8.0",
         "anahkiasen/former": "^4.4",
         "backpack/crud": "4.1.*",
         "backpack/filemanager": "^1.1",
