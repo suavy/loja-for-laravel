@@ -1,16 +1,18 @@
 <div>
 @if($product->attributeSet && $product->attributeSet->attributes)
+    <div class="attributeSetParentClass">
     @foreach($product->attributeSet->attributes as $attribute)
-        <div class="select-dropdown">
-            <select name="attribute" class="js-select-attribute">
+        <div class="attributeSetClass (select-dropdown)">
+            <select name="attribute" class="attributeSetSelectClass">
                 @foreach($attribute->values as $value)
                     <option value="{{ $value->id }}">{{ $value->value }}</option>
                 @endforeach
             </select>
         </div>
     @endforeach
+    </div>
 @endif
-<div class="quantity">
+<div class="quantityParentCl">
     <span wire:click="less" class="quantity__update quantity__update--less">-</span>
     <span class="quantity__current">{{ $quantityToAdd }}</span>
     <span wire:click="add" class="quantity__update quantity__update--more" >+</span>
@@ -26,3 +28,23 @@
 <!-- todo tant que la quantité n'est pas géré, le message d'erreur est inutile -->
 <span class="" id="error-message"></span>
 </div>
+
+attributeSetParentClass
+attributeSetClass
+attributeSetSelectClass
+
+quantityParentClass
+
+quantityLessClass
+
+quantityCurrentClass
+
+quantityMoreClass
+
+addToCartButtonParentClass
+
+addToCartButtonClass
+
+addToCartButtonName
+
+addToCartButtonLoadingHtml
