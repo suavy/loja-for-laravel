@@ -27,8 +27,9 @@ class ProductFactory extends Factory
     public function configure()
     {
         dd(5151);
+
         return $this
-            ->afterMaking(function(Product $product){
+            ->afterMaking(function (Product $product) {
                 $product->category()->associate(
                     Category::query()->inRandomOrder()->first()
                 );
