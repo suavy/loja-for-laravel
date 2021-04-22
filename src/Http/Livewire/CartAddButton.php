@@ -36,7 +36,6 @@ class CartAddButton extends Component
 
     public function addToCart()
     {
-
         if (! $this->product->hasEnoughQuantityAvailable($this->quantity)) {
             //la quantitée demandé n'est pas disponible
         }
