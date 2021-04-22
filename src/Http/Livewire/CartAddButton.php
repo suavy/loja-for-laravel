@@ -7,12 +7,15 @@ use Suavy\LojaForLaravel\Models\Product;
 
 class CartAddButton extends Component
 {
-    public $quantityToAdd;
+    public $attributes = [];
     public $product;
+    public $productIsAddedToCart;
+    public $quantity;
 
     public function mount(Product $product)
     {
-        $this->quantityToAdd = 0;
+        $this->productIsAddedToCart = false;
+        $this->quantity = 1;
         $this->product = $product;
     }
 
@@ -21,13 +24,33 @@ class CartAddButton extends Component
         return view('loja::livewire.cart-add-button');
     }
 
-    public function add()
+    public function addQuantity()
     {
-        $this->quantityToAdd++;
+        $this->quantity++;
     }
 
-    public function less()
+    public function lessQuantity()
     {
-        $this->quantityToAdd--;
+        $this->quantity--;
+    }
+
+    public function addToCart()
+    {
+
+        if (! $this->product->hasEnoughQuantityAvailable($this->quantity)) {
+            //la quantitée demandé n'est pas disponible
+        }
+
+        if (! $this->product->hasEnoughQuantityMaximum($this->quantity)) {
+            //Désolé, vous avez ajouté la quantitée maximum pour ce produit
+        }
+
+        $attributeValues = [$this->attributes]; //TODO improve front
+        $this->product->cartAdd($this->quantity, $attributeValues);
+
+        $this->productIsAddedToCart = true;
+
+        //reset quantity
+        $this->quantity = 0;
     }
 }

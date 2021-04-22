@@ -1,50 +1,36 @@
-<div>
-@if($product->attributeSet && $product->attributeSet->attributes)
-    <div class="attributeSetParentClass">
-    @foreach($product->attributeSet->attributes as $attribute)
-        <div class="attributeSetClass (select-dropdown)">
-            <select name="attribute" class="attributeSetSelectClass">
-                @foreach($attribute->values as $value)
-                    <option value="{{ $value->id }}">{{ $value->value }}</option>
-                @endforeach
-            </select>
+<form accept-charset="utf-8" class="form form--horizontal" method="POST" wire:submit.prevent="addToCart">
+
+    @if($product->attributeSet && $product->attributeSet->attributes)
+        <div class="attributeSetParentClass">
+        @foreach($product->attributeSet->attributes as $attribute)
+            <div class="attributeSetClass (select-dropdown)">
+                <select name="attribute" class="attributeSetSelectClass" wire:model="attributes">
+                    <option></option>
+                    @foreach($attribute->values as $value)
+                        <option value="{{ $value->id }}">{{ $value->value }}</option>
+                    @endforeach
+                </select>
+            </div>
+        @endforeach
         </div>
-    @endforeach
+    @endif
+
+    <div class="quantityParentCl">
+        <span wire:click="lessQuantity" class="quantity__update quantity__update--less">-</span>
+        <span class="quantity__current">{{ $quantity }}</span>
+        <span wire:click="addQuantity" class="quantity__update quantity__update--more" >+</span>
     </div>
-@endif
-<div class="quantityParentCl">
-    <span wire:click="less" class="quantity__update quantity__update--less">-</span>
-    <span class="quantity__current">{{ $quantityToAdd }}</span>
-    <span wire:click="add" class="quantity__update quantity__update--more" >+</span>
-</div>
-<form method="POST" id="product-add-cart" action="">
-    @csrf
+
+
     <input type="hidden" name="quantity" value="1" id="product-quantity">
     <div class="form-group">
-        <button id="product-button" class="btn btn-success btn-submit">Ajouter au panier</button>
+        <button  class="btn btn-success btn-submit">Ajouter au panier</button>
+        @if($productIsAddedToCart)
+            <span id="loading-add-cart">Produit ajouté au panier !</span>
+        @endif
         <span id="loading-add-cart" style="display: none">...</span>
     </div>
+
+    <!-- todo tant que la quantité n'est pas géré, le message d'erreur est inutile -->
+    <span class="" id="error-message"></span>
 </form>
-<!-- todo tant que la quantité n'est pas géré, le message d'erreur est inutile -->
-<span class="" id="error-message"></span>
-</div>
-
-attributeSetParentClass
-attributeSetClass
-attributeSetSelectClass
-
-quantityParentClass
-
-quantityLessClass
-
-quantityCurrentClass
-
-quantityMoreClass
-
-addToCartButtonParentClass
-
-addToCartButtonClass
-
-addToCartButtonName
-
-addToCartButtonLoadingHtml

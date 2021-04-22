@@ -1,11 +1,3 @@
-@csrf
-@if($cartItemsRemoved->count())
-    <ul>
-    @foreach($cartItemsRemoved as $item)
-         <li>Le produit {{ $item->name }} n'est plus disponible nous l'avons supprimé du panier.</li>
-    @endforeach
-    </ul>
-@endif
 <div class="cart-products">
 </div>
 <div class="cart-products">
@@ -29,14 +21,17 @@
             --><div class="cart-product__remove">
                 <i class="far fa-fw fa-trash-alt js-cart-remove"></i>
             </div><!--
-            -->@if($cartItemsProblemQuantity->has($item->id))<div>
+            -->
+            {{--
+            @if($cartItemsProblemQuantity->has($item->id))<div>
                 La quantité demandé n'est plus disponible, nous avons mis à jour le panier avec la quantité restante.
             </div>@endif
+            --}}
         </div>
     @endforeach
 </div>
 
-@push('after-foot-scripts')
+{{--
     <script>
         $(function () {
 
@@ -138,4 +133,4 @@
 
         });
     </script>
-@endpush
+--}}

@@ -10,15 +10,11 @@ use Suavy\LojaForLaravel\Models\Product;
 
 class CartController extends Controller
 {
-    public function empty(Request $request)
-    {
-        \Cart::session(session()->getId())->clear();
-
-        return redirect()->route('loja.cart.index');
-    }
 
     public function index()
     {
+
+        return view('loja::cart.index');
         /* TODO use this when quantity is available
          * check if quantity is available
         foreach ($cartItems as $item){

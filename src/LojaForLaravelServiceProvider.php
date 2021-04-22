@@ -4,6 +4,7 @@ namespace Suavy\LojaForLaravel;
 
 use Illuminate\Support\ServiceProvider;
 use Livewire\Livewire;
+use Suavy\LojaForLaravel\Http\Livewire\Cart;
 use Suavy\LojaForLaravel\Http\Livewire\CartAddButton;
 use Suavy\LojaForLaravel\Http\Livewire\CartCounter;
 
@@ -15,6 +16,7 @@ class LojaForLaravelServiceProvider extends ServiceProvider
     public function boot()
     {
         Livewire::component('cart-counter', CartCounter::class);
+        Livewire::component('cart', Cart::class);
         Livewire::component('cart-add-button', CartAddButton::class);
         /*
          * Optional methods to load your package assets
