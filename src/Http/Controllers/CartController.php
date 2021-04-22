@@ -10,10 +10,8 @@ use Suavy\LojaForLaravel\Models\Product;
 
 class CartController extends Controller
 {
-
     public function index()
     {
-
         return view('loja::cart.index');
         /* TODO use this when quantity is available
          * check if quantity is available
