@@ -4,7 +4,6 @@ use Illuminate\Support\Facades\Route;
 use Suavy\LojaForLaravel\Http\Controllers\CartController;
 use Suavy\LojaForLaravel\Http\Controllers\CategoryController;
 use Suavy\LojaForLaravel\Http\Controllers\CollectionController;
-use Suavy\LojaForLaravel\Http\Controllers\HomeController;
 use Suavy\LojaForLaravel\Http\Controllers\OrderController;
 use Suavy\LojaForLaravel\Http\Controllers\PaymentController;
 use Suavy\LojaForLaravel\Http\Controllers\ProductController;
