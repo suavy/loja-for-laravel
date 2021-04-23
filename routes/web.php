@@ -14,8 +14,6 @@ Route::group([
     'middleware' => 'web',
     'prefix' => config('loja.prefix'),
 ], function () {
-    Route::get('/', [HomeController::class, 'index'])->name('loja.home');
-
     /*
      * Product, Category, Collection routing
      */

@@ -101,13 +101,10 @@ LOJA only create empty views for you, but in each view you have access to the ne
 
 #### GET routes
 
-// todo remove LOJA.HOME route 
-
 // todo Missing checkout/payment routes
 
 | route | route name | view | variables |
 |---|---|---|---|
-| / | loja.home | .../home/index.blade.php | $featuredProducts |
 | /cart | loja.cart.index | .../cart/index.blade.php | $cart |
 | - | - | .../cart/empty.blade.php | |
 | /payment | loja.cart.payment | .../cart/payment.blade.php | $cart |
