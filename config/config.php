@@ -8,5 +8,7 @@ return [
     'quantity' => [
         'maximum' => 100,
         'minimum' => 1,
+        'maximum-product' => 5,
     ],
+
 ];

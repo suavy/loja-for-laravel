@@ -8,10 +8,17 @@ class CartCounter extends Component
 {
     public $counter;
 
+    public $listeners = ['updateQuantityProduct' => 'updateQuantityProduct'];
+
     public function render()
     {
-        $this->users = \Cart::session(session()->getId())->getTotalQuantity();
+        $this->counter = \Cart::session(session()->getId())->getTotalQuantity();
 
         return view('loja::livewire.cart-counter');
+    }
+
+    public function updateQuantityProduct()
+    {
+        $this->counter = \Cart::session(session()->getId())->getTotalQuantity();
     }
 }

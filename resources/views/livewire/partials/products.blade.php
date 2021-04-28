@@ -1,35 +1,25 @@
-<div class="cart-products">
-</div>
-<div class="cart-products">
-    @foreach($cartItems as $item)
-        <div class="cart-product js-cart-product" data-id="{{ $item->id }}" data-quantity-max="100">
-            <div class="cart-product__picture">
-                <img src="{!! $item->associatedModel->cover !!}" />
-            </div><!--
-            --><div class="cart-product__content">
-                <div class="cart-product__content__price">{{ $item->price }}</div>
-                <div class="cart-product__content__name">{{ $item->name }}</div>
-                @foreach($item->attributes as $attribute)
-                    <div class="cart-product__content__name">{{ $attribute }}</div>
-                @endforeach
-                <div class="quantity cart-product__content__quantity">
-                    <!--<span class="quantity__update quantity__update--less js-cart-update" data-update="less">-</span>-->
-                    <span class="quantity__current js-cart-quantity">Quantité : {{ $item->quantity }}</span>
-                    <!--<span class="quantity__update quantity__update--more js-cart-update" data-update="add">+</span>-->
-                </div>
-            </div><!--
-            --><div class="cart-product__remove">
-                <i class="far fa-fw fa-trash-alt js-cart-remove"></i>
-            </div><!--
-            -->
-            {{--
-            @if($cartItemsProblemQuantity->has($item->id))<div>
-                La quantité demandé n'est plus disponible, nous avons mis à jour le panier avec la quantité restante.
-            </div>@endif
-            --}}
+@foreach($cartItems as $item)
+<div class="flex justify-between items-center mt-6 pt-6  border-t">
+    <div class="flex items-center"> <img src="{!! $item->associatedModel->cover !!}" width="60" class="rounded-lg ">
+        <div class="flex flex-col ml-3"> <span class="md:text-md font-medium">{{ $item->name }}</span>
+            @foreach($item->attributes as $attribute)
+                <span class="text-xs font-light text-gray-400">{{ $attribute }}</span>
+            @endforeach
         </div>
-    @endforeach
+    </div>
+
+    <div class="flex justify-center items-center">
+        <div class="pr-8 flex ">
+            <span class="font-semibold" wire:click="lessQuantity('{{$item->id}}')">-</span>
+            <input type="text" class="focus:outline-none bg-gray-100 border h-6 w-8 rounded text-sm px-2 mx-2" value="{{ $item->quantity }}">
+            <span class="font-semibold" wire:click="addQuantity('{{$item->id}}')">+</span>
+        </div>
+        <div class="pr-8 "> <span class="text-xs font-medium">{{ $item->price }}</span> </div>
+
+        <div wire:click="removeProduct('{{$item->id}}')"> <i class="fad fa-trash-alt text-xs font-medium"></i> </div>
+    </div>
 </div>
+@endforeach
 
 {{--
     <script>

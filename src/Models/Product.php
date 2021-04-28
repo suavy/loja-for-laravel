@@ -89,4 +89,9 @@ class Product extends Model
     {
         return CollectionFactory::new();
     }
+
+    public function hasAttributes()
+    {
+        return $this->attributeSet && $this->attributeSet->attributes;
+    }
 }

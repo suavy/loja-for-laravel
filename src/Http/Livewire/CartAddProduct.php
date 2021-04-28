@@ -5,12 +5,16 @@ namespace Suavy\LojaForLaravel\Http\Livewire;
 use Livewire\Component;
 use Suavy\LojaForLaravel\Models\Product;
 
-class CartAddButton extends Component
+class CartAddProduct extends Component
 {
     public $attributes = [];
     public $product;
     public $productIsAddedToCart;
     public $quantity;
+
+    protected $rules = [
+        'quantity' => "required|min:1"
+    ];
 
     public function mount(Product $product)
     {
@@ -21,21 +25,18 @@ class CartAddButton extends Component
 
     public function render()
     {
-        return view('loja::livewire.cart-add-button');
-    }
-
-    public function addQuantity()
-    {
-        $this->quantity++;
-    }
-
-    public function lessQuantity()
-    {
-        $this->quantity--;
+        return view('loja::livewire.cart-add-product');
     }
 
     public function addToCart()
     {
+        if($this->product->hasAttributes())
+        {
+            $this->rules['attributes'] = 'required|array|min:1';
+        }
+
+        $this->validate();
+
         if (! $this->product->hasEnoughQuantityAvailable($this->quantity)) {
             //la quantitée demandé n'est pas disponible
         }
@@ -44,12 +45,13 @@ class CartAddButton extends Component
             //Désolé, vous avez ajouté la quantitée maximum pour ce produit
         }
 
-        $attributeValues = [$this->attributes]; //TODO improve front
-        $this->product->cartAdd($this->quantity, $attributeValues);
+        $this->product->cartAdd($this->quantity, $this->attributes);
 
         $this->productIsAddedToCart = true;
 
         //reset quantity
-        $this->quantity = 0;
+        $this->quantity = 1;
+
+        $this->emit('updateQuantityProduct');
     }
 }
