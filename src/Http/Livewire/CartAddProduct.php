@@ -13,7 +13,7 @@ class CartAddProduct extends Component
     public $quantity;
 
     protected $rules = [
-        'quantity' => "required|min:1"
+        'quantity' => 'required|min:1',
     ];
 
     public function mount(Product $product)
@@ -30,8 +30,7 @@ class CartAddProduct extends Component
 
     public function addToCart()
     {
-        if($this->product->hasAttributes())
-        {
+        if ($this->product->hasAttributes()) {
             $this->rules['attributes'] = 'required|array|min:1';
         }
 
