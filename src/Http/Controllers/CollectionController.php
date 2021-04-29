@@ -15,7 +15,6 @@ class CollectionController extends Controller
 
     public function show(Collection $collection)
     {
-        $collection = Collection::query()->first(); // todo fix
         return view('loja::collection.show', compact('collection'));
     }
 }

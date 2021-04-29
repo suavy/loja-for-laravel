@@ -18,16 +18,16 @@ Route::group([
      */
     Route::get('/product/{product}', [ProductController::class, 'show'])->name('loja.product.show');
     Route::get('/categories', [CategoryController::class, 'index'])->name('loja.category.index');
-    Route::get('/category/{id}', [CategoryController::class, 'show'])->name('loja.category.show');
+    Route::get('/category/{category}', [CategoryController::class, 'show'])->name('loja.category.show');
     Route::get('/collections', [CollectionController::class, 'index'])->name('loja.collection.index');
-    Route::get('/collection/{id}', [CollectionController::class, 'show'])->name('loja.collection.show');
+    Route::get('/collection/{collection}', [CollectionController::class, 'show'])->name('loja.collection.show');
     Route::get('/search', [SearchController::class, 'index'])->name('loja.search');
 
     /*
      * Order routing
      */
     Route::get('/user/orders', [OrderController::class, 'index'])->name('loja.order.index');
-    Route::get('/user/order/{id}', [OrderController::class, 'show'])->name('loja.order.show');
+    Route::get('/user/order/{order}', [OrderController::class, 'show'])->name('loja.order.show');
 
     /*
      * Cart routing
