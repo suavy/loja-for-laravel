@@ -12,6 +12,11 @@ class CartController extends Controller
 {
     public function index()
     {
+
+        if(auth()->guest()) {
+            session(['url.intended' => route('loja.cart.index')]);
+        }
+
         return view('loja::cart.index');
         /* TODO use this when quantity is available
          * check if quantity is available
@@ -42,6 +47,8 @@ class CartController extends Controller
         if (Auth::check() && Auth::user()->hasAddress()) {
             Former::populate(['address'=>Auth::user()->address()]);
         }
+
+
 
         if (\Cart::session(session()->getId())->isEmpty()) {
             return view('loja::cart.empty', compact('cartItemsRemoved'));

@@ -1,4 +1,4 @@
-<div class="flex justify-between items-center mt-6 pt-6">
+<div><div class="flex justify-between items-center mt-6 pt-6">
     <div class="flex items-center"> <i class="fa fa-arrow-left text-sm pr-2"></i> <a href="{{ route('home') }}" class="text-md font-medium text-blue-500">Continuer mes achats</a> </div>
 </div>
 <div class="flex justify-center my-6">
@@ -47,7 +47,7 @@
                                 <span class="text-sm lg:text-base font-medium">{{ $item->price }}€</span>
                             </td>
                             <td class="text-right">
-                                <span class="text-sm lg:text-base font-medium">{{ $item->price }}€</span>
+                                <span class="text-sm lg:text-base font-medium">{{ $item->price * $item->quantity }}€</span>
                             </td>
                             <td class="text-right">
                                 <span class="text-sm lg:text-base font-medium cursor-pointer" wire:click="removeProduct('{{$item->id}}')"> <i class="fal fa-trash-alt"></i> </span>
@@ -57,6 +57,12 @@
                 </tbody>
             </table>
             <hr class="pb-6 mt-6">
+            @guest
+                Total: {{ $totalPrice }}
+                <br>
+                <a href="{{route('login')}}" >Se connecter</a>
+            @endguest
+            @auth
             <div class="my-4 mt-6 -mx-2 lg:flex">
                 <div class="lg:px-2 lg:w-1/2">
                     {{-- Coupon Code --}}
@@ -124,6 +130,8 @@
                     </div>
                 </div>
             </div>
+            @endauth
         </div>
     </div>
+</div>
 </div>

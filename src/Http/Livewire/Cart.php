@@ -2,6 +2,7 @@
 
 namespace Suavy\LojaForLaravel\Http\Livewire;
 
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class Cart extends Component
@@ -10,9 +11,33 @@ class Cart extends Component
     public $cartItems;
     public $totalPrice;
 
+    public $addressName;
+    public $addressFirstName;
+    public $addressLastName;
+    public $addressStreet;
+    public $addressCity;
+    public $addressState;
+    public $addressOther;
+    public $addressCountry;
+
+
+    public $email;
+    public $password;
+    public $isLogged=false;
+
     public function mount(): void
     {
         $this->updateItems();
+
+        if(auth()->check())
+        {
+
+        }
+    }
+
+    public function updateOrCreateAddress()
+    {
+
     }
 
     public function render()
@@ -53,7 +78,7 @@ class Cart extends Component
             $this->cartItems = \Cart::session(session()->getId())->getContent();
             $this->totalPrice = \Cart::getTotal();
         }
-
+        
         $this->emit('updateQuantityProduct');
     }
 
