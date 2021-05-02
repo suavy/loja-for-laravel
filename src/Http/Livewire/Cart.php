@@ -20,24 +20,20 @@ class Cart extends Component
     public $addressOther;
     public $addressCountry;
 
-
     public $email;
     public $password;
-    public $isLogged=false;
+    public $isLogged = false;
 
     public function mount(): void
     {
         $this->updateItems();
 
-        if(auth()->check())
-        {
-
+        if (auth()->check()) {
         }
     }
 
     public function updateOrCreateAddress()
     {
-
     }
 
     public function render()
@@ -78,7 +74,7 @@ class Cart extends Component
             $this->cartItems = \Cart::session(session()->getId())->getContent();
             $this->totalPrice = \Cart::getTotal();
         }
-        
+
         $this->emit('updateQuantityProduct');
     }
 
