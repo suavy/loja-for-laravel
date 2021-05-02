@@ -44,6 +44,7 @@ class ProductCrudController extends CrudController
     {
         $this->crud->field('name')->type('text')->label('Nom');
         $this->crud->field('description')->type('textarea')->label('Description');
+        $this->crud->field('content')->type('textarea')->label('Content');
         $this->crud->field('price')->type('number')->label('Prix')->attributes(['step'=>'any'])->suffix('€')->wrapper(['class'=>'form-group col-md-6']);
         $this->crud->field('stock')->type('number')->label('Stock')->wrapper(['class'=>'form-group col-md-6']);
 
