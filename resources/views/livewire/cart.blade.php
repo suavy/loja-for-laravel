@@ -121,12 +121,13 @@
                             <div class="lg:px-4 lg:py-2 m-2 text-lg font-semibold text-center text-gray-800">Total</div>
                             <div class="lg:px-4 lg:py-2 m-2 lg:text-lg font-bold text-center text-gray-900">{{ $totalPrice }}€</div>
                         </div>
-                        <a href="#">
+                        <form method="post" action="{{ route('loja.payment.index') }}">
+                            @csrf
                             <button class="flex justify-center w-full px-10 py-3 mt-6 font-medium text-white uppercase bg-gray-800 rounded-full shadow item-center hover:bg-gray-700 focus:shadow-outline focus:outline-none">
                                 <i class="far fa-lg fa-fw fa-credit-card"></i>
                                 <span class="ml-2">Procceed to checkout</span>
                             </button>
-                        </a>
+                        </form>
                     </div>
                 </div>
             </div>

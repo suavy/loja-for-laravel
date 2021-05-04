@@ -4,7 +4,8 @@
         <div class="text-center left-0 pt-2 right-0 absolute block text-xs uppercase text-gray-400 tracking-wide font-semibold">Qty</div>
         <select class="cursor-pointer appearance-none rounded-xl border border-gray-200 pl-4 pr-8 h-14 flex items-end pb-1" wire:model="quantity">
 
-            @for($i=1; $i<=config('loja.quantity.maximum-product'); $i++)
+            {{-- TODO USE config('loja.quantity.maximum-product'); --}}
+            @for($i=1; $i<=5; $i++)
                 <option value ="{{ $i }}">{{ $i }}</option>
             @endfor
         </select>

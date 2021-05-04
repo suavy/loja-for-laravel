@@ -11,10 +11,12 @@ class PaymentController extends Controller
 {
     public function index(PaymentRequest $request)
     {
+        /*
         if ($request->has('address')) {
             Auth::user()->updateAddress($request->input('address'));
             //return back();
         }
+        */
         if (\Cart::session(session()->getId())->isEmpty()) {
             return back();
         }

@@ -78,7 +78,7 @@ class Cart extends Component
             $this->cartItems = \Cart::session(session()->getId())->getContent();
             $this->totalPrice = \Cart::getTotal();
         }
-        
+
         $this->emit('updateQuantityProduct');
     }
 
