@@ -10,11 +10,11 @@ class LojaForLaravelEventServiceProvider extends ServiceProvider
 {
     protected $listen = [
         \Illuminate\Auth\Events\Attempting::class => [
-            PrepareCartTransfer::class
+            PrepareCartTransfer::class,
         ],
         \Illuminate\Auth\Events\Login::class => [
-            TransferGuestCartToUser::class
-        ]
+            TransferGuestCartToUser::class,
+        ],
     ];
 
     /**
