@@ -42,5 +42,4 @@ Route::group([
      * Payment routing
      */
     Route::post('/payment', [PaymentController::class, 'index'])->name('loja.payment.index');
-    Route::post('/charge', [PaymentController::class, 'charge'])->name('loja.payment.charge');
 });

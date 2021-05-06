@@ -36,8 +36,4 @@ class PaymentController extends Controller
         return view('loja::cart.payment', compact('cartItems', 'paymentIntent'));
     }
 
-    public function charge(Request $request)
-    {
-        dd($request->input('stripeToken'));
-    }
 }
