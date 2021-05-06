@@ -3,7 +3,6 @@
 namespace Suavy\LojaForLaravel\Http\Controllers;
 
 use Cartalyst\Stripe\Stripe;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Suavy\LojaForLaravel\Http\Requests\PaymentRequest;
 
@@ -35,5 +34,4 @@ class PaymentController extends Controller
 
         return view('loja::cart.payment', compact('cartItems', 'paymentIntent'));
     }
-
 }
