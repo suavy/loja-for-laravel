@@ -35,5 +35,4 @@ class PaymentController extends Controller
     // todo : Webhook qui écoute les events de Stripe
     // https://stripe.com/docs/webhooks/integration-builder
     // todo : en fonction de l'event changer le statut de l'order / envoyer email / etc
-
 }
