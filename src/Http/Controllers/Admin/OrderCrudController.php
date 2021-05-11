@@ -34,7 +34,6 @@ class OrderCrudController extends CrudController
 
     protected function setupCreateOperation()
     {
-
     }
 
     protected function setupUpdateOperation()
