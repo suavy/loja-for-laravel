@@ -42,5 +42,11 @@ Route::group([
      * Payment routing
      */
     Route::post('/payment', [PaymentController::class, 'index'])->name('loja.payment.index');
+});
+
+Route::group([
+    'middleware' => 'api',
+    'prefix' => config('loja.prefix'),
+], function () {
     Route::post('stripe/webhook', [PaymentController::class, 'webhook'])->name('loja.payment.webhook');
 });
