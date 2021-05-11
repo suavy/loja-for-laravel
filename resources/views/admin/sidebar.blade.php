@@ -1,6 +1,7 @@
 <!-- Loja (backpack) sidebar -->
 <li class="nav-title">LOJA</li>
 <li class="nav-item"><a class="nav-link" href="{{ backpack_url('product') }}"><i class="nav-icon fad fa-shopping-bag"></i> Produits</a></li>
+<li class="nav-item"><a class="nav-link" href="{{ backpack_url('order') }}"><i class="nav-icon fad fa-shipping-fast"></i> Commandes</a></li>
 <li class="nav-item"><a class="nav-link" href="{{ backpack_url('category') }}"><i class="nav-icon fad fa-sitemap"></i> Catégories</a></li>
 <li class="nav-item"><a class="nav-link" href="{{ backpack_url('collection') }}"><i class="nav-icon fad fa-hashtag"></i> Collections</a></li>
 <li class='nav-item nav-dropdown'>

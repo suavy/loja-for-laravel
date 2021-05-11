@@ -2,12 +2,15 @@
 
 namespace Suavy\LojaForLaravel\Models;
 
+use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use Stripe\PaymentIntent;
 
 class Order extends Model
 {
+    use CrudTrait;
+
     protected $table = 'loja_orders';
     // Disable Laravel's mass assignment protection
     protected $guarded = [];
@@ -17,6 +20,11 @@ class Order extends Model
     | Relations
     |--------------------------------------------------------------------------
     */
+
+    public function orderStatus()
+    {
+        return $this->belongsTo(OrderStatus::class);
+    }
     public function products()
     {
         return $this->belongsToMany(Product::class)->withPivot('quantity', 'price', 'price_with_tax');
