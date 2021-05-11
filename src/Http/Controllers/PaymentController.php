@@ -2,7 +2,6 @@
 
 namespace Suavy\LojaForLaravel\Http\Controllers;
 
-
 use Illuminate\Support\Facades\Auth;
 use Stripe\Event;
 use Stripe\PaymentIntent;
@@ -33,6 +32,7 @@ class PaymentController extends Controller
             'currency' => 'eur',
         ]);
         Order::initOrder($paymentIntent); // todo complete this function
+
         return view('loja::cart.payment', compact('cartItems', 'paymentIntent'));
     }
 
@@ -48,7 +48,7 @@ class PaymentController extends Controller
             $event = Event::constructFrom(
                 json_decode($payload, true)
             );
-        } catch(\UnexpectedValueException $e) {
+        } catch (\UnexpectedValueException $e) {
             // Invalid payload
             echo '⚠️  Webhook error while parsing basic request.';
             http_response_code(400);
