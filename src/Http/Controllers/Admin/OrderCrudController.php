@@ -29,7 +29,7 @@ class OrderCrudController extends CrudController
     {
         $this->crud->column('id')->label('#');
         $this->crud->column('user_id')->label('user');
-        $this->crud->column('orderStatus.name')->label('status');
+        $this->crud->column('order_status_id')->label('status');
     }
 
     protected function setupCreateOperation()
