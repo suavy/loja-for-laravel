@@ -42,4 +42,5 @@ Route::group([
      * Payment routing
      */
     Route::post('/payment', [PaymentController::class, 'index'])->name('loja.payment.index');
+    Route::post('/webhook', [PaymentController::class, 'webhook'])->name('loja.payment.webhook');
 });

@@ -3,6 +3,8 @@
 namespace Suavy\LojaForLaravel\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
+use Stripe\PaymentIntent;
 
 class Order extends Model
 {
@@ -23,5 +25,28 @@ class Order extends Model
     public function orderProducts()
     {
         return $this->hasMany(OrderProduct::class);
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Functions
+    |--------------------------------------------------------------------------
+    */
+    public static function initOrder(PaymentIntent $paymentIntent)
+    {
+        $order = self::create([
+            'user_id' => Auth::id(),
+            'order_status_id' => 1, // pending
+            'stripe_payment_intent_id' => $paymentIntent->id,
+        ]);
+        // todo complete loja_order_... tables
+        return $order;
+    }
+
+    public static function handlePaymentIntentSucceeded(PaymentIntent $paymentIntent)
+    {
+        // update order_status_id to "processed"
+        self::query()->where('stripe_payment_intent_id', $paymentIntent->id)->update(['order_status_id' => 2]);
+        // todo send success email
     }
 }

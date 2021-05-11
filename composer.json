@@ -21,11 +21,11 @@
         "backpack/crud": "4.1.*",
         "backpack/filemanager": "^1.1",
         "backpack/settings": "^3.0",
-        "cartalyst/stripe-laravel": "^13.0",
         "darryldecode/cart": "^4.1",
         "illuminate/support": "^8.0",
         "livewire/livewire": "^2.3",
-        "pragmarx/countries": "^0.7.0"
+        "pragmarx/countries": "^0.7.0",
+        "stripe/stripe-php": "^7.78"
     },
     "require-dev": {
         "orchestra/testbench": "^6.0",
