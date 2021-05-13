@@ -18,6 +18,7 @@ class CreateLojaAddressTable extends Migration
             $table->string('name')->nullable();
             $table->string('firstname');
             $table->string('lastname');
+            $table->string('phone');
             $table->string('street');
             $table->string('city');
             $table->string('state')->nullable();

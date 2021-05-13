@@ -69,6 +69,7 @@
                     </p>
                 @endguest
                 @auth
+                    <form wire:submit.prevent="checkout" method="post">
                     <div class="my-4 mt-6 -mx-2 lg:flex">
                         <div class="lg:px-2 lg:w-1/2">
                             {{-- Coupon Code --}}
@@ -89,12 +90,10 @@
                                 </div>
                             </div>
                             {{-- Delivery address --}}
-                            <div class="p-4 mt-6 bg-gray-100 rounded-full">
-                                <h1 class="ml-2 font-bold uppercase">Delivery address</h1>
-                            </div>
-                            <div class="p-4">
-                                {{-- todo form adress --}}
-                            </div>
+
+
+                            @include('loja::livewire.partials.address')
+
                         </div>
                         <div class="lg:px-2 lg:w-1/2">
                             <div class="p-4 bg-gray-100 rounded-full">
@@ -127,16 +126,16 @@
                                     <div class="lg:px-4 lg:py-2 m-2 text-lg font-semibold text-center text-gray-800">Total</div>
                                     <div class="lg:px-4 lg:py-2 m-2 lg:text-lg font-bold text-center text-gray-900">{{ $totalPrice }}€</div>
                                 </div>
-                                <form method="post" action="{{ route('loja.payment.index') }}">
-                            @csrf
-                                    <button class="flex justify-center w-full px-10 py-3 mt-6 font-medium text-white uppercase bg-gray-800 rounded-full shadow item-center hover:bg-gray-700 focus:shadow-outline focus:outline-none">
-                                        <i class="far fa-lg fa-fw fa-credit-card"></i>
-                                        <span class="ml-2">Procceed to checkout</span>
-                                    </button>
-                                </form>
+
+                                <button class="flex justify-center w-full px-10 py-3 mt-6 font-medium text-white uppercase bg-gray-800 rounded-full shadow item-center hover:bg-gray-700 focus:shadow-outline focus:outline-none">
+                                    <i class="far fa-lg fa-fw fa-credit-card"></i>
+                                    <span class="ml-2">Procceed to checkout</span>
+                                </button>
+
                             </div>
                         </div>
                     </div>
+                    </form>
                 @endauth
             </div>
         </div>
