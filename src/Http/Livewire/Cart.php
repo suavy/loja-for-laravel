@@ -30,29 +30,23 @@ class Cart extends Component
     public $isLogged = false;
 
     protected $rules = [
-        'addressFirstname' => "required",
-        'addressLastname' => "required",
-        'addressPhone' => "required",
-        'addressStreet' => "required",
-        'addressCity' => "required",
-        'addressZipCode' => "required",
-        'addressCountry' => "required",
+        'addressFirstname' => 'required',
+        'addressLastname' => 'required',
+        'addressPhone' => 'required',
+        'addressStreet' => 'required',
+        'addressCity' => 'required',
+        'addressZipCode' => 'required',
+        'addressCountry' => 'required',
     ];
 
     public function mount(): void
     {
         $this->updateItems();
 
+        if (auth()->check()) {
+            $this->optionsCountries = Country::query()->where('cca2', 'FR')->get()->pluck('name', 'id')->toArray();
 
-
-        if (auth()->check())
-        {
-
-            $this->optionsCountries = Country::query()->where('cca2','FR')->get()->pluck('name','id')->toArray();
-
-
-            if(auth()->user()->address() !== null)
-            {
+            if (auth()->user()->address() !== null) {
                 $this->addressFirstname = auth()->user()->address()->firstname;
                 $this->addressLastname = auth()->user()->address()->lastname;
                 $this->addressPhone = auth()->user()->address()->phone;
@@ -61,15 +55,12 @@ class Cart extends Component
                 $this->addressZipCode = auth()->user()->address()->zip_code;
                 $this->addressOther = auth()->user()->address()->other;
                 $this->addressCountry = auth()->user()->address()->country->id;
-
-            }else{
+            } else {
                 $this->addressFirstname = auth()->user()->firstname;
                 $this->addressLastname = auth()->user()->lastname;
             }
-
         }
     }
-
 
     public function render()
     {
@@ -139,9 +130,8 @@ class Cart extends Component
 
         $this->validate();
 
-
         auth()->user()->updateAddress([
-            'name' => "Adresse par défault",
+            'name' => 'Adresse par défault',
             'firstname' => $this->addressFirstname,
             'lastname' => $this->addressLastname,
             'phone' => $this->addressPhone,
@@ -149,11 +139,9 @@ class Cart extends Component
             'city' => $this->addressCity,
             'zip_code' => $this->addressZipCode,
             'other' => $this->addressOther,
-            'country_id' => $this->addressCountry
+            'country_id' => $this->addressCountry,
         ]);
 
         return redirect(route('loja.payment.index'));
     }
-
-
 }
