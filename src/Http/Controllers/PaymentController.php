@@ -28,6 +28,9 @@ class PaymentController extends Controller
         ]);
         Order::initOrder($paymentIntent); // todo complete this function
 
+
+        \Cart::session(session()->getId())->clear(); //empty cart after payment
+
         return view('loja::cart.payment', compact('cartItems', 'paymentIntent'));
     }
 
