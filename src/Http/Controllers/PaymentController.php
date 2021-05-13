@@ -2,7 +2,6 @@
 
 namespace Suavy\LojaForLaravel\Http\Controllers;
 
-use Illuminate\Support\Facades\Auth;
 use Stripe\Event;
 use Stripe\PaymentIntent;
 use Stripe\Stripe;
@@ -13,7 +12,6 @@ class PaymentController extends Controller
 {
     public function index(PaymentRequest $request)
     {
-
         if (\Cart::session(session()->getId())->isEmpty()) {
             return back();
         }
