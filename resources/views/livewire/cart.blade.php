@@ -1,15 +1,20 @@
-<div>
-    <div class="flex justify-between items-center mt-6 pt-6 md:w-4/5 lg:w-4/5 mx-auto">
-        <div class="flex items-center pl-6 lg:pl-0">
-            <a href="{{ route('home') }}" class="text-md font-medium text-blue-500"><i class="fa fa-arrow-left text-sm pr-2"></i>  Continuer mes achats</a>
+<div class="container mx-auto">
+    <div class="flex justify-between items-center m-6 mx-auto">
+        <div class="flex items-center pl-6 sm:pl-0">
+            <a href="{{ route('home') }}" class="text-md font-medium bg-gray-100 rounded px-3 py-2 text-gray-900 hover:bg-gray-200"><i class="fa fa-arrow-left text-sm pr-2"></i>  Continuer mes achats</a>
         </div>
     </div>
     <div class="flex justify-center my-6">
-        <div class="flex flex-col w-full p-8 text-gray-800 bg-white shadow-lg pin-r pin-y md:w-4/5 lg:w-4/5 rounded-md">
+        <h1 class="text-center text-3xl font-bold">Mon panier</h1>
+    </div>
+    <div class="flex justify-center my-6">
+        <div class="flex flex-col w-full text-gray-800">
             <div class="flex-1">
-                <table class="w-full text-sm lg:text-base" cellspacing="0">
-                    <thead>
-                        <tr class="h-12 uppercase">
+                {{-- Products --}}
+                <div class="bg-gray-100 p-8 rounded">
+                    <table class="w-full text-sm lg:text-base" cellspacing="0">
+                        <thead>
+                        <tr class="h-12">
                             <th class="hidden md:table-cell"></th>
                             <th class="text-left">Product</th>
                             <th class="lg:text-right text-left pl-5 lg:pl-0">
@@ -20,8 +25,8 @@
                             <th class="text-right">Total price</th>
                             <th class=""></th>
                         </tr>
-                    </thead>
-                    <tbody>
+                        </thead>
+                        <tbody>
                         @foreach($cartItems as $item)
                             <tr>
                                 <td class="hidden pb-2 md:table-cell">
@@ -57,10 +62,11 @@
                                 </td>
                             </tr>
                         @endforeach
-                    </tbody>
-                </table>
-                <hr class="pb-6 mt-6">
+                        </tbody>
+                    </table>
+                </div>
                 @guest
+                    <hr class="pb-6 mt-6">
                     Total: {{ $totalPrice }}
                     <br>
                     <p>
@@ -71,13 +77,21 @@
                 @auth
                     <form wire:submit.prevent="checkout" method="post">
                     <div class="my-4 mt-6 -mx-2 lg:flex">
-                        <div class="lg:px-2 lg:w-1/2">
-                            {{-- Coupon Code --}}
-                            <div class="p-4 bg-gray-100 rounded-full">
-                                <h1 class="ml-2 font-bold uppercase">Coupon Code</h1>
+                        {{-- Delivery address --}}
+                        <div class="lg:px-2 lg:w-1/2 p-4">
+                            <div class="p-4 pb-2">
+                                <h1 class="font-bold text-xl">Delivery address</h1>
                             </div>
+                            @include('loja::livewire.partials.address')
+
+                        </div>
+                        {{-- Order Details --}}
+                        <div class="lg:px-2 lg:w-1/2 p-4">
+                            <div class="p-4 pb-2">
+                                <h1 class="font-bold text-xl">Order details</h1>
+                            </div>
+                            {{-- Coupon Code --}}
                             <div class="p-4">
-                                <p class="mb-4 italic">If you have a coupon code, please enter it in the box below</p>
                                 <div class="justify-center md:flex">
                                     <div class="flex items-center w-full h-13 pl-3 bg-white bg-gray-100 border rounded-full">
                                         <input type="coupon" name="code" id="coupon" placeholder="Apply coupon" value="90off"
@@ -88,16 +102,7 @@
                                         </button>
                                     </div>
                                 </div>
-                            </div>
-                            {{-- Delivery address --}}
-
-
-                            @include('loja::livewire.partials.address')
-
-                        </div>
-                        <div class="lg:px-2 lg:w-1/2">
-                            <div class="p-4 bg-gray-100 rounded-full">
-                                <h1 class="ml-2 font-bold uppercase">Order Details</h1>
+                                <p class="mt-2 italic text-center text-sm">If you have a coupon code, please enter it in the box below</p>
                             </div>
                             <div class="p-4">
                                 <p class="mb-6 italic">Shipping costs are calculated based on values you have entered</p>
@@ -127,7 +132,7 @@
                                     <div class="lg:px-4 lg:py-2 m-2 lg:text-lg font-bold text-center text-gray-900">{{ $totalPrice }}€</div>
                                 </div>
 
-                                <button class="flex justify-center w-full px-10 py-3 mt-6 font-medium text-white uppercase bg-gray-800 rounded-full shadow item-center hover:bg-gray-700 focus:shadow-outline focus:outline-none">
+                                <button class="flex justify-center w-full px-10 py-3 mt-6 font-medium text-white bg-gray-800 rounded-full shadow item-center hover:bg-gray-700 focus:shadow-outline focus:outline-none">
                                     <i class="far fa-lg fa-fw fa-credit-card"></i>
                                     <span class="ml-2">Procceed to checkout</span>
                                 </button>
