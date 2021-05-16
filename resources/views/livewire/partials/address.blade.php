@@ -6,21 +6,21 @@
                     Prénom
                 </label>
                 <input wire:model="addressFirstname" class="@error('addressFirstname') border-red-500 @enderror appearance-none block w-full bg-gray-100 text-gray-700 border  rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white" type="text" >
-                @error('addressFirstname')<p class="text-red-500 text-sm italic">{{ $message }}</p>@enderror
+                @error('addressFirstname')<p class="text-red-500 text-xs italic pt-1">{{ $message }}</p>@enderror
             </div>
             <div class="w-full md:w-1/3 p-3">
                 <label class="block tracking-wide text-gray-700 text-sm font-bold mb-2">
                     Nom
                 </label>
                 <input wire:model="addressLastname" class="@error('addressLastname') border-red-500 @enderror appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="text" >
-                @error('addressLastname')<p class="text-red-500 text-sm italic">{{ $message }}</p>@enderror
+                @error('addressLastname')<p class="text-red-500 text-xs italic pt-1">{{ $message }}</p>@enderror
             </div>
             <div class="w-full md:w-1/3 p-3">
                 <label class="block tracking-wide text-gray-700 text-sm font-bold mb-2">
                     Téléphone
                 </label>
                 <input wire:model="addressPhone" class="@error('addressPhone') border-red-500 @enderror appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="text" >
-                @error('addressPhone')<p class="text-red-500 text-sm italic">{{ $message }}</p>@enderror
+                @error('addressPhone')<p class="text-red-500 text-xs italic pt-1">{{ $message }}</p>@enderror
             </div>
         </div>
         <div class="flex flex-wrap">
@@ -29,7 +29,7 @@
                     Adresse
                 </label>
                 <input wire:model="addressStreet" class="@error('addressStreet') border-red-500 @enderror appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-password" type="text">
-                @error('addressStreet')<p class="text-red-500 text-sm italic">{{ $message }}</p>@enderror
+                @error('addressStreet')<p class="text-red-500 text-xs italic pt-1">{{ $message }}</p>@enderror
             </div>
         </div>
         <div class="flex flex-wrap">
@@ -38,14 +38,14 @@
                     Ville
                 </label>
                 <input wire:model="addressCity" class="@error('addressCity') border-red-500 @enderror appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-city" type="text" >
-                @error('addressCity')<p class="text-red-500 text-sm italic">{{ $message }}</p>@enderror
+                @error('addressCity')<p class="text-red-500 text-xs italic pt-1">{{ $message }}</p>@enderror
             </div>
             <div class="w-full md:w-1/3 p-3">
                 <label class="block tracking-wide text-gray-700 text-sm font-bold mb-2">
                     Code postal
                 </label>
                 <input wire:model="addressZipCode" class="@error('addressZipCode') border-red-500 @enderror appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-zip" type="text" >
-                @error('addressZipCode')<p class="text-red-500 text-sm italic">{{ $message }}</p>@enderror
+                @error('addressZipCode')<p class="text-red-500 text-xs italic pt-1">{{ $message }}</p>@enderror
             </div>
             <div class="w-full md:w-1/3 p-3">
                 <label class="block tracking-wide text-gray-700 text-sm font-bold mb-2">
@@ -57,7 +57,7 @@
                         <option value="{{ $id }}">{{ $country }}</option>
                     @endforeach
                 </select>
-                @error('addressCountry')<p class="text-red-500 text-sm italic">{{ $message }}</p>@enderror
+                @error('addressCountry')<p class="text-red-500 text-xs italic pt-1">{{ $message }}</p>@enderror
             </div>
         </div>
         <div class="flex flex-wrap">
@@ -66,7 +66,7 @@
                     Information complémentaire
                 </label>
                 <textarea wire:model="addressOther" class="@error('addressOther') border-red-500 @enderror appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-password"></textarea>
-                @error('addressOther')<p class="text-red-500 text-sm italic">{{ $message }}</p>@enderror
+                @error('addressOther')<p class="text-red-500 text-xs italic pt-1">{{ $message }}</p>@enderror
             </div>
         </div>
 
