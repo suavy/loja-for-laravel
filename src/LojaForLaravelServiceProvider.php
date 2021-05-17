@@ -21,7 +21,7 @@ class LojaForLaravelServiceProvider extends ServiceProvider
         /*
          * Optional methods to load your package assets
          */
-        // $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'loja);
+        $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'loja');
         $this->loadViewsFrom(__DIR__.'/../resources/views', 'loja');
         //$this->loadMigrationsFrom(__DIR__.'/../database/migrations');
         $this->loadRoutesFrom(__DIR__.'/../routes/web.php');
