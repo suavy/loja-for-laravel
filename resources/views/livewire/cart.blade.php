@@ -1,17 +1,15 @@
 <div class="container mx-auto">
-    <div class="flex justify-between items-center m-6 mx-auto">
-        <div class="flex items-center pl-6 sm:pl-0">
-            <a href="{{ route('home') }}" class="text-md font-medium bg-gray-100 rounded px-3 py-2 text-gray-900 hover:bg-gray-200"><i class="fa fa-arrow-left text-sm pr-2"></i>  @lang('loja::cart.continue-shopping')</a>
+    <div class="flex justify-between items-center m-6 mx-auto px-2 sm:px-0">
+        <h1 class="text-3xl font-bold">Mon panier</h1>
+        <div class="flex items-center">
+            <a href="{{ route('home') }}" class="text-md font-medium bg-gray-100 rounded px-3 py-2 text-gray-900 hover:bg-gray-200 border-2 border-gray-200">@lang('loja::cart.continue-shopping') <i class="fa fa-arrow-right text-sm pl-1"></i></a>
         </div>
-    </div>
-    <div class="flex justify-center my-6">
-        <h1 class="text-center text-3xl font-bold">Mon panier</h1>
     </div>
     <div class="flex justify-center my-6">
         <div class="flex flex-col w-full text-gray-800">
             <div class="flex-1">
                 {{-- Products --}}
-                <div class="bg-gray-100 p-8 rounded">
+                <div class="bg-gray-100 p-8 rounded mx-2">
                     <table class="w-full text-sm lg:text-base" cellspacing="0">
                         <thead>
                         <tr class="">
@@ -78,7 +76,7 @@
                     <form wire:submit.prevent="checkout" method="post">
                     <div class="my-4 mt-6 -mx-2 lg:flex">
                         {{-- Delivery address --}}
-                        <div class="lg:px-2 lg:w-1/2 p-4 border-2 m-4">
+                        <div class="lg:px-2 lg:w-1/2 rounded p-0 sm:px-6 sm:py-2 border-2 m-4">
                             <div class="p-4 pb-2">
                                 <h1 class="font-bold text-xl">@lang('loja::cart.address.title')</h1>
                             </div>
@@ -86,7 +84,7 @@
 
                         </div>
                         {{-- Order Details --}}
-                        <div class="lg:px-2 lg:w-1/2 p-4 border-2 m-4">
+                        <div class="lg:px-2 lg:w-1/2 rounded p-0 sm:px-6 sm:py-2 border-2 m-4">
                             <div class="p-4 pb-2">
                                 <h1 class="font-bold text-xl">@lang('loja::cart.details.title')</h1>
                             </div>
@@ -118,7 +116,7 @@
                                         </form>
                                         Coupon "couponSlug" -20%
                                     </div>
-                                    <div class="lg:px-4 lg:py-2 m-2 lg:text-lg font-bold text-center text-green-700">
+                                    <div class="lg:px-4 lg:py-2 m-2 lg:text-lg font-bold text-center text-green-600">
                                         -133,944.77€
                                     </div>
                                 </div>
@@ -130,11 +128,13 @@
                                     <div class="lg:px-4 lg:py-2 m-2 text-lg font-semibold text-center text-gray-800">@lang('loja::cart.details.total')</div>
                                     <div class="lg:px-4 lg:py-2 m-2 lg:text-lg font-bold text-center text-gray-900">{{ $totalPrice }}€</div>
                                 </div>
+                                <div class="text-center">
+                                    <button class="mx-auto px-6 py-3 mt-6 font-medium text-white bg-green-600 rounded shadow item-center hover:bg-green-700 focus:shadow-outline focus:outline-none">
+                                        <i class="far fa-fw fa-credit-card"></i>
+                                        <span class="ml-1">@lang('loja::cart.details.checkout-button')</span>
+                                    </button>
+                                </div>
 
-                                <button class="flex justify-center w-full px-10 py-3 mt-6 font-medium text-white bg-gray-800 rounded-full shadow item-center hover:bg-gray-700 focus:shadow-outline focus:outline-none">
-                                    <i class="far fa-lg fa-fw fa-credit-card"></i>
-                                    <span class="ml-2">@lang('loja::cart.details.checkout-button')</span>
-                                </button>
 
                             </div>
                         </div>
