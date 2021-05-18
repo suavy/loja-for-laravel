@@ -2,6 +2,7 @@
 
 namespace Suavy\LojaForLaravel\Http\Controllers;
 
+use Stripe\Checkout\Session;
 use Stripe\Event;
 use Stripe\PaymentIntent;
 use Stripe\Stripe;
@@ -10,6 +11,8 @@ use Suavy\LojaForLaravel\Models\Order;
 
 class PaymentController extends Controller
 {
+    // Todo à voir avec Matthieu
+    // Todo remove this
     public function index(PaymentRequest $request)
     {
         if (\Cart::session(session()->getId())->isEmpty()) {
@@ -26,14 +29,69 @@ class PaymentController extends Controller
         ]);
         Order::initOrder($paymentIntent); // todo complete this function
 
-        \Cart::session(session()->getId())->clear(); //empty cart after payment
 
         return view('loja::cart.payment', compact('cartItems', 'paymentIntent'));
     }
 
+    // Todo à voir avec Matthieu
+    public function createCheckoutSession()
+    {
+        if (\Cart::session(session()->getId())->isEmpty()) {
+            return back();
+        }
+        $cartItems = \Cart::session(session()->getId())->getContent();
+        Stripe::setApiKey(config('services.stripe.secret'));
+        $checkoutSession = Session::create([
+            'payment_method_types' => ['card'],
+            'line_items' => [
+                [
+                    'price_data' => [
+                        'currency' => 'eur',
+                        'unit_amount' => 2000,
+                        'product_data' => [
+                            'name' => 'Stubborn Attachments',
+                            'images' => ["https://i.imgur.com/EHyR2nP.png"],
+                        ],
+                    ],
+                    'quantity' => 1,
+                ],
+                [
+                    'price_data' => [
+                        'currency' => 'eur',
+                        'unit_amount' => 1000,
+                        'product_data' => [
+                            'name' => 'Stubborn Attachments',
+                            'images' => ["https://i.imgur.com/EHyR2nP.png"],
+                        ],
+                    ],
+                    'quantity' => 1,
+                ],
+            ],
+            'mode' => 'payment',
+            'success_url' => route('loja.payment.success'),
+            'cancel_url' => route('loja.payment.cancel'),
+        ]);
+        return response()->json(['id' => $checkoutSession->id]);
+    }
+
+    // Todo à voir avec Matthieu
+    public function success()
+    {
+        \Cart::session(session()->getId())->clear(); //empty cart after payment
+        dd("success");
+    }
+
+    // Todo à voir avec Matthieu
+    public function cancel()
+    {
+        dd("cancel");
+    }
+
+    // Todo à voir avec Matthieu
     // todo : Webhook qui écoute les events de Stripe
     // https://stripe.com/docs/webhooks/integration-builder
     // todo : en fonction de l'event changer le statut de l'order / envoyer email / etc
+    // TODO IMPORTANT : update webhook to https://stripe.com/docs/payments/checkout/fulfill-orders "checkout.session.completed" au lieux de "payment_intent"
     public function webhook()
     {
         Stripe::setApiKey(config('services.stripe.secret'));

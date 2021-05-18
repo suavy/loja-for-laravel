@@ -42,6 +42,9 @@ Route::group([
      * Payment routing
      */
     Route::get('/payment', [PaymentController::class, 'index'])->name('loja.payment.index');
+    Route::post('/payment/create-checkout-session', [PaymentController::class, 'createCheckoutSession'])->name('loja.payment.create-checkout-session');
+    Route::get('/payment/success', [PaymentController::class, 'success'])->name('loja.payment.success');
+    Route::get('/payment/cancel', [PaymentController::class, 'cancel'])->name('loja.payment.cancel');
 });
 
 Route::group([

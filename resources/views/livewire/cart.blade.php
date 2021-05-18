@@ -129,7 +129,7 @@
                                     <div class="lg:px-4 lg:py-2 m-2 lg:text-lg font-bold text-center text-gray-900">{{ $totalPrice }}€</div>
                                 </div>
                                 <div class="text-center">
-                                    <button class="mx-auto px-6 py-3 mt-6 font-medium text-white bg-green-600 rounded shadow item-center hover:bg-green-700 focus:shadow-outline focus:outline-none">
+                                    <button id="checkout-button" class="mx-auto px-6 py-3 mt-6 font-medium text-white bg-green-600 rounded shadow item-center hover:bg-green-700 focus:shadow-outline focus:outline-none">
                                         <i class="far fa-fw fa-credit-card"></i>
                                         <span class="ml-1">@lang('loja::cart.details.checkout-button')</span>
                                     </button>
@@ -145,3 +145,37 @@
         </div>
     </div>
 </div>
+
+{{-- Todo à voir avec Matthieu--}}
+<script src="https://js.stripe.com/v3/"></script>
+
+<script type="text/javascript">
+    // Create an instance of the Stripe object with your publishable API key
+    var stripe = Stripe("{{ env('STRIPE_PUBLIC_KEY') }}");
+    var checkoutButton = document.getElementById("checkout-button");
+    checkoutButton.addEventListener("click", function () {
+        fetch("{{ route('loja.payment.create-checkout-session') }}", {
+            method: "POST",
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        })
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (session) {
+                return stripe.redirectToCheckout({ sessionId: session.id });
+            })
+            .then(function (result) {
+                // If redirectToCheckout fails due to a browser or network
+                // error, you should display the localized error message to your
+                // customer using error.message.
+                if (result.error) {
+                    alert(result.error.message);
+                }
+            })
+            .catch(function (error) {
+                console.error("Error:", error);
+            });
+    });
+</script>
