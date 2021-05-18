@@ -29,7 +29,6 @@ class PaymentController extends Controller
         ]);
         Order::initOrder($paymentIntent); // todo complete this function
 
-
         return view('loja::cart.payment', compact('cartItems', 'paymentIntent'));
     }
 
@@ -50,7 +49,7 @@ class PaymentController extends Controller
                         'unit_amount' => 2000,
                         'product_data' => [
                             'name' => 'Stubborn Attachments',
-                            'images' => ["https://i.imgur.com/EHyR2nP.png"],
+                            'images' => ['https://i.imgur.com/EHyR2nP.png'],
                         ],
                     ],
                     'quantity' => 1,
@@ -61,7 +60,7 @@ class PaymentController extends Controller
                         'unit_amount' => 1000,
                         'product_data' => [
                             'name' => 'Stubborn Attachments',
-                            'images' => ["https://i.imgur.com/EHyR2nP.png"],
+                            'images' => ['https://i.imgur.com/EHyR2nP.png'],
                         ],
                     ],
                     'quantity' => 1,
@@ -71,6 +70,7 @@ class PaymentController extends Controller
             'success_url' => route('loja.payment.success'),
             'cancel_url' => route('loja.payment.cancel'),
         ]);
+
         return response()->json(['id' => $checkoutSession->id]);
     }
 
@@ -78,13 +78,13 @@ class PaymentController extends Controller
     public function success()
     {
         \Cart::session(session()->getId())->clear(); //empty cart after payment
-        dd("success");
+        dd('success');
     }
 
     // Todo à voir avec Matthieu
     public function cancel()
     {
-        dd("cancel");
+        dd('cancel');
     }
 
     // Todo à voir avec Matthieu
