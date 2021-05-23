@@ -4,14 +4,11 @@ namespace Suavy\LojaForLaravel\Http\Controllers;
 
 use Stripe\Checkout\Session;
 use Stripe\Event;
-use Stripe\PaymentIntent;
 use Stripe\Stripe;
-use Suavy\LojaForLaravel\Http\Requests\PaymentRequest;
 use Suavy\LojaForLaravel\Models\Order;
 
 class PaymentController extends Controller
 {
-
     // Todo needs updates
     public function createCheckoutSession()
     {
@@ -31,7 +28,7 @@ class PaymentController extends Controller
                         'unit_amount' => 2000,
                         'product_data' => [
                             'name' => 'Stubborn Attachments',
-                            'images' => ["https://i.imgur.com/EHyR2nP.png"],
+                            'images' => ['https://i.imgur.com/EHyR2nP.png'],
                         ],
                     ],
                     'quantity' => 1,
@@ -42,7 +39,7 @@ class PaymentController extends Controller
                         'unit_amount' => 1000,
                         'product_data' => [
                             'name' => 'Stubborn Attachments',
-                            'images' => ["https://i.imgur.com/EHyR2nP.png"],
+                            'images' => ['https://i.imgur.com/EHyR2nP.png'],
                         ],
                     ],
                     'quantity' => 1,
@@ -52,12 +49,14 @@ class PaymentController extends Controller
             'success_url' => route('loja.payment.success'),
             'cancel_url' => route('loja.payment.cancel'),
         ]);
+
         return response()->json(['id' => $checkoutSession->id]);
     }
 
     public function success()
     {
         \Cart::session(session()->getId())->clear(); //empty cart after payment // todo fix ?
+
         return view('loja::cart.payment-success');
     }
 
