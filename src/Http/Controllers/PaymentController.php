@@ -11,31 +11,11 @@ use Suavy\LojaForLaravel\Models\Order;
 
 class PaymentController extends Controller
 {
-    // Todo à voir avec Matthieu
-    // Todo remove this
-    public function index(PaymentRequest $request)
-    {
-        if (\Cart::session(session()->getId())->isEmpty()) {
-            return back();
-        }
-        $cartItems = \Cart::session(session()->getId())->getContent();
-        $cartItemsProblemQuantity = collect();
-        $cartItemsRemoved = collect();
-        $orderAmount = 200; // todo real order amount
-        Stripe::setApiKey(config('services.stripe.secret'));
-        $paymentIntent = PaymentIntent::create([
-            'amount' => $orderAmount,
-            'currency' => 'eur',
-        ]);
-        Order::initOrder($paymentIntent); // todo complete this function
 
-
-        return view('loja::cart.payment', compact('cartItems', 'paymentIntent'));
-    }
-
-    // Todo à voir avec Matthieu
+    // Todo needs updates
     public function createCheckoutSession()
     {
+        //  Order::initOrder($paymentIntent); // todo fix this function
         if (\Cart::session(session()->getId())->isEmpty()) {
             return back();
         }
@@ -74,17 +54,15 @@ class PaymentController extends Controller
         return response()->json(['id' => $checkoutSession->id]);
     }
 
-    // Todo à voir avec Matthieu
     public function success()
     {
-        \Cart::session(session()->getId())->clear(); //empty cart after payment
-        dd("success");
+        \Cart::session(session()->getId())->clear(); //empty cart after payment // todo fix ?
+        return view('loja::cart.payment-success');
     }
 
-    // Todo à voir avec Matthieu
     public function cancel()
     {
-        dd("cancel");
+        return redirect(route('loja.cart.index'));
     }
 
     // Todo à voir avec Matthieu
