@@ -17,10 +17,11 @@ class PaymentController extends Controller
     {
         //  Order::initOrder($paymentIntent); // todo fix this function
         if (\Cart::session(session()->getId())->isEmpty()) {
-            return back();
+            return back(); // todo fix this, do not work anymore cause createCheckoutSession is called on JS
         }
         $cartItems = \Cart::session(session()->getId())->getContent();
         Stripe::setApiKey(config('services.stripe.secret'));
+        // todo foreach products (dans une fonction)
         $checkoutSession = Session::create([
             'payment_method_types' => ['card'],
             'line_items' => [
@@ -65,7 +66,6 @@ class PaymentController extends Controller
         return redirect(route('loja.cart.index'));
     }
 
-    // Todo à voir avec Matthieu
     // todo : Webhook qui écoute les events de Stripe
     // https://stripe.com/docs/webhooks/integration-builder
     // todo : en fonction de l'event changer le statut de l'order / envoyer email / etc
