@@ -9,7 +9,12 @@ class TransferGuestCartToUser
         $userCart = \Cart::session($event->user->id);
         //$userCartItems = $userCart->getContent()->toArray();
 
+
         $guestCart = session('guest_cart.data');
+
+        if(is_null($guestCart))
+            return false;
+
         $guestCartItems = $guestCart->toArray();
 
         // my app does not require quantities so I can just add new items as cart lines regardless of

@@ -9,12 +9,7 @@ use Suavy\LojaForLaravel\Listeners\TransferGuestCartToUser;
 class LojaForLaravelEventServiceProvider extends ServiceProvider
 {
     protected $listen = [
-        \Illuminate\Auth\Events\Attempting::class => [
-            PrepareCartTransfer::class,
-        ],
-        \Illuminate\Auth\Events\Login::class => [
-            TransferGuestCartToUser::class,
-        ],
+
     ];
 
     /**

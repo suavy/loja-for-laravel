@@ -28,12 +28,12 @@
                         @foreach($cartItems as $item)
                             <tr>
                                 <td class="hidden pb-2 md:table-cell">
-                                    <a href="#">
-                                        <img src="https://limg.app/i/Calm-Cormorant-Catholic-Pinball-Blaster-yM4oub.jpeg" class="w-20 rounded" alt="Thumbnail">
+                                    <a href="{{ route('loja.product.show', $item->associatedModel->id) }}">
+                                        <img src="{{ $item->associatedModel->cover }}" class="w-20 rounded" alt="Thumbnail">
                                     </a>
                                 </td>
                                 <td>
-                                    <a href="#">
+                                    <a href="{{ route('loja.product.show', $item->associatedModel->id) }}">
                                         <p>{{ $item->name }}</p>
                                         @foreach($item->attributes as $attribute)
                                             <span class="text-xs font-light text-gray-400">{{ $attribute }}</span>

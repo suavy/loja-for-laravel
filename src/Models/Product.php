@@ -69,6 +69,9 @@ class Product extends Model
     |--------------------------------------------------------------------------
     */
 
+
+
+
     /*
     |--------------------------------------------------------------------------
     | Mutators
@@ -94,4 +97,9 @@ class Product extends Model
     {
         return $this->attributeSet && $this->attributeSet->attributes;
     }
+
+
+
+
+
 }
