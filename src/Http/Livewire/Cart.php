@@ -2,7 +2,6 @@
 
 namespace Suavy\LojaForLaravel\Http\Livewire;
 
-use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Suavy\LojaForLaravel\Models\Country;
 

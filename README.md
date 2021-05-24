@@ -95,23 +95,22 @@ Installation is done now :tada:
 > Everything was already done during the installation. So you can start using your backend now :rocket:
 
 ### Frontend (Do It Yourself)
-LOJA only create empty views for you, but in each view you have access to the needed variables and their attributes to make your beautiful frontend like you always do.
+LOJA only create empty views (except for the cart page that is included), but in each view you have access to the needed variables and their attributes to make your own frontend views.
 
 > You can add a prefix to every LOJA routes updating the ``routes_prefix`` on config file.
 
 #### GET routes
 
-// todo Missing checkout/payment routes
-
 | route | route name | view | variables |
 |---|---|---|---|
 | /cart | loja.cart.index | .../cart/index.blade.php | $cart |
-| - | - | .../cart/empty.blade.php | |
-| /payment | loja.cart.payment | .../cart/payment.blade.php | $cart |
+| - | - | .../cart/empty.blade.php | - |
 | /categories | loja.category.index | .../category/index.blade.php |  $categories |
 | /category/{category} | loja.category.show | .../category/show.blade.php |  $category |
 | /collections | loja.collection.index | .../collection/index.blade.php | $collections |
 | /collection/{collection} | loja.collection.show | .../collection/show.blade.php | $collection |
+| /payment/success | loja.payment.success | .../cart/payment-success.blade.php | $cart |
+| /payment/cancel | **redirects to /cart with message** | - | - |
 | /product/{product} | loja.product.show | .../product/show.blade.php | $product, $relatedProducts |
 | /search?... | loja.search | .../search/index.blade.php | $products |
 | /user/orders | loja.user.order.index | .../user/order/index.blade.php | $orders |

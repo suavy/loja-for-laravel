@@ -4,42 +4,21 @@ namespace Suavy\LojaForLaravel\Http\Controllers;
 
 use Stripe\Checkout\Session;
 use Stripe\Event;
-use Stripe\PaymentIntent;
 use Stripe\Stripe;
-use Suavy\LojaForLaravel\Http\Requests\PaymentRequest;
 use Suavy\LojaForLaravel\Models\Order;
 
 class PaymentController extends Controller
 {
-    // Todo à voir avec Matthieu
-    // Todo remove this
-    public function index(PaymentRequest $request)
-    {
-        if (\Cart::session(session()->getId())->isEmpty()) {
-            return back();
-        }
-        $cartItems = \Cart::session(session()->getId())->getContent();
-        $cartItemsProblemQuantity = collect();
-        $cartItemsRemoved = collect();
-        $orderAmount = 200; // todo real order amount
-        Stripe::setApiKey(config('services.stripe.secret'));
-        $paymentIntent = PaymentIntent::create([
-            'amount' => $orderAmount,
-            'currency' => 'eur',
-        ]);
-        Order::initOrder($paymentIntent); // todo complete this function
-
-        return view('loja::cart.payment', compact('cartItems', 'paymentIntent'));
-    }
-
-    // Todo à voir avec Matthieu
+    // Todo needs updates
     public function createCheckoutSession()
     {
+        //  Order::initOrder($paymentIntent); // todo fix this function
         if (\Cart::session(session()->getId())->isEmpty()) {
-            return back();
+            return back(); // todo fix this, do not work anymore cause createCheckoutSession is called on JS
         }
         $cartItems = \Cart::session(session()->getId())->getContent();
         Stripe::setApiKey(config('services.stripe.secret'));
+        // todo foreach products (dans une fonction)
         $checkoutSession = Session::create([
             'payment_method_types' => ['card'],
             'line_items' => [
@@ -74,20 +53,18 @@ class PaymentController extends Controller
         return response()->json(['id' => $checkoutSession->id]);
     }
 
-    // Todo à voir avec Matthieu
     public function success()
     {
-        \Cart::session(session()->getId())->clear(); //empty cart after payment
-        dd('success');
+        \Cart::session(session()->getId())->clear(); //empty cart after payment // todo fix ?
+
+        return view('loja::cart.payment-success');
     }
 
-    // Todo à voir avec Matthieu
     public function cancel()
     {
-        dd('cancel');
+        return redirect(route('loja.cart.index'));
     }
 
-    // Todo à voir avec Matthieu
     // todo : Webhook qui écoute les events de Stripe
     // https://stripe.com/docs/webhooks/integration-builder
     // todo : en fonction de l'event changer le statut de l'order / envoyer email / etc

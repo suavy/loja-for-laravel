@@ -73,7 +73,6 @@
                     </p>
                 @endguest
                 @auth
-                    <form wire:submit.prevent="checkout" method="post">
                     <div class="my-4 mt-6 -mx-2 lg:flex">
                         {{-- Delivery address --}}
                         <div class="lg:px-2 lg:w-1/2 rounded p-0 sm:px-6 sm:py-2 border-2 m-4">
@@ -134,12 +133,9 @@
                                         <span class="ml-1">@lang('loja::cart.details.checkout-button')</span>
                                     </button>
                                 </div>
-
-
                             </div>
                         </div>
                     </div>
-                    </form>
                 @endauth
             </div>
         </div>
