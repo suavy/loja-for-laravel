@@ -16,35 +16,27 @@ class PaymentController extends Controller
         if (\Cart::session(session()->getId())->isEmpty()) {
             return back(); // todo fix this, do not work anymore cause createCheckoutSession is called on JS
         }
-        $cartItems = \Cart::session(session()->getId())->getContent();
+
         Stripe::setApiKey(config('services.stripe.secret'));
-        // todo foreach products (dans une fonction)
+
+        $lineItems = [];
+        foreach(\Cart::session(session()->getId())->getContent() as $item){
+            $lineItems[] = [
+                'price_data' => [
+                    'currency' => 'eur',
+                    'unit_amount' => $item->price, //todo j'ai un doute sur le prix
+                    'product_data' => [
+                        'name' => $item->name,
+                        'images' => [$item->associatedModel->cover],
+                    ],
+                ],
+                'quantity' => (int) $item->quantity,
+            ];
+        }
+
         $checkoutSession = Session::create([
             'payment_method_types' => ['card'],
-            'line_items' => [
-                [
-                    'price_data' => [
-                        'currency' => 'eur',
-                        'unit_amount' => 2000,
-                        'product_data' => [
-                            'name' => 'Stubborn Attachments',
-                            'images' => ['https://i.imgur.com/EHyR2nP.png'],
-                        ],
-                    ],
-                    'quantity' => 1,
-                ],
-                [
-                    'price_data' => [
-                        'currency' => 'eur',
-                        'unit_amount' => 1000,
-                        'product_data' => [
-                            'name' => 'Stubborn Attachments',
-                            'images' => ['https://i.imgur.com/EHyR2nP.png'],
-                        ],
-                    ],
-                    'quantity' => 1,
-                ],
-            ],
+            'line_items' => $lineItems,
             'mode' => 'payment',
             'success_url' => route('loja.payment.success'),
             'cancel_url' => route('loja.payment.cancel'),
