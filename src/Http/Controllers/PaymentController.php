@@ -20,7 +20,7 @@ class PaymentController extends Controller
         Stripe::setApiKey(config('services.stripe.secret'));
 
         $lineItems = [];
-        foreach(\Cart::session(session()->getId())->getContent() as $item){
+        foreach (\Cart::session(session()->getId())->getContent() as $item) {
             $lineItems[] = [
                 'price_data' => [
                     'currency' => 'eur',

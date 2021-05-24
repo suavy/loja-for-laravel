@@ -9,11 +9,11 @@ class TransferGuestCartToUser
         $userCart = \Cart::session($event->user->id);
         //$userCartItems = $userCart->getContent()->toArray();
 
-
         $guestCart = session('guest_cart.data');
 
-        if(is_null($guestCart))
+        if (is_null($guestCart)) {
             return false;
+        }
 
         $guestCartItems = $guestCart->toArray();
 
