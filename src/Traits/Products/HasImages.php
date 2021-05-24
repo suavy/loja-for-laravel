@@ -4,10 +4,9 @@ namespace Suavy\LojaForLaravel\Traits\Products;
 
 trait HasImages
 {
-
     public function hasImages()
     {
-        return !is_null($this->images) && is_array($this->images) && count($this->images) > 0;
+        return ! is_null($this->images) && is_array($this->images) && count($this->images) > 0;
     }
 
     public function getCountImagesAttribute()
@@ -17,9 +16,9 @@ trait HasImages
 
     public function getCoverAttribute()
     {
-        if($this->hasImages()){
+        if ($this->hasImages()) {
             return asset($this->images[0]);
-        }else{
+        } else {
             return asset('images/photo-non-disponible.jpg');
         }
     }
