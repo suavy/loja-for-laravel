@@ -55,8 +55,7 @@ class PaymentController extends Controller
 
     public function success()
     {
-        \Cart::session(session()->getId())->clear(); //empty cart after payment // todo fix ?
-
+        \Cart::session(session()->getId())->clear();
         return view('loja::cart.payment-success');
     }
 
@@ -65,10 +64,10 @@ class PaymentController extends Controller
         return redirect(route('loja.cart.index'));
     }
 
-    // todo : Webhook qui écoute les events de Stripe
     // https://stripe.com/docs/webhooks/integration-builder
     // todo : en fonction de l'event changer le statut de l'order / envoyer email / etc
-    // TODO IMPORTANT : update webhook to https://stripe.com/docs/payments/checkout/fulfill-orders "checkout.session.completed" au lieux de "payment_intent"
+    // TODO IMPORTANT : update webhook to https://stripe.com/docs/payments/checkot/fulfill-orders"checkout.session.completed" au lieux de "payment_intent"
+    // todo remarque : le webhook "payment_intent.succeeded" est toujours envoyé alors que ça devrait envoyé "checkout.session.completed", pas grave mais à comprendre
     public function webhook()
     {
         Stripe::setApiKey(config('services.stripe.secret'));
@@ -91,11 +90,6 @@ class PaymentController extends Controller
                 // Then define and call a method to handle the successful payment intent.
                 // handlePaymentIntentSucceeded($paymentIntent);
                 Order::handlePaymentIntentSucceeded($paymentIntent);
-                break;
-            case 'payment_method.attached':
-                $paymentMethod = $event->data->object; // contains a \Stripe\PaymentMethod
-                // Then define and call a method to handle the successful attachment of a PaymentMethod.
-                // handlePaymentMethodAttached($paymentMethod);
                 break;
             default:
                 // Unexpected event type
