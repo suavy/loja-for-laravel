@@ -97,7 +97,6 @@ class Cart extends Component
         } else {
             $this->cartHasItems = true;
             $this->cartItems = \Cart::session(session()->getId())->getContent();
-
             $this->totalPrice = \Cart::getTotal();
         }
 
