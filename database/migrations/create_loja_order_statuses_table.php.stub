@@ -36,6 +36,16 @@ class CreateLojaOrderStatusesTable extends Migration
                 'notification' => 1,
             ],
             [
+                'slug' => 'canceled',
+                'name' => 'Canceled',
+                'notification' => 1,
+            ],
+            [
+                'slug' => 'payment-failed',
+                'name' => 'Payment failed',
+                'notification' => 1,
+            ],
+            [
                 'slug' => 'delivered',
                 'name' => 'Delivered',
                 'notification' => 1,

@@ -42,12 +42,12 @@ class Order extends Model
     | Functions
     |--------------------------------------------------------------------------
     */
-    public static function initOrder(PaymentIntent $paymentIntent)
+    public static function initOrder($stripeId)
     {
         $order = self::create([
             'user_id' => Auth::id(),
             'order_status_id' => 1, // pending
-            'stripe_payment_intent_id' => $paymentIntent->id,
+            'stripe_id' => $stripeId,
         ]);
         // todo complete loja_order_... tables
         return $order;
@@ -56,10 +56,22 @@ class Order extends Model
     public static function handlePaymentIntentSucceeded(PaymentIntent $paymentIntent)
     {
         // update order_status_id to "processed"
-        self::query()->where('stripe_payment_intent_id', $paymentIntent->id)->update(['order_status_id' => 2]);
+        self::query()->where('stripe_id', $paymentIntent->id)->update(['order_status_id' => 2]);
         // retrieve order user and send him a notification
         $order = self::query()->where('stripe_payment_intent_id', $paymentIntent->id)->with('user')->first();
         $user = $order->user;
         $user->notify(new OrderPaid());
+    }
+
+    public static function handlePaymentIntentCanceled(PaymentIntent $paymentIntent)
+    {
+        // update order_status_id to "canceled"
+        self::query()->where('stripe_id', $paymentIntent->id)->update(['order_status_id' => 3]);
+    }
+
+    public static function handlePaymentIntentPaymentFailed(PaymentIntent $paymentIntent)
+    {
+        // update order_status_id to "payment-failed"
+        self::query()->where('stripe_id', $paymentIntent->id)->update(['order_status_id' => 4]);
     }
 }

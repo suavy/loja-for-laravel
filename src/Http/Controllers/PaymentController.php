@@ -12,7 +12,6 @@ class PaymentController extends Controller
     // Todo needs updates
     public function createCheckoutSession()
     {
-        //  Order::initOrder($paymentIntent); // todo fix this function
         if (\Cart::session(session()->getId())->isEmpty()) {
             return back(); // todo fix this, do not work anymore cause createCheckoutSession is called on JS
         }
@@ -42,6 +41,7 @@ class PaymentController extends Controller
             'cancel_url' => route('loja.payment.cancel'),
         ]);
 
+        Order::initOrder($checkoutSession->id);
         return response()->json(['id' => $checkoutSession->id]);
     }
 
@@ -79,9 +79,11 @@ class PaymentController extends Controller
         switch ($event->type) {
             case 'payment_intent.succeeded':
                 $paymentIntent = $event->data->object; // contains a \Stripe\PaymentIntent
-                // Then define and call a method to handle the successful payment intent.
-                // handlePaymentIntentSucceeded($paymentIntent);
                 Order::handlePaymentIntentSucceeded($paymentIntent);
+                break;
+            case 'payment_intent.canceled':
+                break;
+            case 'payment_intent.succeeded':
                 break;
             default:
                 // Unexpected event type

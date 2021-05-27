@@ -14,7 +14,9 @@ class CreateLojaOrdersTable extends Migration
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreignId('order_status_id');
             $table->foreign('order_status_id')->references('id')->on('loja_order_statuses');
-            $table->string('stripe_payment_intent_id');
+            $table->string('stripe_id');
+            $table->unsignedInteger('amount');
+            $table->unsignedInteger('amount_received');
             $table->mediumText('user_comment')->nullable();
             $table->timestamps();
         });
