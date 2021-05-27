@@ -42,6 +42,7 @@ class PaymentController extends Controller
         ]);
 
         Order::initOrder($checkoutSession->id);
+
         return response()->json(['id' => $checkoutSession->id]);
     }
 
