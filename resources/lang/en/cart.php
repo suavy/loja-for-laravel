@@ -15,7 +15,7 @@ return [
         'coupon-label' => 'If you have a coupon code, please enter it in the box below',
         'coupon-button' => 'Apply coupon',
         'subtotal' => 'Subtotal',
-        'shipping-cost' => 'Shipping',
+        'shipping-cost' => 'Shipping cost',
         'total' => 'Total',
         'checkout-button' => 'Proceed to checkout',
     ],
