@@ -22,14 +22,14 @@ return [
     'address' => [
         'title' => 'Delivery address',
         'labels' => [
-            'firstname' => '',
-            'lastname' => '',
-            'phone' => '',
-            'address' => '',
-            'city' => '',
-            'postal-code' => '',
-            'country' => '',
-            'additional-informations' => '',
+            'firstname' => 'Firstname',
+            'lastname' => 'Lastname',
+            'phone' => 'Phone',
+            'address' => 'Adress',
+            'city' => 'City',
+            'postal-code' => 'Postal code',
+            'country' => 'Country',
+            'additional-informations' => 'Additional informations',
         ],
     ],
 ];
