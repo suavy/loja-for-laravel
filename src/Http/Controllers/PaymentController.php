@@ -48,6 +48,7 @@ class PaymentController extends Controller
     public function success()
     {
         \Cart::session(session()->getId())->clear();
+
         return view('loja::cart.payment-success');
     }
 
