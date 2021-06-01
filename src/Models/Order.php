@@ -21,6 +21,10 @@ class Order extends Model
     | Relations
     |--------------------------------------------------------------------------
     */
+    public function orderProducts()
+    {
+        return $this->hasMany(OrderProduct::class);
+    }
 
     public function orderStatus()
     {
@@ -32,9 +36,9 @@ class Order extends Model
         return $this->belongsToMany(Product::class)->withPivot('quantity', 'price', 'price_with_tax');
     }
 
-    public function orderProducts()
+    public function user()
     {
-        return $this->hasMany(OrderProduct::class);
+        return $this->belongsTo(App\Models\User::class);
     }
 
     /*
