@@ -80,15 +80,15 @@ class PaymentController extends Controller
 
         switch ($event->type) {
             case 'payment_intent.succeeded':
-                $paymentIntent = $event->data->object; // contains a \Stripe\PaymentIntent
-                Order::handlePaymentIntentSucceeded($paymentIntent);
+                Order::handlePaymentIntentSucceeded($event->data->object);
                 break;
             case 'payment_intent.canceled':
+                Order::handlePaymentIntentCanceled($event->data->object);
                 break;
-            case 'payment_intent.succeeded':
+            case 'payment_intent.payment_failed':
+                Order::handlePaymentIntentPaymentFailed($event->data->object);
                 break;
             default:
-                // Unexpected event type
                 echo 'Received unknown event type';
         }
         http_response_code(200);
