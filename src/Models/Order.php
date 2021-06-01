@@ -65,7 +65,7 @@ class Order extends Model
         self::query()->where('stripe_id', $checkoutSession->id)->update(['order_status_id' => 2]);
         // retrieve order user and send him a notification
         $order = self::query()->where('stripe_id', $checkoutSession->id)->with('user')->first();
-        if(optional($order)->user) {
+        if (optional($order)->user) {
             $order->user->notify(new OrderPaid());
         }
     }
