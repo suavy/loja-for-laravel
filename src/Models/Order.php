@@ -48,6 +48,7 @@ class Order extends Model
             'user_id' => Auth::id(),
             'order_status_id' => 1, // pending
             'stripe_id' => $stripeId,
+            'amount' => 0,
         ]);
         // todo complete loja_order_... tables
         return $order;
