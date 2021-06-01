@@ -79,15 +79,15 @@ class PaymentController extends Controller
         }
 
         switch ($event->type) {
-            case 'payment_intent.succeeded':
+            case 'checkout.session.completed':
                 Order::handlePaymentIntentSucceeded($event->data->object);
                 break;
-            case 'payment_intent.canceled':
+            /*case 'payment_intent.canceled':
                 Order::handlePaymentIntentCanceled($event->data->object);
                 break;
             case 'payment_intent.payment_failed':
                 Order::handlePaymentIntentPaymentFailed($event->data->object);
-                break;
+                break;*/
             default:
                 echo 'Received unknown event type';
         }
