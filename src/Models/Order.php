@@ -59,7 +59,7 @@ class Order extends Model
         // update order_status_id to "processed"
         self::query()->where('stripe_id', $paymentIntent->id)->update(['order_status_id' => 2]);
         // retrieve order user and send him a notification
-        $order = self::query()->where('stripe_payment_intent_id', $paymentIntent->id)->with('user')->first();
+        $order = self::query()->where('stripe_id', $paymentIntent->id)->with('user')->first();
         $user = $order->user;
         $user->notify(new OrderPaid());
     }
