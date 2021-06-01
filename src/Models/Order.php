@@ -5,6 +5,7 @@ namespace Suavy\LojaForLaravel\Models;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
+use Stripe\Checkout\Session;
 use Stripe\PaymentIntent;
 use Suavy\LojaForLaravel\Notifications\OrderPaid;
 
@@ -58,12 +59,12 @@ class Order extends Model
         return $order;
     }
 
-    public static function handlePaymentIntentSucceeded(PaymentIntent $paymentIntent)
+    public static function handlePaymentIntentSucceeded(Session $checkoutSession)
     {
         // update order_status_id to "processed"
-        self::query()->where('stripe_id', $paymentIntent->id)->update(['order_status_id' => 2]);
+        self::query()->where('stripe_id', $checkoutSession->id)->update(['order_status_id' => 2]);
         // retrieve order user and send him a notification
-        $order = self::query()->where('stripe_id', $paymentIntent->id)->with('user')->first();
+        $order = self::query()->where('stripe_id', $checkoutSession->id)->with('user')->first();
         if($order->user) {
             $order->user->notify(new OrderPaid());
         }
