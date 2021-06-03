@@ -68,6 +68,10 @@ class Product extends Model
     | Accesors
     |--------------------------------------------------------------------------
     */
+    public function getNameTestAttribute()
+    {
+        //return $this->name.
+    }
 
     /*
     |--------------------------------------------------------------------------

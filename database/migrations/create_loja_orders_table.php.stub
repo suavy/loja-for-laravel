@@ -18,6 +18,7 @@ class CreateLojaOrdersTable extends Migration
             $table->unsignedInteger('amount');
             $table->unsignedInteger('amount_received');
             $table->mediumText('user_comment')->nullable();
+            $table->mediumText('delivery_tracking')->nullable();
             $table->timestamps();
         });
     }

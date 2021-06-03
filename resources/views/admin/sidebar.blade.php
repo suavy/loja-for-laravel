@@ -1,6 +1,19 @@
 <!-- Loja (backpack) sidebar -->
+@php
+    $orderProcessed = \Suavy\LojaForLaravel\Models\Order::query()->processed()->count();
+@endphp
 <li class="nav-title">LOJA</li>
 <li class="nav-item"><a class="nav-link" href="{{ backpack_url('product') }}"><i class="nav-icon fad fa-shopping-bag"></i> Produits</a></li>
+
+@if($orderProcessed > 0)
+    <li class="nav-item">
+        <a class="nav-link" href="{{ backpack_url('new-order') }}"><i class="nav-icon fad fa-shipping-fast"></i>
+            Commandes
+            <span style="float: none;" class="badge badge-pill badge-warning">{{ $orderProcessed }}</span>
+        </a>
+    </li>
+@endif
+
 <li class="nav-item"><a class="nav-link" href="{{ backpack_url('order') }}"><i class="nav-icon fad fa-shipping-fast"></i> Commandes</a></li>
 <li class="nav-item"><a class="nav-link" href="{{ backpack_url('category') }}"><i class="nav-icon fad fa-sitemap"></i> Catégories</a></li>
 <li class="nav-item"><a class="nav-link" href="{{ backpack_url('collection') }}"><i class="nav-icon fad fa-hashtag"></i> Collections</a></li>

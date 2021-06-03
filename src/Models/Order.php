@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use Stripe\PaymentIntent;
 use Suavy\LojaForLaravel\Notifications\OrderPaid;
+use Illuminate\Foundation\Auth\User;
 
 class Order extends Model
 {
@@ -29,12 +30,29 @@ class Order extends Model
 
     public function products()
     {
-        return $this->belongsToMany(Product::class)->withPivot('quantity', 'price', 'price_with_tax');
+        return $this->belongsToMany(Product::class,'loja_order_product')->withPivot('quantity', 'price', 'price_with_tax');
     }
 
     public function orderProducts()
     {
         return $this->hasMany(OrderProduct::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(\Suavy\LojaForLaravel\Models\User::class);
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Scopes
+    |--------------------------------------------------------------------------
+    */
+    public function scopeProcessed($query)
+    {
+        return $query->whereHas('orderStatus',function($query){
+            $query->processed();
+        });
     }
 
     /*
