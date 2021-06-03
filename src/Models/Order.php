@@ -6,7 +6,6 @@ use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use Stripe\Checkout\Session;
-use Stripe\Stripe;
 use Suavy\LojaForLaravel\Notifications\OrderPaid;
 
 class Order extends Model
@@ -69,5 +68,4 @@ class Order extends Model
             $order->user->notify(new OrderPaid());
         }
     }
-
 }
