@@ -4,7 +4,6 @@ namespace Suavy\LojaForLaravel\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Stripe\Checkout\Session;
-use Stripe\Customer;
 use Stripe\Event;
 use Stripe\Stripe;
 use Suavy\LojaForLaravel\Models\Order;
@@ -53,7 +52,7 @@ class PaymentController extends Controller
     public function success(Request $request)
     {
         $checkoutSessionId = $request->input('session_id');
-        $order = Order::query()->where("stripe_id", $checkoutSessionId)->first();
+        $order = Order::query()->where('stripe_id', $checkoutSessionId)->first();
 
         // Clear cart
         \Cart::session(session()->getId())->clear(); // todo replace \Cart with an import
@@ -63,9 +62,9 @@ class PaymentController extends Controller
 
     public function cancel(Request $request)
     {
-        if($request->has('session_id')) {
+        if ($request->has('session_id')) {
             $checkoutSessionId = $request->input('session_id');
-            Order::query()->where("stripe_id", $checkoutSessionId)->update(['order_status_id' => OrderStatus::$STATUS_CANCELED]);
+            Order::query()->where('stripe_id', $checkoutSessionId)->update(['order_status_id' => OrderStatus::$STATUS_CANCELED]);
         }
         // todo : missing message on loja.cart.index when order is canceled
         return redirect(route('loja.cart.index'));

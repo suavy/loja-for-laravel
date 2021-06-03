@@ -14,5 +14,4 @@ class OrderStatus extends Model
     public static $STATUS_PROCESSED = 2;
     public static $STATUS_CANCELED = 3;
     public static $STATUS_DELIVERED = 4;
-
 }

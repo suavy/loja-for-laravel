@@ -70,8 +70,9 @@ class Product extends Model
     */
     public function getReadablePriceAttribute()
     {
-        return number_format(($this->price /100), 2, ',', ' ');
+        return number_format(($this->price / 100), 2, ',', ' ');
     }
+
     /*
     |--------------------------------------------------------------------------
     | Mutators
