@@ -26,7 +26,7 @@ class PaymentController extends Controller
             $lineItems[] = [
                 'price_data' => [
                     'currency' => 'eur',
-                    'unit_amount' => $item->price, //todo j'ai un doute sur le prix
+                    'unit_amount' => $item->price,
                     'product_data' => [
                         'name' => $item->name,
                         'images' => [$item->associatedModel->cover],
