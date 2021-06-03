@@ -20,7 +20,6 @@ class NewOrderCrudController extends CrudController
     use UpdateOperation;
     use DeleteOperation;
     use ShowOperation;
-
     use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation { update as traitUpdate; }
 
     public function setup()
@@ -28,12 +27,10 @@ class NewOrderCrudController extends CrudController
         $this->crud->setModel(Order::class);
         $this->crud->setRoute('admin/new-order');
         $this->crud->setEntityNameStrings('Commande', 'Commandes');
-
     }
 
     protected function setupListOperation()
     {
-
         $this->crud->addClause('processed');
         $this->crud->column('id')->label('#');
         $this->crud->column('user')
@@ -57,7 +54,6 @@ class NewOrderCrudController extends CrudController
         $this->crud->denyAccess('delete');
         $this->crud->addButtonFromView('line', 'validate', 'validate', 'beginning');
 
-
         $this->crud->column('products')
             ->type('relationship')
             ->attribute('name')
@@ -66,12 +62,9 @@ class NewOrderCrudController extends CrudController
             ->label('Produits');
     }
 
-
     protected function setupUpdateOperation()
     {
-
         $this->crud->field('delivery_tracking')->type('text')->label('Lien de suivis de livraison');
-
     }
 
     public function update()
@@ -98,7 +91,6 @@ class NewOrderCrudController extends CrudController
 
         // $this->crud->getRequest()->request->remove('password_confirmation');
 
-
         $orderStatusSent = OrderStatus::query()->sent()->first();
 
         $this->crud->getRequest()->request->add(['order_status_id'=> $orderStatusSent->id]);
@@ -106,6 +98,7 @@ class NewOrderCrudController extends CrudController
         // do something after save
 
         $this->crud->getCurrentEntry()->user->notify(new OrderSent($this->crud->getCurrentEntry()));
+
         return $response;
     }
 }
