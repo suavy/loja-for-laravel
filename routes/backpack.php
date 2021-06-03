@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use \Suavy\LojaForLaravel\Http\Controllers\Admin\AdminController;
+use Suavy\LojaForLaravel\Http\Controllers\Admin\AdminController;
+
 // --------------------------
 // Custom Backpack Routes
 // --------------------------
@@ -28,6 +29,6 @@ Route::group([
     Route::crud('product', 'ProductCrudController');
     Route::crud('tax', 'TaxCrudController');
 
-    Route::get('/verification-de-commmande/{order}',[AdminController::class,'confirmOrderView'])->name('admin.confirm.order.view');
-    Route::post('/confirm-order',[AdminController::class,'confirmOrder'])->name('admin.confirm.order');
+    Route::get('/verification-de-commmande/{order}', [AdminController::class, 'confirmOrderView'])->name('admin.confirm.order.view');
+    Route::post('/confirm-order', [AdminController::class, 'confirmOrder'])->name('admin.confirm.order');
 }); // this should be the absolute last line of this file
