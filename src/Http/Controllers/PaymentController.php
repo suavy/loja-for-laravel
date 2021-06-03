@@ -2,10 +2,13 @@
 
 namespace Suavy\LojaForLaravel\Http\Controllers;
 
+use Illuminate\Http\Request;
 use Stripe\Checkout\Session;
+use Stripe\Customer;
 use Stripe\Event;
 use Stripe\Stripe;
 use Suavy\LojaForLaravel\Models\Order;
+use Suavy\LojaForLaravel\Models\OrderStatus;
 
 class PaymentController extends Controller
 {
@@ -38,8 +41,8 @@ class PaymentController extends Controller
             'payment_method_types' => ['card'],
             'line_items' => $lineItems,
             'mode' => 'payment',
-            'success_url' => route('loja.payment.success'),
-            'cancel_url' => route('loja.payment.cancel'),
+            'success_url' => route('loja.payment.success').'?session_id={CHECKOUT_SESSION_ID}',
+            'cancel_url' => route('loja.payment.cancel').'?session_id={CHECKOUT_SESSION_ID}',
         ]);
 
         Order::initOrder($checkoutSession->id);
@@ -47,17 +50,24 @@ class PaymentController extends Controller
         return response()->json(['id' => $checkoutSession->id]);
     }
 
-    public function success()
+    public function success(Request $request)
     {
-        \Cart::session(session()->getId())->clear();
+        $checkoutSessionId = $request->input('session_id');
+        $order = Order::query()->where("stripe_id", $checkoutSessionId)->first();
 
-        return view('loja::cart.payment-success');
+        // Clear cart
+        \Cart::session(session()->getId())->clear(); // todo replace \Cart with an import
+
+        return view('loja::cart.payment-success', compact('order'));
     }
 
-    public function cancel()
+    public function cancel(Request $request)
     {
-        // todo find a way to make this working
-        //Order::handleCheckoutSessionCanceled();
+        if($request->has('session_id')) {
+            $checkoutSessionId = $request->input('session_id');
+            Order::query()->where("stripe_id", $checkoutSessionId)->update(['order_status_id' => OrderStatus::$STATUS_CANCELED]);
+        }
+        // todo : missing message on loja.cart.index when order is canceled
         return redirect(route('loja.cart.index'));
     }
 

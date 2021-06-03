@@ -6,6 +6,7 @@ use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use Stripe\Checkout\Session;
+use Stripe\Stripe;
 use Suavy\LojaForLaravel\Notifications\OrderPaid;
 
 class Order extends Model
@@ -50,7 +51,7 @@ class Order extends Model
     {
         $order = self::create([
             'user_id' => Auth::id(),
-            'order_status_id' => 1, // pending
+            'order_status_id' => OrderStatus::$STATUS_PENDING, // pending
             'stripe_id' => $stripeId,
             'amount' => 0,
         ]);
@@ -61,8 +62,7 @@ class Order extends Model
     // todo clean this
     public static function handleCheckoutSessionCompleted(Session $checkoutSession)
     {
-        // update order_status_id to "processed"
-        self::query()->where('stripe_id', $checkoutSession->id)->update(['order_status_id' => 2]);
+        self::query()->where('stripe_id', $checkoutSession->id)->update(['order_status_id' => OrderStatus::$STATUS_PROCESSED]);
         // retrieve order user and send him a notification
         $order = self::query()->where('stripe_id', $checkoutSession->id)->with('user')->first();
         if(optional($order)->user) {
@@ -70,9 +70,4 @@ class Order extends Model
         }
     }
 
-    public static function handleCheckoutSessionCanceled($checkoutSessionId)
-    {
-        // update order_status_id to "canceled"
-        self::query()->where('stripe_id', $checkoutSessionId)->update(['order_status_id' => 3]);
-    }
 }

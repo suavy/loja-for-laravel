@@ -68,7 +68,10 @@ class Product extends Model
     | Accesors
     |--------------------------------------------------------------------------
     */
-
+    public function getReadablePriceAttribute()
+    {
+        return number_format(($this->price /100), 2, ',', ' ');
+    }
     /*
     |--------------------------------------------------------------------------
     | Mutators

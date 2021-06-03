@@ -23,7 +23,7 @@ class CreateLojaProductsTable extends Migration
             $table->foreign('attribute_set_id')->references('id')->on('loja_attribute_sets');
             $table->foreignId('tax_id');
             $table->foreign('tax_id')->references('id')->on('loja_taxes');
-            $table->decimal('price', 13, 2)->nullable();
+            $table->unsignedBigInteger('price')->default(0);
             $table->unsignedBigInteger('stock')->default(0);
             $table->boolean('enabled')->default(false);
             $table->timestamps();

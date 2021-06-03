@@ -41,19 +41,9 @@ class CreateLojaOrderStatusesTable extends Migration
                 'notification' => 1,
             ],
             [
-                'slug' => 'payment-failed',
-                'name' => 'Payment failed',
-                'notification' => 1,
-            ],
-            [
                 'slug' => 'delivered',
                 'name' => 'Delivered',
                 'notification' => 1,
-            ],
-            [
-                'slug' => 'archived',
-                'name' => 'Archived',
-                'notification' => 0,
             ],
         ];
         DB::table('loja_order_statuses')->insert($orderStatuses);
