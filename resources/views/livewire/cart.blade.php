@@ -49,6 +49,7 @@
                                         </div>
                                     </div>
                                 </td>
+                                {{-- todo : fix item->price doit être item->readable_price (not working) --}}
                                 <td class="hidden text-right md:table-cell">
                                     <span class="text-sm lg:text-base font-medium">{{ $item->price }}€</span>
                                 </td>
