@@ -5,7 +5,7 @@ namespace Suavy\LojaForLaravel\Models;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
-use Stripe\PaymentIntent;
+use Stripe\Checkout\Session;
 use Suavy\LojaForLaravel\Notifications\OrderPaid;
 use Illuminate\Foundation\Auth\User;
 
@@ -22,6 +22,10 @@ class Order extends Model
     | Relations
     |--------------------------------------------------------------------------
     */
+    public function orderProducts()
+    {
+        return $this->hasMany(OrderProduct::class);
+    }
 
     public function orderStatus()
     {
@@ -33,9 +37,9 @@ class Order extends Model
         return $this->belongsToMany(Product::class,'loja_order_product')->withPivot('quantity', 'price', 'price_with_tax');
     }
 
-    public function orderProducts()
+    public function user()
     {
-        return $this->hasMany(OrderProduct::class);
+        return $this->belongsTo(config('auth.providers.users.model'));
     }
 
     public function user()
@@ -64,32 +68,22 @@ class Order extends Model
     {
         $order = self::create([
             'user_id' => Auth::id(),
-            'order_status_id' => 1, // pending
+            'order_status_id' => OrderStatus::$STATUS_PENDING, // pending
             'stripe_id' => $stripeId,
+            'amount' => 0,
         ]);
         // todo complete loja_order_... tables
         return $order;
     }
 
-    public static function handlePaymentIntentSucceeded(PaymentIntent $paymentIntent)
+    // todo clean this
+    public static function handleCheckoutSessionCompleted(Session $checkoutSession)
     {
-        // update order_status_id to "processed"
-        self::query()->where('stripe_id', $paymentIntent->id)->update(['order_status_id' => 2]);
+        self::query()->where('stripe_id', $checkoutSession->id)->update(['order_status_id' => OrderStatus::$STATUS_PROCESSED]);
         // retrieve order user and send him a notification
-        $order = self::query()->where('stripe_payment_intent_id', $paymentIntent->id)->with('user')->first();
-        $user = $order->user;
-        $user->notify(new OrderPaid());
-    }
-
-    public static function handlePaymentIntentCanceled(PaymentIntent $paymentIntent)
-    {
-        // update order_status_id to "canceled"
-        self::query()->where('stripe_id', $paymentIntent->id)->update(['order_status_id' => 3]);
-    }
-
-    public static function handlePaymentIntentPaymentFailed(PaymentIntent $paymentIntent)
-    {
-        // update order_status_id to "payment-failed"
-        self::query()->where('stripe_id', $paymentIntent->id)->update(['order_status_id' => 4]);
+        $order = self::query()->where('stripe_id', $checkoutSession->id)->with('user')->first();
+        if (optional($order)->user) {
+            $order->user->notify(new OrderPaid());
+        }
     }
 }

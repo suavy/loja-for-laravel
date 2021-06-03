@@ -2,10 +2,12 @@
 
 namespace Suavy\LojaForLaravel\Http\Controllers;
 
+use Illuminate\Http\Request;
 use Stripe\Checkout\Session;
 use Stripe\Event;
 use Stripe\Stripe;
 use Suavy\LojaForLaravel\Models\Order;
+use Suavy\LojaForLaravel\Models\OrderStatus;
 
 class PaymentController extends Controller
 {
@@ -23,7 +25,7 @@ class PaymentController extends Controller
             $lineItems[] = [
                 'price_data' => [
                     'currency' => 'eur',
-                    'unit_amount' => $item->price, //todo j'ai un doute sur le prix
+                    'unit_amount' => $item->price,
                     'product_data' => [
                         'name' => $item->name,
                         'images' => [$item->associatedModel->cover],
@@ -34,11 +36,12 @@ class PaymentController extends Controller
         }
 
         $checkoutSession = Session::create([
+            'customer_email' => \Auth::user()->email,
             'payment_method_types' => ['card'],
             'line_items' => $lineItems,
             'mode' => 'payment',
-            'success_url' => route('loja.payment.success'),
-            'cancel_url' => route('loja.payment.cancel'),
+            'success_url' => route('loja.payment.success').'?session_id={CHECKOUT_SESSION_ID}',
+            'cancel_url' => route('loja.payment.cancel').'?session_id={CHECKOUT_SESSION_ID}',
         ]);
 
         Order::initOrder($checkoutSession->id);
@@ -46,22 +49,27 @@ class PaymentController extends Controller
         return response()->json(['id' => $checkoutSession->id]);
     }
 
-    public function success()
+    public function success(Request $request)
     {
-        \Cart::session(session()->getId())->clear();
+        $checkoutSessionId = $request->input('session_id');
+        $order = Order::query()->where('stripe_id', $checkoutSessionId)->first();
 
-        return view('loja::cart.payment-success');
+        // Clear cart
+        \Cart::session(session()->getId())->clear(); // todo replace \Cart with an import
+
+        return view('loja::cart.payment-success', compact('order'));
     }
 
-    public function cancel()
+    public function cancel(Request $request)
     {
+        if ($request->has('session_id')) {
+            $checkoutSessionId = $request->input('session_id');
+            Order::query()->where('stripe_id', $checkoutSessionId)->update(['order_status_id' => OrderStatus::$STATUS_CANCELED]);
+        }
+        // todo : missing message on loja.cart.index when order is canceled
         return redirect(route('loja.cart.index'));
     }
 
-    // https://stripe.com/docs/webhooks/integration-builder
-    // todo : en fonction de l'event changer le statut de l'order / envoyer email / etc
-    // TODO IMPORTANT : update webhook to https://stripe.com/docs/payments/checkot/fulfill-orders"checkout.session.completed" au lieux de "payment_intent"
-    // todo remarque : le webhook "payment_intent.succeeded" est toujours envoyé alors que ça devrait envoyé "checkout.session.completed", pas grave mais à comprendre
     public function webhook()
     {
         Stripe::setApiKey(config('services.stripe.secret'));
@@ -79,16 +87,10 @@ class PaymentController extends Controller
         }
 
         switch ($event->type) {
-            case 'payment_intent.succeeded':
-                $paymentIntent = $event->data->object; // contains a \Stripe\PaymentIntent
-                Order::handlePaymentIntentSucceeded($paymentIntent);
-                break;
-            case 'payment_intent.canceled':
-                break;
-            case 'payment_intent.succeeded':
+            case 'checkout.session.completed':
+                Order::handleCheckoutSessionCompleted($event->data->object);
                 break;
             default:
-                // Unexpected event type
                 echo 'Received unknown event type';
         }
         http_response_code(200);

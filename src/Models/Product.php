@@ -68,6 +68,10 @@ class Product extends Model
     | Accesors
     |--------------------------------------------------------------------------
     */
+    public function getReadablePriceAttribute()
+    {
+        return number_format(($this->price / 100), 2, ',', ' ');
+    }
     public function getNameTestAttribute()
     {
         //return $this->name.
