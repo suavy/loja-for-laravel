@@ -4,6 +4,7 @@ namespace Suavy\LojaForLaravel\Models;
 
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Facades\Auth;
 use Stripe\Checkout\Session;
 use Suavy\LojaForLaravel\Notifications\OrderPaid;
@@ -33,13 +34,30 @@ class Order extends Model
 
     public function products()
     {
-        return $this->belongsToMany(Product::class)->withPivot('quantity', 'price', 'price_with_tax');
+        return $this->belongsToMany(Product::class, 'loja_order_product')->withPivot('quantity', 'price', 'price_with_tax');
     }
 
     /*public function user() temporary remove for EAP
     {
         return $this->belongsTo(config('auth.providers.users.model'));
     }*/
+
+    public function user()
+    {
+        return $this->belongsTo(\Suavy\LojaForLaravel\Models\User::class);
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Scopes
+    |--------------------------------------------------------------------------
+    */
+    public function scopeProcessed($query)
+    {
+        return $query->whereHas('orderStatus', function ($query) {
+            $query->processed();
+        });
+    }
 
     /*
     |--------------------------------------------------------------------------

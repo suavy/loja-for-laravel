@@ -17,6 +17,7 @@ class CreateLojaOrdersTable extends Migration
             $table->string('stripe_id');
             $table->unsignedInteger('amount')->default(0);
             $table->mediumText('user_comment')->nullable();
+            $table->mediumText('delivery_tracking')->nullable();
             $table->timestamps();
         });
     }

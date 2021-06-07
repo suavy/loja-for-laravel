@@ -41,6 +41,11 @@ class CreateLojaOrderStatusesTable extends Migration
                 'notification' => 1,
             ],
             [
+                'slug' => 'sent',
+                'name' => 'Envoyé',
+                'notification' => 1,
+            ],
+            [
                 'slug' => 'delivered',
                 'name' => 'Delivered',
                 'notification' => 1,

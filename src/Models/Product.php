@@ -73,6 +73,11 @@ class Product extends Model
         return number_format(($this->price / 100), 2, ',', ' ');
     }
 
+    public function getNameTestAttribute()
+    {
+        //return $this->name.
+    }
+
     /*
     |--------------------------------------------------------------------------
     | Mutators

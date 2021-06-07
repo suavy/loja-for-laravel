@@ -22,7 +22,7 @@ class OrderCrudController extends CrudController
     {
         $this->crud->setModel(Order::class);
         $this->crud->setRoute('admin/order');
-        $this->crud->setEntityNameStrings('order', 'orders');
+        $this->crud->setEntityNameStrings('Commande', 'Commandes');
     }
 
     protected function setupListOperation()
