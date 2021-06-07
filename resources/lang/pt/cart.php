@@ -17,7 +17,7 @@ return [
         'subtotal' => 'Subtotal',
         'shipping-cost' => 'Custos de entrega',
         'total' => 'Total',
-        'checkout-button' => "Proceder ao pagamento',
+        'checkout-button' => 'Proceder ao pagamento',
     ],
     'address' => [
         'title' => 'Endereço de entrega',
