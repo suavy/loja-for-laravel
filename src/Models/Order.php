@@ -36,10 +36,10 @@ class Order extends Model
         return $this->belongsToMany(Product::class)->withPivot('quantity', 'price', 'price_with_tax');
     }
 
-    public function user()
+    /*public function user() temporary remove for EAP
     {
         return $this->belongsTo(config('auth.providers.users.model'));
-    }
+    }*/
 
     /*
     |--------------------------------------------------------------------------
