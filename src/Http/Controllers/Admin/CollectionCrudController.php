@@ -38,7 +38,6 @@ class CollectionCrudController extends CrudController
 
     protected function setupCreateOperation()
     {
-
         $this->crud->field('name')->type('text')->label('Nom');
         $this->crud->field('description')->type('textarea')->label('Description');
         $this->crud->field('images')->label('Image de la collection')->type('browse')->mimeTypes('images');
