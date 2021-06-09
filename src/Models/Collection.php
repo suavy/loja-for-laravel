@@ -36,12 +36,12 @@ class Collection extends Model
     */
     public function scopeEnabledHomePage($query)
     {
-        $query->where('enabled_home_page',true);
+        $query->where('enabled_home_page', true);
     }
 
     public function scopeEnabled($query)
     {
-        $query->where('enabled',true);
+        $query->where('enabled', true);
     }
 
     /*
@@ -55,7 +55,7 @@ class Collection extends Model
     }
 
     /**
-     * Get collection enabled for homepage
+     * Get collection enabled for homepage.
      */
     public static function getForHome()
     {
@@ -67,12 +67,12 @@ class Collection extends Model
     }
 
     /**
-     * Get cover of collection
+     * Get cover of collection.
      * @return string
      */
     public function cover()
     {
-        if (!is_null($this->cover)) {
+        if (! is_null($this->cover)) {
             return asset($this->cover);
         } else {
             return asset('images/photo-non-disponible.jpg');
