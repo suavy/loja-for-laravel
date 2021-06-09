@@ -67,7 +67,7 @@ class PaymentController extends Controller
             Order::query()->where('stripe_id', $checkoutSessionId)->update(['order_status_id' => OrderStatus::$STATUS_CANCELED]);
         }
         // todo : missing message on loja.cart.index when order is canceled
-        return redirect(route('loja.cart.index'));
+        return redirect()->route('loja.cart.index');
     }
 
     public function webhook()
