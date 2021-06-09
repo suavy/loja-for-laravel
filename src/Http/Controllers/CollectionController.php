@@ -8,7 +8,7 @@ class CollectionController extends Controller
 {
     public function index()
     {
-        $collections = Collection::query()->get();
+        $collections = loja_collections();
 
         return view('loja::collection.index', compact('collections'));
     }

@@ -13,12 +13,14 @@ class CreateLojaCollectionsTable extends Migration
             $table->string('slug');
             $table->string('name');
             $table->longText('description')->nullable();
+            $table->text('cover')->nullable();
             $table->integer('lft')->default(0);
             $table->integer('rgt')->default(0);
             $table->integer('depth')->default(0);
             $table->foreignId('parent_id')->nullable();
             $table->foreign('parent_id')->references('id')->on('loja_collections');
             $table->boolean('enabled')->default(false);
+            $table->boolean('enabled_home_page')->default(false);
             $table->timestamps();
         });
     }

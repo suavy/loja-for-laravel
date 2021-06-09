@@ -11,7 +11,12 @@ function loja_products()
 
 function loja_collections()
 {
-    return Collection::all();
+    return Collection::query()->orderBy('lft')->enabled()->get();
+}
+
+function loja_collections_home()
+{
+    return Collection::getForHome();
 }
 
 function loja_categories()

@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Suavy\LojaForLaravel\Database\Factories\CollectionFactory;
 use Suavy\LojaForLaravel\Traits\HasSlug;
+use function Symfony\Component\String\s;
 
 class Collection extends Model
 {
@@ -33,8 +34,48 @@ class Collection extends Model
     | Functions
     |--------------------------------------------------------------------------
     */
+    public function scopeEnabledHomePage($query)
+    {
+        $query->where('enabled_home_page',true);
+    }
+
+    public function scopeEnabled($query)
+    {
+        $query->where('enabled',true);
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Functions
+    |--------------------------------------------------------------------------
+    */
     protected static function newFactory()
     {
         return CollectionFactory::new();
+    }
+
+    /**
+     * Get collection enabled for homepage
+     */
+    public static function getForHome()
+    {
+        return
+            self::query()
+            ->enabledHomePage()
+            ->orderBy('lft')
+            ->get();
+    }
+
+    /**
+     * Get cover of collection
+     * @return string
+     */
+    public function cover()
+    {
+        if (!is_null($this->cover)) {
+            return asset($this->cover);
+        } else {
+            return asset('images/photo-non-disponible.jpg');
+        }
     }
 }
