@@ -26,8 +26,8 @@ Route::group([
     /*
      * Order routing
      */
-    Route::get('/user/orders', [OrderController::class, 'index'])->name('loja.order.index');
-    Route::get('/user/order/{order}', [OrderController::class, 'show'])->name('loja.order.show');
+    Route::get('/orders', [OrderController::class, 'index'])->name('loja.order.index');
+    Route::get('/order/{order}', [OrderController::class, 'show'])->name('loja.order.show');
 
     /*
      * Cart routing

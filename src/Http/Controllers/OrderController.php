@@ -10,11 +10,11 @@ class OrderController extends Controller
     {
         $orders = Order::query()->get();
 
-        return view('loja::user.order.index', compact('orders'));
+        return view('loja::order.index', compact('orders'));
     }
 
     public function show(Order $order)
     {
-        return view('loja::user.order.show', compact('order'));
+        return view('loja::order.show', compact('order'));
     }
 }
