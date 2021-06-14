@@ -37,21 +37,25 @@ class Order extends Model
         return $this->belongsToMany(Product::class, 'loja_order_product')->withPivot('quantity', 'price', 'price_with_tax');
     }
 
-    /*public function user() temporary remove for EAP
-    {
-        return $this->belongsTo(config('auth.providers.users.model'));
-    }*/
-
     public function user()
     {
-        return $this->belongsTo(\Suavy\LojaForLaravel\Models\User::class);
+        return $this->belongsTo(config('auth.providers.users.model'));
     }
 
-    /*
-    |--------------------------------------------------------------------------
-    | Scopes
-    |--------------------------------------------------------------------------
-    */
+    // this user relation was added to fix a bug on EAP
+/*public function user()
+{
+    return $this->belongsTo(\Suavy\LojaForLaravel\Models\User::class);
+}*/
+
+
+
+
+/*
+|--------------------------------------------------------------------------
+| Scopes
+|--------------------------------------------------------------------------
+*/
     public function scopeProcessed($query)
     {
         return $query->whereHas('orderStatus', function ($query) {

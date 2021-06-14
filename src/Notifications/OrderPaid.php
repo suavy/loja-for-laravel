@@ -5,19 +5,21 @@ namespace Suavy\LojaForLaravel\Notifications;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
+use Suavy\LojaForLaravel\Models\Order;
 
 class OrderPaid extends Notification
 {
     use Queueable;
 
+    public Order $order;
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(Order $order)
     {
-        //
+        $this->order = $order;
     }
 
     /**
@@ -39,10 +41,13 @@ class OrderPaid extends Notification
      */
     public function toMail($notifiable)
     {
-        return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/'))
-                    ->line('Thank you for using our application!');
+        $mailMessage = (new MailMessage)
+            ->subject("Merci pour ta commande !")
+            ->greeting("Bonjour {$notifiable->name}")
+            ->line("Ta commande **numéro {$this->order->id}** a bien été enregistrée. Elle sera expédiée sous 2 à 3 jours ouvrés, tu recevras un e-mail pour te confirmer l’envoi.")
+            ->action('Détails de la commande', route('loja.order.show', $this->order))
+            ->line("*Si tu as une question à propos de cette commande, tu peux nous contacter par mail à contact@lucilevilaine.com*");
+        return $mailMessage;
     }
 
     /**
