@@ -87,7 +87,7 @@ class Order extends Model
         // retrieve order user and send him a notification
         $order = self::query()->where('stripe_id', $checkoutSession->id)->with('user')->first();
         if (optional($order)->user) {
-            $order->user->notify(new OrderPaid());
+            $order->user->notify(new OrderPaid($order));
         }
     }
 }
