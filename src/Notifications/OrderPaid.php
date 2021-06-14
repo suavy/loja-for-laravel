@@ -12,6 +12,7 @@ class OrderPaid extends Notification
     use Queueable;
 
     public Order $order;
+
     /**
      * Create a new notification instance.
      *
@@ -42,11 +43,12 @@ class OrderPaid extends Notification
     public function toMail($notifiable)
     {
         $mailMessage = (new MailMessage)
-            ->subject("Merci pour ta commande !")
+            ->subject('Merci pour ta commande !')
             ->greeting("Bonjour {$notifiable->name}")
             ->line("Ta commande **numéro {$this->order->id}** a bien été enregistrée. Elle sera expédiée sous 2 à 3 jours ouvrés, tu recevras un e-mail pour te confirmer l’envoi.")
             ->action('Détails de la commande', route('loja.order.show', $this->order))
-            ->line("*Si tu as une question à propos de cette commande, tu peux nous contacter par mail à contact@lucilevilaine.com*");
+            ->line('*Si tu as une question à propos de cette commande, tu peux nous contacter par mail à contact@lucilevilaine.com*');
+
         return $mailMessage;
     }
 

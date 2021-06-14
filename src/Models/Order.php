@@ -43,19 +43,16 @@ class Order extends Model
     }
 
     // this user relation was added to fix a bug on EAP
-/*public function user()
-{
-    return $this->belongsTo(\Suavy\LojaForLaravel\Models\User::class);
-}*/
+    /*public function user()
+    {
+        return $this->belongsTo(\Suavy\LojaForLaravel\Models\User::class);
+    }*/
 
-
-
-
-/*
-|--------------------------------------------------------------------------
-| Scopes
-|--------------------------------------------------------------------------
-*/
+    /*
+    |--------------------------------------------------------------------------
+    | Scopes
+    |--------------------------------------------------------------------------
+    */
     public function scopeProcessed($query)
     {
         return $query->whereHas('orderStatus', function ($query) {
