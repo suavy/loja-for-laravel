@@ -9,9 +9,6 @@ use Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
 use Backpack\CRUD\app\Http\Controllers\Operations\ShowOperation;
 use Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
 use Suavy\LojaForLaravel\Models\Order;
-use Suavy\LojaForLaravel\Models\OrderStatus;
-use Suavy\LojaForLaravel\Models\Product;
-use Suavy\LojaForLaravel\Notifications\OrderSent;
 
 class NewOrderCrudController extends CrudController
 {
@@ -27,8 +24,6 @@ class NewOrderCrudController extends CrudController
         $this->crud->setModel(Order::class);
         $this->crud->setRoute('admin/new-order');
         $this->crud->setEntityNameStrings('Commande', 'Commandes');
-
-
 
         $this->crud->setShowView('loja::admin.manager-order');
     }
@@ -47,8 +42,6 @@ class NewOrderCrudController extends CrudController
         $this->crud->denyAccess('create');
         $this->crud->denyAccess('update');
         $this->crud->denyAccess('delete');
-
-
     }
 
     protected function setupShowOperation()
@@ -57,5 +50,4 @@ class NewOrderCrudController extends CrudController
         $this->crud->denyAccess('delete');
         $this->crud->addButtonFromView('line', 'validate', 'validate', 'beginning');
     }
-
 }

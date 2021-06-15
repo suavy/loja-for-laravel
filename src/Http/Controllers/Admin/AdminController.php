@@ -16,7 +16,7 @@ class AdminController extends Controller
     {
         $order = Order::query()->findOrFail(request()->input('order'));
 
-        if($order->orderStatus->slug !== OrderStatus::PROCESSED){
+        if ($order->orderStatus->slug !== OrderStatus::PROCESSED) {
             return redirect()->back();
         }
 
@@ -29,7 +29,6 @@ class AdminController extends Controller
         $order->user->notify(new OrderSent($order));
 
         return redirect(backpack_url('new-order'))
-            ->with('success','La commande a bien été confirmé');
-
+            ->with('success', 'La commande a bien été confirmé');
     }
 }

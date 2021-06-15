@@ -25,5 +25,4 @@ trait HasAddress
     {
         $this->hasAddress() ? $this->address()->update($address) : (new Address($address))->user()->associate($this)->save();
     }
-
 }
