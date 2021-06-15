@@ -2,12 +2,11 @@
 
 namespace Suavy\LojaForLaravel\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
 class OrderProduct extends Model
 {
-
     use HasFactory;
 
     protected $table = 'loja_order_product';
@@ -29,7 +28,7 @@ class OrderProduct extends Model
         return $this->belongsToMany(AttributeValue::class, 'loja_order_product_attribute_value');
     }
 
-    public function  getReadableAttributeValueAttribute()
+    public function getReadableAttributeValueAttribute()
     {
         return $this->attributeValues->pluck('readable')->implode(', ');
     }

@@ -2,9 +2,8 @@
 
 namespace Suavy\LojaForLaravel\Models;
 
-
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Facades\Auth;
@@ -55,7 +54,8 @@ class Order extends Model
     | Accessors
     |--------------------------------------------------------------------------
     */
-    public function getReadableProductsAttribute(){
+    public function getReadableProductsAttribute()
+    {
         return $this->products->pluck('name')->implode(', ');
     }
 
@@ -85,12 +85,13 @@ class Order extends Model
     */
 
     /**
-     * Défini le status de la commande a envoyé (sent)
+     * Défini le status de la commande a envoyé (sent).
      */
     public function setStatusSent()
     {
         $this->orderStatus()->associate(OrderStatus::getSent());
     }
+
     public static function initOrder($stripeId)
     {
         $order = self::create([

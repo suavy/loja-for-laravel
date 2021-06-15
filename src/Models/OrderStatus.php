@@ -25,7 +25,7 @@ class OrderStatus extends Model
 
     public static function getSent()
     {
-        return self::query()->where('slug',self::SENT)->first();
+        return self::query()->where('slug', self::SENT)->first();
     }
 
     public static $STATUS_PENDING = 1;
