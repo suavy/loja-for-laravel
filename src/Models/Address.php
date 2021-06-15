@@ -29,4 +29,13 @@ class Address extends Model
     {
         return $this->belongsTo(Country::class);
     }
+
+    public function getReadableAttribute(){
+        return " {$this->street} {$this->zip_code} {$this->city}";
+    }
+
+    public function  getReadableOtherAttribute()
+    {
+        return is_null($this->other) ? "Non précisé" : $this->other;
+    }
 }

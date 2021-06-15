@@ -29,6 +29,6 @@ Route::group([
     Route::crud('product', 'ProductCrudController');
     Route::crud('tax', 'TaxCrudController');
 
-    Route::get('/verification-de-commmande/{order}', [AdminController::class, 'confirmOrderView'])->name('admin.confirm.order.view');
+    Route::post('/verification-de-commmande', [AdminController::class, 'confirmOrder'])->name('admin.confirm.order');
     Route::post('/confirm-order', [AdminController::class, 'confirmOrder'])->name('admin.confirm.order');
 }); // this should be the absolute last line of this file

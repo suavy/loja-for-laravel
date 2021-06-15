@@ -3,6 +3,7 @@
 return [
     'continue-shopping' => 'Continuer mes achats',
     'title' => 'Mon panier',
+    'empty' => 'Votre panier est vide',
     'table' => [
         'product' => 'Produit',
         'quantity' => 'Quantité',

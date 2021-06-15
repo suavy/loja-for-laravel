@@ -2,6 +2,8 @@
 
 namespace Suavy\LojaForLaravel\Models;
 
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User;
@@ -12,6 +14,7 @@ use Suavy\LojaForLaravel\Notifications\OrderPaid;
 class Order extends Model
 {
     use CrudTrait;
+    use HasFactory;
 
     protected $table = 'loja_orders';
     // Disable Laravel's mass assignment protection
@@ -47,6 +50,14 @@ class Order extends Model
     {
         return $this->belongsTo(\Suavy\LojaForLaravel\Models\User::class);
     }*/
+    /*
+    |--------------------------------------------------------------------------
+    | Accessors
+    |--------------------------------------------------------------------------
+    */
+    public function getReadableProductsAttribute(){
+        return $this->products->pluck('name')->implode(', ');
+    }
 
     /*
     |--------------------------------------------------------------------------
@@ -60,11 +71,26 @@ class Order extends Model
         });
     }
 
+    public function scopeSent($query)
+    {
+        return $query->whereHas('orderStatus', function ($query) {
+            $query->sent();
+        });
+    }
+
     /*
     |--------------------------------------------------------------------------
     | Functions
     |--------------------------------------------------------------------------
     */
+
+    /**
+     * Défini le status de la commande a envoyé (sent)
+     */
+    public function setStatusSent()
+    {
+        $this->orderStatus()->associate(OrderStatus::getSent());
+    }
     public static function initOrder($stripeId)
     {
         $order = self::create([

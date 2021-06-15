@@ -23,6 +23,11 @@ class OrderStatus extends Model
         return $query->where('slug', self::SENT);
     }
 
+    public static function getSent()
+    {
+        return self::query()->where('slug',self::SENT)->first();
+    }
+
     public static $STATUS_PENDING = 1;
     public static $STATUS_PROCESSED = 2;
     public static $STATUS_CANCELED = 3;
