@@ -7,7 +7,6 @@ use Suavy\LojaForLaravel\Models\Country;
 
 class Address extends Component
 {
-
     public $addressName;
     public $addressFirstname;
     public $addressLastname;
@@ -54,7 +53,6 @@ class Address extends Component
     {
         return view('loja::livewire.address');
     }
-
 
     public function saveAddress()
     {
