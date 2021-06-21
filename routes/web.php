@@ -8,6 +8,7 @@ use Suavy\LojaForLaravel\Http\Controllers\OrderController;
 use Suavy\LojaForLaravel\Http\Controllers\PaymentController;
 use Suavy\LojaForLaravel\Http\Controllers\ProductController;
 use Suavy\LojaForLaravel\Http\Controllers\SearchController;
+use Suavy\LojaForLaravel\Http\Controllers\AddressController;
 
 Route::group([
     'middleware' => 'web',
@@ -45,6 +46,11 @@ Route::group([
     Route::post('/payment/create-checkout-session', [PaymentController::class, 'createCheckoutSession'])->name('loja.payment.create-checkout-session');
     Route::get('/payment/success', [PaymentController::class, 'success'])->name('loja.payment.success');
     Route::get('/payment/cancel', [PaymentController::class, 'cancel'])->name('loja.payment.cancel');
+
+    /*
+     * Adresses
+     */
+    Route::get('/address',[AddressController::class,'index'])->name('loja.address.index');
 });
 
 Route::group([

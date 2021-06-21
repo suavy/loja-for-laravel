@@ -4,6 +4,7 @@ namespace Suavy\LojaForLaravel;
 
 use Illuminate\Support\ServiceProvider;
 use Livewire\Livewire;
+use Suavy\LojaForLaravel\Http\Livewire\Address;
 use Suavy\LojaForLaravel\Http\Livewire\Cart;
 use Suavy\LojaForLaravel\Http\Livewire\CartAddProduct;
 use Suavy\LojaForLaravel\Http\Livewire\CartCounter;
@@ -18,6 +19,7 @@ class LojaForLaravelServiceProvider extends ServiceProvider
         Livewire::component('cart-counter', CartCounter::class);
         Livewire::component('cart', Cart::class);
         Livewire::component('cart-add-product', CartAddProduct::class);
+        Livewire::component('address', Address::class);
         /*
          * Optional methods to load your package assets
          */
