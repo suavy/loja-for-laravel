@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Suavy\LojaForLaravel\Http\Controllers\AddressController;
 use Suavy\LojaForLaravel\Http\Controllers\CartController;
 use Suavy\LojaForLaravel\Http\Controllers\CategoryController;
 use Suavy\LojaForLaravel\Http\Controllers\CollectionController;
@@ -8,7 +9,6 @@ use Suavy\LojaForLaravel\Http\Controllers\OrderController;
 use Suavy\LojaForLaravel\Http\Controllers\PaymentController;
 use Suavy\LojaForLaravel\Http\Controllers\ProductController;
 use Suavy\LojaForLaravel\Http\Controllers\SearchController;
-use Suavy\LojaForLaravel\Http\Controllers\AddressController;
 
 Route::group([
     'middleware' => 'web',
@@ -50,7 +50,7 @@ Route::group([
     /*
      * Adresses
      */
-    Route::get('/address',[AddressController::class,'index'])->name('loja.address.index');
+    Route::get('/address', [AddressController::class, 'index'])->name('loja.address.index');
 });
 
 Route::group([
