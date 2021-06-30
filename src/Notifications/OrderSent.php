@@ -43,9 +43,11 @@ class OrderSent extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-            ->line('Votre commande a bien été envoyé')
+            ->subject("Ta commande a été expediée")
+            ->greeting("Bonjour {$notifiable->name}")
+            ->line("Bonne nouvelle ! Ta commande numéro **numéro {$this->order->id}** vient d’être expédiée.")
             ->action('Suivre ma commande', $this->order->delivery_tracking)
-            ->line('Thank you for using our application!');
+            ->line('*Si tu as une question à propos de cette commande, tu peux nous contacter par mail à contact@lucilevilaine.com*');
     }
 
     /**
