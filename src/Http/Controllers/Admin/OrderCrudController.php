@@ -9,6 +9,7 @@ use Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
 use Backpack\CRUD\app\Http\Controllers\Operations\ShowOperation;
 use Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
 use Suavy\LojaForLaravel\Models\Order;
+use Suavy\LojaForLaravel\Models\OrderStatus;
 
 class OrderCrudController extends CrudController
 {
@@ -34,6 +35,12 @@ class OrderCrudController extends CrudController
 
     protected function setupCreateOperation()
     {
+        $this->crud->field('user_id')->label('Utilisateur')->attributes(['disabled' => 'disabled']);
+        $this->crud->field('order_status_id')->type('select2')->label('Status')->entity('orderStatus')->model(OrderStatus::class)->attribute('name');
+        $this->crud->field('stripe_id')->label('stripe_id')->attributes(['disabled' => 'disabled']);;
+        $this->crud->field('amount')->label('amount')->attributes(['disabled' => 'disabled']);
+        $this->crud->field('amount_received')->label('amount_received')->attributes(['disabled' => 'disabled']);
+        $this->crud->field('user_comment')->type('textarea')->label('user_comment');
     }
 
     protected function setupUpdateOperation()
