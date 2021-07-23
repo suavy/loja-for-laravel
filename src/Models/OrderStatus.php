@@ -15,7 +15,7 @@ class OrderStatus extends Model
 
     public function getReadableOrderStatusAttribute()
     {
-        return __("loja::order.".$this->slug);
+        return __('loja::order.'.$this->slug);
     }
 
     public function scopeProcessed($query)

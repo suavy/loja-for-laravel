@@ -19,9 +19,8 @@ class Collection extends Model
     // Disable Laravel's mass assignment protection
     protected $guarded = [];
 
-
     public $fillable = ['id', 'name', 'description', 'slug', 'cover', 'lft', 'rgt', 'depth',
-        'parent_id', 'enabled', 'enabled_home_page', 'created_at', 'updated_at'];
+        'parent_id', 'enabled', 'enabled_home_page', 'created_at', 'updated_at', ];
 
     /*
     |--------------------------------------------------------------------------

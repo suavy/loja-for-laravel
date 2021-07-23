@@ -53,7 +53,7 @@ class OrderCrudController extends CrudController
         $this->crud->addFilter([
             'name' => 'status',
             'type' => 'select2',
-            'label' => 'Status'
+            'label' => 'Status',
         ], function () {
             return OrderStatus::all()->pluck('readable_order_status', 'id')->toArray();
         }, function ($values) {

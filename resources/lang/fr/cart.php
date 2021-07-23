@@ -19,7 +19,7 @@ return [
         'shipping-cost' => 'Frais de livraison',
         'total' => 'Total',
         'checkout-button' => 'Procéder au paiement',
-        'free-shipping' => "Gratuit",
+        'free-shipping' => 'Gratuit',
     ],
     'address' => [
         'title' => 'Adresse de livraison',

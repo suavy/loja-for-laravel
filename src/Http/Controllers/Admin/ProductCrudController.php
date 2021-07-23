@@ -51,24 +51,23 @@ class ProductCrudController extends CrudController
             ->attribute('name')
             ->label('Set d\'attribue');
 
-
         $this->crud->addFilter([
             'name'  => 'collection',
             'type'  => 'select2_multiple',
-            'label' => 'Collections'
-        ], function() {
-            return Collection::all()->pluck('name','id')->toArray();
-        }, function($values) {
+            'label' => 'Collections',
+        ], function () {
+            return Collection::all()->pluck('name', 'id')->toArray();
+        }, function ($values) {
             $this->crud->addClause('whereIn', 'collection_id', json_decode($values));
         });
 
         $this->crud->addFilter([
             'name'  => 'category',
             'type'  => 'select2_multiple',
-            'label' => 'Catégories'
-        ], function() {
-            return Category::all()->pluck('name','id')->toArray();
-        }, function($values) {
+            'label' => 'Catégories',
+        ], function () {
+            return Category::all()->pluck('name', 'id')->toArray();
+        }, function ($values) {
             $this->crud->addClause('whereIn', 'category_id', json_decode($values));
         });
 
@@ -77,10 +76,10 @@ class ProductCrudController extends CrudController
             'type'       => 'range',
             'label'      => 'Prix',
             'label_from' => 'min',
-            'label_to'   => 'max'
+            'label_to'   => 'max',
         ],
             false,
-            function($value) { // if the filter is active
+            function ($value) { // if the filter is active
                 $range = json_decode($value);
                 if ($range->from) {
                     $min = $range->from * 100;

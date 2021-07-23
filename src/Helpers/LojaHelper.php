@@ -26,5 +26,5 @@ function loja_categories()
 
 function loja_price_readable($price)
 {
-    return number_format($price / 100,2, '.', '');
+    return number_format($price / 100, 2, '.', '');
 }
