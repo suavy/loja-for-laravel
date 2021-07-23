@@ -61,9 +61,9 @@ class Order extends Model
 
     public function getReadableOrderStatusAttribute()
     {
-        if($this->orderStatus){
+        if ($this->orderStatus) {
             return $this->orderStatus->readable_order_status;
-        }else{
+        } else {
             return __('loja::order.not-defined');
         }
     }
@@ -76,7 +76,7 @@ class Order extends Model
 
     public function getReadablePriceAttribute()
     {
-        return loja_price_readable($this->amount). "€";
+        return loja_price_readable($this->amount).'€';
     }
 
     public function scopeProcessed($query)
