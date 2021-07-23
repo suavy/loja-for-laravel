@@ -2,5 +2,5 @@
 
 return [
     'title' => 'Mon adresse',
-    'submit' => "Enregistrer"
+    'submit' => 'Mettre à jour mon adressse',
 ];

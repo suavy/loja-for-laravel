@@ -40,6 +40,25 @@
                     @endif
                 </div>
                 <div class="card-body">
+                    {{-- Order data--}}
+                    <h2 class="card-title">La commande</h2>
+                        <ul class="list-group">
+                            <li class="list-group-item list-group-item-primary">
+                                <div class="row">
+                                    <dt class="col-sm-1">Quantité</dt>
+                                    <dt class="col-sm-3">Produit</dt>
+                                    <dt class="col-sm-8">Attributes</dt>
+                                </div>
+                            </li>
+                            @foreach($order->orderProducts as $product)
+                                <li class="list-group-item">
+                                    <div class="row">
+                                        <dd class="col-sm-1">{{$product->quantity}}</dd>
+                                        <dd class="col-sm-3">{{ $product->product->name }}</dd>
+                                        <dd class="col-sm-8">{{ $product->readable_attribute_value }}</dd>
+                                    </div>
+                                </li>
+                            @endforeach
                         <h2 class="card-title">Informations</h2>
                         <div class="ml-3 mb-4">
                             <h5 class="card-title pt-2">Commande <span class="badge badge-primary badge-pill">n° {{ $order->id }}</span></h5>
@@ -61,41 +80,64 @@
                                 <span class="badge badge-primary badge-pill"><b>{{ $product->readable_price_qty }} €</b></span>
                             </li>
                         </ul>
-                        @endforeach
-                        <br/>
-                    </div>
+                    <br/>
+                    <p><b>Prix total de la commande :</b> {{ $order->amount }}</p>
 
-                    <h2 class="card-title">Informations du client</h2>
+                    {{-- User data--}}
+                    <h2 class="card-title">Le client</h2>
                     @php $user = $order->user; @endphp
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item">Nom & Prénom: <b>{{ $user->lastname." ".$user->firstname }}</b></li>
-                        <li class="list-group-item">Téléphone: <b>{{ $user->address()->phone }}</b></li>
-                        <li class="list-group-item">Adresse: <b>{{ $user->address()->readable}}</b></li>
-                        <li class="list-group-item">Pays: <b>{{ $user->address()->country->name }}</b></li>
-                        <li class="list-group-item">Informations supplémentaire: <b>{{ $user->address()->readable_other }}</b></li>
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <div class="row">
+                                <dt class="col-sm-3">Nom & Prénom</dt>
+                                <dd class="col-sm-9">{{ $user->lastname." ".$user->firstname }}</dd>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="row">
+                                <dt class="col-sm-3">Téléphone</dt>
+                                <dd class="col-sm-9">{{ optional($user->address())->phone }}</dd>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="row">
+                                <dt class="col-sm-3">Adresse</dt>
+                                <dd class="col-sm-9">{{ optional($user->address())->readable}}</dd>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="row">
+                                <dt class="col-sm-3">Pays</dt>
+                                <dd class="col-sm-9">{{ optional($user->address())->country->name }}</dd>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="row">
+                                <dt class="col-sm-3">Informations supplémentaire</dt>
+                                <dd class="col-sm-9">{{ optional($user->address())->readable_other }}</dd>
+                            </div>
+                        </li>
                     </ul>
-
-                    <br/><br/>
-                    @if($order->orderStatus->isProcessed())
+                    <br/>
+                    {{-- Follow link--}}
+                    <h2 class="card-title">Gestion de la commande</h2>
                     <form method="POST" action="{{ route('admin.confirm.order') }}">
                         @csrf
                         <input type="hidden" name="order" value="{{ $order->id }}">
-                        <label for="basic-url" class="form-label">Lien pour suivre la commande*</label>
+                        <label for="basic-url" class="form-label">Lien de suivi*</label>
                         <div class="input-group mb-3">
                             <input name="delivery_tracking" type="url" class="form-control"  pattern="https://.*" placeholder="https://example.com" required>
                         </div>
 
-
-                        <div class="d-grid gap-2 d-md-flex justify-content-md-center btn-toolbar">
-
-                            <button type="submit" class="btn btn-success m-2" type="button">Confirmer l'envois</button>
-                            <a href="javascript:history.back()" class="btn btn-primary m-2" type="button">Retour</a>
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-success me-md-2" type="button">Confirmer l'envoie</button>
+                            <a href="javascript:history.back()" class="btn btn-default"><span class="la la-ban"></span> &nbsp;Retour</a>
                         </div>
                     </form>
-                    @endif
 
                 </div>
             </div>
+
         </div>
     </div>
 @endsection
