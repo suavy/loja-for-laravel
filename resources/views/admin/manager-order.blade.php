@@ -40,14 +40,25 @@
                     @endif
                 </div>
                 <div class="card-body">
+
+                    <h2 class="card-title">Informations</h2>
+                    <div class="ml-3 mb-4">
+                        <h5 class="card-title pt-2">Commande <span class="badge badge-primary badge-pill">n° {{ $order->id }}</span></h5>
+                        <h5 class="card-title pt-2">Passée le <b>{{ $order->created_at->format('Y/m/d à H:i') }}</b></h5>
+                        <h5 class="card-title pt-2">Prix total de la commande
+                            <span class="badge badge-primary badge-pill"><b>{{ loja_price_readable($order->amount) }} € </b></span>
+                        </h5>
+                    </div>
+
                     {{-- Order data--}}
-                    <h2 class="card-title">La commande</h2>
+                        <h2 class="card-title">La commande</h2>
                         <ul class="list-group">
                             <li class="list-group-item list-group-item-primary">
                                 <div class="row">
                                     <dt class="col-sm-1">Quantité</dt>
                                     <dt class="col-sm-3">Produit</dt>
-                                    <dt class="col-sm-8">Attributes</dt>
+                                    <dt class="col-sm-6">Attributes</dt>
+                                    <dt class="col-sm-2">Prix</dt>
                                 </div>
                             </li>
                             @foreach($order->orderProducts as $product)
@@ -55,33 +66,16 @@
                                     <div class="row">
                                         <dd class="col-sm-1">{{$product->quantity}}</dd>
                                         <dd class="col-sm-3">{{ $product->product->name }}</dd>
-                                        <dd class="col-sm-8">{{ $product->readable_attribute_value }}</dd>
+                                        <dd class="col-sm-6">{{ $product->readable_attribute_value_bold }}</dd>
+                                        <dd class="col-sm-2">
+                                            <span class="badge badge-primary badge-pill"><b>
+                                                {{ $product->readable_price_qty }} €
+                                            </b></span>
+                                        </dd>
                                     </div>
                                 </li>
                             @endforeach
-                        <h2 class="card-title">Informations</h2>
-                        <div class="ml-3 mb-4">
-                            <h5 class="card-title pt-2">Commande <span class="badge badge-primary badge-pill">n° {{ $order->id }}</span></h5>
-                            <h5 class="card-title pt-2">Passée le <b>{{ $order->created_at->format('Y/m/d à H:i') }}</b></h5>
-                            <h5 class="card-title pt-2">Prix total de la commande
-                                <span class="badge badge-primary badge-pill"><b>{{ loja_price_readable($order->amount) }} € </b></span>
-                            </h5>
-                        </div>
-
-                    <h2 class="card-title">Produits commandés</h2>
-
-                    <div class="ml-3">
-                        @foreach($order->orderProducts as $product)
-                        <h5 class="card-title pt-2">{{ $product->product->name }}</h5>
-                        <ul class="list-group col-4">
-                            <li class="list-group-item">Quantité: <span class="badge badge-primary badge-pill">{{$product->quantity}}</span></li>
-                            <li class="list-group-item">{!!  $product->readable_attribute_value_bold !!}</li>
-                            <li class="list-group-item">Prix:
-                                <span class="badge badge-primary badge-pill"><b>{{ $product->readable_price_qty }} €</b></span>
-                            </li>
                         </ul>
-                    <br/>
-                    <p><b>Prix total de la commande :</b> {{ $order->amount }}</p>
 
                     {{-- User data--}}
                     <h2 class="card-title">Le client</h2>
