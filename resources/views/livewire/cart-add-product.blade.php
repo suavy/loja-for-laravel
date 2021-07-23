@@ -36,12 +36,35 @@
         Ajouter au panier
     </button>
 
+
+
+
+
     <!-- Gestion des erreurs -->
-    @error('quantity') {{ $message }} @enderror
-    @error('attributes') {{ $message }} @enderror
+    @error('quantity')
+    <div class="text-white px-6 py-4 border-0 rounded relative mb-4 bg-red-500 bg-opacity-1">
+          <span class="text-xl inline-block mr-5 align-middle">
+            <i class="fas fa-bell"></i>
+          </span>
+          <span class="inline-block align-middle mr-8">
+              {{ $message }}
+          </span>
+    </div>
+    @enderror
+    @error('attributes')
+        <div class="flex text-white px-6 py-4 border-0 rounded relative mb-4 bg-red-500 bg-opacity-1">
+              <span class="text-xl inline-block mr-5 align-middle">
+                <i class="fas fa-bell"></i>
+              </span>
+            <span class="inline-block align-middle mr-8">
+                  {{ $message }}
+              </span>
+        </div>
+    @enderror
 
     @if($productIsAddedToCart)
         <span id="loading-add-cart">Produit ajouté au panier !</span>
     @endif
+
 </div>
 </form>

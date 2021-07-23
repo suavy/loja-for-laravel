@@ -24,7 +24,7 @@ class Product extends Model
     // Disable Laravel's mass assignment protection
     //protected $guarded = [];
 
-    protected $fillable = ['id', 'name', 'description', 'slug', 'stock', 'price', 'enabled', 'images',
+    protected $fillable = ['id', 'name', 'sub_name', 'description', 'slug', 'stock', 'price', 'enabled', 'images', 'backoffice_price',
         'tax_id', 'category_id', 'collection_id', 'attribute_set_id', ];
     protected $casts = ['images'=>'array'];
 
@@ -70,7 +70,12 @@ class Product extends Model
     */
     public function getReadablePriceAttribute()
     {
-        return number_format(($this->price / 100), 2, ',', ' ');
+        return number_format(($this->price / 100), 2, '.', ' ');
+    }
+
+    public function getBackofficePriceAttribute()
+    {
+        return $this->readable_price;
     }
 
     public function getNameTestAttribute()
@@ -87,6 +92,11 @@ class Product extends Model
     {
         $this->attributes['name'] = $value;
         $this->attributes['slug'] = Str::slug($value);
+    }
+
+    public function setBackofficePriceAttribute($value)
+    {
+        $this->attributes['price'] = (int) ($value * 100);
     }
 
     /*

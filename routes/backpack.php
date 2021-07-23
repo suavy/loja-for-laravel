@@ -25,7 +25,6 @@ Route::group([
     Route::crud('country-delivery', 'CountryDeliveryCrudController');
     Route::get('country-delivery/{id}/toggle-country', 'CountryDeliveryCrudController@toggleCountry');
     Route::crud('order', 'OrderCrudController');
-    Route::crud('new-order', 'NewOrderCrudController');
     Route::crud('product', 'ProductCrudController');
     Route::crud('tax', 'TaxCrudController');
 

@@ -13,6 +13,11 @@ class OrderStatus extends Model
     const PROCESSED = 'processed';
     const SENT = 'sent';
 
+    public function getReadableOrderStatusAttribute()
+    {
+        return __("loja::order.".$this->slug);
+    }
+
     public function scopeProcessed($query)
     {
         return $query->where('slug', self::PROCESSED);
@@ -26,6 +31,11 @@ class OrderStatus extends Model
     public static function getSent()
     {
         return self::query()->where('slug', self::SENT)->first();
+    }
+
+    public function isProcessed()
+    {
+        return $this->slug === self::PROCESSED;
     }
 
     public static $STATUS_PENDING = 1;

@@ -122,7 +122,7 @@ class Cart extends Component
         $this->validateOnly($propertyName);
     }
 
-    public function checkout()
+    public function saveAddress()
     {
         $this->updateItems();
 
@@ -140,6 +140,6 @@ class Cart extends Component
             'country_id' => $this->addressCountry,
         ]);
 
-        return redirect(route('loja.payment.index'));
+        $this->dispatchBrowserEvent('checkout');
     }
 }

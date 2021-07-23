@@ -23,3 +23,8 @@ function loja_categories()
 {
     return Category::all();
 }
+
+function loja_price_readable($price)
+{
+    return number_format($price / 100,2, '.', '');
+}

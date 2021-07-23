@@ -34,44 +34,65 @@
         <div class="col-md-12">
 
             <div class="card">
-                <div class="card-header">
-                    Commande n° {{ $order->id }}
+                <div class="card-header {{ $order->orderStatus->isProcessed() ?  "bg-warning" : "bg-primary" }}">
+                    @if($order->orderStatus->isProcessed())
+                        <span class="badge badge-pill badge-danger"><i class="fas fa-exclamation-circle"></i> Attention </span> Commande en attente d'envois
+                    @endif
                 </div>
                 <div class="card-body">
+                        <h2 class="card-title">Informations</h2>
+                        <div class="ml-3 mb-4">
+                            <h5 class="card-title pt-2">Commande <span class="badge badge-primary badge-pill">n° {{ $order->id }}</span></h5>
+                            <h5 class="card-title pt-2">Passée le <b>{{ $order->created_at->format('Y/m/d à H:i') }}</b></h5>
+                            <h5 class="card-title pt-2">Prix total de la commande
+                                <span class="badge badge-primary badge-pill"><b>{{ loja_price_readable($order->amount) }} € </b></span>
+                            </h5>
+                        </div>
+
                     <h2 class="card-title">Produits commandés</h2>
+
+                    <div class="ml-3">
                         @foreach($order->orderProducts as $product)
-                        <h5 class="card-title">{{ $product->product->name }}</h5>
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item">Quantité: {{$product->quantity}} - {{ $product->readable_attribute_value }}</li>
+                        <h5 class="card-title pt-2">{{ $product->product->name }}</h5>
+                        <ul class="list-group col-4">
+                            <li class="list-group-item">Quantité: <span class="badge badge-primary badge-pill">{{$product->quantity}}</span></li>
+                            <li class="list-group-item">{!!  $product->readable_attribute_value_bold !!}</li>
+                            <li class="list-group-item">Prix:
+                                <span class="badge badge-primary badge-pill"><b>{{ $product->readable_price_qty }} €</b></span>
+                            </li>
                         </ul>
                         @endforeach
-                    <br/>
-                    <p class="card-text">Prix total de la commande {{ $order->amount }}</p>
+                        <br/>
+                    </div>
 
                     <h2 class="card-title">Informations du client</h2>
                     @php $user = $order->user; @endphp
                     <ul class="list-group list-group-flush">
-                        <li class="list-group-item">Nom & Prénom: {{ $user->lastname." ".$user->firstname }}</li>
-                        <li class="list-group-item">Téléphone: {{ $user->address()->phone }}</li>
-                        <li class="list-group-item">Adresse: {{ $user->address()->readable}}</li>
-                        <li class="list-group-item">Pays: {{ $user->address()->country->name }}</li>
-                        <li class="list-group-item">Informations supplémentaire: {{ $user->address()->readable_other }}</li>
+                        <li class="list-group-item">Nom & Prénom: <b>{{ $user->lastname." ".$user->firstname }}</b></li>
+                        <li class="list-group-item">Téléphone: <b>{{ $user->address()->phone }}</b></li>
+                        <li class="list-group-item">Adresse: <b>{{ $user->address()->readable}}</b></li>
+                        <li class="list-group-item">Pays: <b>{{ $user->address()->country->name }}</b></li>
+                        <li class="list-group-item">Informations supplémentaire: <b>{{ $user->address()->readable_other }}</b></li>
                     </ul>
 
                     <br/><br/>
+                    @if($order->orderStatus->isProcessed())
                     <form method="POST" action="{{ route('admin.confirm.order') }}">
                         @csrf
                         <input type="hidden" name="order" value="{{ $order->id }}">
-                        <label for="basic-url" class="form-label">Lien de pour suivre la commande*</label>
+                        <label for="basic-url" class="form-label">Lien pour suivre la commande*</label>
                         <div class="input-group mb-3">
                             <input name="delivery_tracking" type="url" class="form-control"  pattern="https://.*" placeholder="https://example.com" required>
                         </div>
 
-                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                            <button type="submit" class="btn btn-primary me-md-2" type="button">Confirmer l'envois</button>
-                            <a href="javascript:history.back()" class="btn btn-primary" type="button">Retour</a>
+
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-center btn-toolbar">
+
+                            <button type="submit" class="btn btn-success m-2" type="button">Confirmer l'envois</button>
+                            <a href="javascript:history.back()" class="btn btn-primary m-2" type="button">Retour</a>
                         </div>
                     </form>
+                    @endif
 
                 </div>
             </div>

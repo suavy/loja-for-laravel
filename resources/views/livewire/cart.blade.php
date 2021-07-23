@@ -52,10 +52,10 @@
                                     </td>
                                     {{-- todo : fix item->price doit être item->readable_price (not working) --}}
                                     <td class="hidden text-right md:table-cell">
-                                        <span class="text-sm lg:text-base font-medium">{{ $item->price }}€</span>
+                                        <span class="text-sm lg:text-base font-medium">{{ loja_price_readable($item->price) }}€</span>
                                     </td>
                                     <td class="text-right">
-                                        <span class="text-sm lg:text-base font-medium">{{ $item->price * $item->quantity }}€</span>
+                                        <span class="text-sm lg:text-base font-medium">{{ loja_price_readable($item->price * $item->quantity) }}€</span>
                                     </td>
                                     <td class="text-right">
                                         <span class="text-sm lg:text-base font-medium cursor-pointer" wire:click="removeProduct('{{$item->id}}')"> <i class="fal fa-trash-alt"></i> </span>
@@ -67,7 +67,7 @@
                     </div>
                     @guest
                         <hr class="pb-6 mt-6">
-                        Total: {{ $totalPrice }}
+                        Total: <b>{{ loja_price_readable($totalPrice) }} €</b>
                         <br>
                         <p>
                             <a class="font-medium" href="{{route('login')}}" >Se connecter</a> ou <a class="font-medium" href="{{route('login')}}" >S'inscrire</a>
@@ -89,7 +89,7 @@
                                 <div class="p-4 pb-2">
                                     <h1 class="font-bold text-xl">@lang('loja::cart.details.title')</h1>
                                 </div>
-                                {{-- Coupon Code --}}
+                                {{-- Coupon Code
                                 <div class="p-4">
                                     <p class="italic text-sm pb-1 ">@lang('loja::cart.details.coupon-label')</p>
                                     <div class="justify-center md:flex">
@@ -103,11 +103,13 @@
                                         </div>
                                     </div>
                                 </div>
+                                --}}
                                 <div class="p-4">
                                     <div class="flex justify-between border-b">
                                         <div class="lg:px-4 lg:py-2 m-2 text-lg font-bold text-center text-gray-800">@lang('loja::cart.details.subtotal')</div>
-                                        <div class="lg:px-4 lg:py-2 m-2 lg:text-lg font-bold text-center text-gray-900">{{ $totalPrice }}€</div>
+                                        <div class="lg:px-4 lg:py-2 m-2 lg:text-lg font-bold text-center text-gray-900">{{ loja_price_readable($totalPrice) }}€</div>
                                     </div>
+                                    {{-- Coupon Code
                                     <div class="flex justify-between pt-4 border-b">
                                         <div class="flex lg:px-4 lg:py-2 m-2 text-lg font-semibold text-gray-800">
                                             <form action="" method="POST">
@@ -121,13 +123,14 @@
                                             -133,944.77€
                                         </div>
                                     </div>
+                                    --}}
                                     <div class="flex justify-between pt-4 border-b">
                                         <div class="lg:px-4 lg:py-2 m-2 text-lg font-semibold text-center text-gray-800">@lang('loja::cart.details.shipping-cost')</div>
-                                        <div class="lg:px-4 lg:py-2 m-2 lg:text-lg font-bold text-center text-gray-900">14,882.75€</div>
+                                        <div class="lg:px-4 lg:py-2 m-2 lg:text-lg font-bold text-center text-gray-900">@lang('loja::cart.details.free-shipping')</div>
                                     </div>
                                     <div class="flex justify-between pt-4 border-b">
                                         <div class="lg:px-4 lg:py-2 m-2 text-lg font-semibold text-center text-gray-800">@lang('loja::cart.details.total')</div>
-                                        <div class="lg:px-4 lg:py-2 m-2 lg:text-lg font-bold text-center text-gray-900">{{ $totalPrice }}€</div>
+                                        <div class="lg:px-4 lg:py-2 m-2 lg:text-lg font-bold text-center text-gray-900">{{ loja_price_readable($totalPrice) }}€</div>
                                     </div>
                                     <div class="text-center">
                                         <button id="checkout-button" class="mx-auto px-6 py-3 mt-6 font-medium text-white bg-green-600 rounded shadow item-center hover:bg-green-700 focus:shadow-outline focus:outline-none">
@@ -156,13 +159,15 @@
     // Create an instance of the Stripe object with your publishable API key
     var stripe = Stripe("{{ env('STRIPE_PUBLIC_KEY') }}");
     var checkoutButton = document.getElementById("checkout-button");
-    checkoutButton.addEventListener("click", function () {
-        fetch("{{ route('loja.payment.create-checkout-session') }}", {
-            method: "POST",
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        })
+
+
+    window.addEventListener('checkout', event => {
+            fetch("{{ route('loja.payment.create-checkout-session') }}", {
+                method: "POST",
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            })
             .then(function (response) {
                 return response.json();
             })

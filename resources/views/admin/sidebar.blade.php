@@ -7,14 +7,15 @@
 
 @if($orderProcessed > 0)
     <li class="nav-item">
-        <a class="nav-link" href="{{ backpack_url('new-order') }}"><i class="nav-icon fad fa-shipping-fast"></i>
+        <a class="nav-link" href="{{ backpack_url('order')."?status=2" }}"><i class="nav-icon fad fa-shipping-fast"></i>
             Commandes
             <span style="float: none;" class="badge badge-pill badge-warning">{{ $orderProcessed }}</span>
         </a>
     </li>
+@else
+    <li class="nav-item"><a class="nav-link" href="{{ backpack_url('order') }}"><i class="nav-icon fad fa-shipping-fast"></i> Commandes</a></li>
 @endif
 
-<li class="nav-item"><a class="nav-link" href="{{ backpack_url('order') }}"><i class="nav-icon fad fa-shipping-fast"></i> Commandes</a></li>
 <li class="nav-item"><a class="nav-link" href="{{ backpack_url('category') }}"><i class="nav-icon fad fa-sitemap"></i> Catégories</a></li>
 <li class="nav-item"><a class="nav-link" href="{{ backpack_url('collection') }}"><i class="nav-icon fad fa-hashtag"></i> Collections</a></li>
 <li class='nav-item nav-dropdown'>

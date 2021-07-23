@@ -40,7 +40,7 @@ class CollectionCrudController extends CrudController
     {
         $this->crud->field('name')->type('text')->label('Nom');
         $this->crud->field('description')->type('textarea')->label('Description');
-        $this->crud->field('images')->label('Image de la collection')->type('browse')->mimeTypes('images');
+        $this->crud->field('cover')->label('Image de la collection')->type('browse')->mimeTypes('images');
         $this->crud->field('enabled')->type('checkbox')->label('Activer');
         $this->crud->field('enabled_home_page')->type('checkbox')->label("Activer sur l'acceuil");
     }

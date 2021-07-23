@@ -19,6 +19,10 @@ class Collection extends Model
     // Disable Laravel's mass assignment protection
     protected $guarded = [];
 
+
+    public $fillable = ['id', 'name', 'description', 'slug', 'cover', 'lft', 'rgt', 'depth',
+        'parent_id', 'enabled', 'enabled_home_page', 'created_at', 'updated_at'];
+
     /*
     |--------------------------------------------------------------------------
     | Relations
@@ -70,7 +74,7 @@ class Collection extends Model
      * Get cover of collection.
      * @return string
      */
-    public function cover()
+    public function getCover()
     {
         if (! is_null($this->cover)) {
             return asset($this->cover);

@@ -28,8 +28,18 @@ class OrderProduct extends Model
         return $this->belongsToMany(AttributeValue::class, 'loja_order_product_attribute_value');
     }
 
+    public function getReadablePriceQtyAttribute()
+    {
+        return $this->price * $this->quantity;
+    }
+
     public function getReadableAttributeValueAttribute()
     {
         return $this->attributeValues->pluck('readable')->implode(', ');
+    }
+
+    public function getReadableAttributeValueBoldAttribute()
+    {
+        return $this->attributeValues->pluck('readable_bold')->implode(', ');
     }
 }

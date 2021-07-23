@@ -32,4 +32,9 @@ class AttributeValue extends Model
     {
         return $this->attribute->name.' : '.strtolower($this->value);
     }
+
+    public function getReadableBoldAttribute()
+    {
+        return $this->attribute->name.' : <b>'.strtolower($this->value).'</b>';
+    }
 }

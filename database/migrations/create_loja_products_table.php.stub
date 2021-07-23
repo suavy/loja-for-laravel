@@ -12,6 +12,7 @@ class CreateLojaProductsTable extends Migration
             $table->bigIncrements('id');
             $table->string('slug');
             $table->string('name');
+            $table->string('sub_name')->nullable();
             $table->text('images')->nullable();
             $table->longText('description')->nullable();
             $table->longText('content')->nullable();
@@ -24,7 +25,7 @@ class CreateLojaProductsTable extends Migration
             $table->foreignId('tax_id');
             $table->foreign('tax_id')->references('id')->on('loja_taxes');
             $table->unsignedBigInteger('price')->default(0);
-            $table->unsignedBigInteger('stock')->default(0);
+            $table->unsignedBigInteger('stock')->default(0)->nullable();
             $table->boolean('enabled')->default(false);
             $table->timestamps();
         });
