@@ -67,11 +67,13 @@
                     </div>
                     @guest
                         <hr class="pb-6 mt-6">
-                        Total: <b>{{ loja_price_readable($totalPrice) }} €</b>
-                        <br>
+                        <div class="text-right">
+                            Total: <b>{{ loja_price_readable($totalPrice) }} €</b>
+                        </div>
+                        <div class="bg-lucilelight p-4 rounded">
+                            <a class="font-medium" href="{{route('login')}}">Se connecter</a> ou <a class="font-medium" href="{{route('login')}}" >S'inscrire</a> pour finaliser la commande <i class="fal fa-arrow-right"></i>
+                        </div>
                         <p>
-                            <a class="font-medium" href="{{route('login')}}" >Se connecter</a> ou <a class="font-medium" href="{{route('login')}}" >S'inscrire</a>
-                            pour valider la commande.
                         </p>
                     @endguest
                     @auth
