@@ -26,7 +26,7 @@ class CustomFormer extends Framework implements FrameworkInterface
     /**
      * Create a new Nude instance.
      *
-     * @param Container $app
+     * @param  Container  $app
      */
     public function __construct(Container $app)
     {
@@ -106,8 +106,7 @@ class CustomFormer extends Framework implements FrameworkInterface
     /**
      * Render a disabled field.
      *
-     * @param Field $field
-     *
+     * @param  Field  $field
      * @return Input
      */
     public function createDisabledField(Field $field)
@@ -121,8 +120,7 @@ class CustomFormer extends Framework implements FrameworkInterface
      * Render a plain text field
      * Which fallback to a disabled field.
      *
-     * @param Field $field
-     *
+     * @param  Field  $field
      * @return Element
      */
     public function createPlainTextField(Field $field)
@@ -137,8 +135,7 @@ class CustomFormer extends Framework implements FrameworkInterface
     /**
      * Wrap an item to be prepended or appended to the current field.
      *
-     * @param  string $item
-     *
+     * @param  string  $item
      * @return Element A wrapped item
      */
     public function placeAround($item)
@@ -149,10 +146,9 @@ class CustomFormer extends Framework implements FrameworkInterface
     /**
      * Wrap a field with prepended and appended items.
      *
-     * @param  Field $field
-     * @param  array $prepend
-     * @param  array $append
-     *
+     * @param  Field  $field
+     * @param  array  $prepend
+     * @param  array  $append
      * @return string A field concatented with prepended and/or appended items
      */
     public function prependAppend($field, $prepend, $append)
@@ -180,8 +176,7 @@ class CustomFormer extends Framework implements FrameworkInterface
     /**
      * Wraps all field contents with potential additional tags.
      *
-     * @param  Field $field
-     *
+     * @param  Field  $field
      * @return Field A wrapped field
      */
     public function wrapField($field)
@@ -192,8 +187,7 @@ class CustomFormer extends Framework implements FrameworkInterface
     /**
      * Wrap actions block with potential additional tags.
      *
-     * @param  Actions $actions
-     *
+     * @param  Actions  $actions
      * @return string A wrapped actions block
      */
     public function wrapActions($actions)
