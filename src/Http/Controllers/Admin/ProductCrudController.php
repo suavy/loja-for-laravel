@@ -120,6 +120,8 @@ class ProductCrudController extends CrudController
             return $query->orderBy('name', 'ASC')->get();
         });
         $this->crud->field('images')->label('Images')->type('browse_multiple')->sortable(true)->mimeTypes('images');
+
+        $this->crud->field('enabled')->label('Autoriser la vente')->type('checkbox');
     }
 
     protected function setupUpdateOperation()

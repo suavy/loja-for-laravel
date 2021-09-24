@@ -1,5 +1,8 @@
 <form accept-charset="utf-8" method="POST" wire:submit.prevent="addToCart">
 <div class="flex py-4 space-x-4">
+
+    @if($product->enabled)
+
     <div class="relative">
         <div class="text-center left-0 pt-2 right-0 absolute block text-xs uppercase text-gray-400 tracking-wide font-semibold">Qty</div>
         <select class="cursor-pointer appearance-none rounded-xl border border-gray-200 pl-4 pr-8 h-14 flex items-end pb-1" wire:model="quantity">
@@ -32,13 +35,16 @@
         </div>
     @endif
 
-    <button class="h-14 px-6 py-2 font-semibold rounded-xl bg-lucilelight hover:bg-luciledark text-white">
+
+    <button class="h-14 px-6 py-2 font-semibold rounded-xl bg-lucilelight hover:bg-luciledark text-white ">
         Ajouter au panier
     </button>
 
+    @else
+        <h2 class="mb-2 leading-tight tracking-tight text-gray-800 text-2xl md:text-3xl">Rupture de stock</h2>
+    @endif
 
-
-
+</div>
 
     <!-- Gestion des erreurs -->
     @error('quantity')
@@ -46,25 +52,26 @@
           <span class="text-xl inline-block mr-5 align-middle">
             <i class="fas fa-bell"></i>
           </span>
-          <span class="inline-block align-middle mr-8">
+        <span class="inline-block align-middle mr-8">
               {{ $message }}
           </span>
     </div>
     @enderror
+
     @error('attributes')
-        <div class="flex text-white px-6 py-4 border-0 rounded relative mb-4 bg-red-500 bg-opacity-1">
-              <span class="text-xl inline-block mr-5 align-middle">
-                <i class="fas fa-bell"></i>
+    <div class="flex text-white px-6 py-4 border-0 rounded relative mb-4 bg-red-500 bg-opacity-1">
+        <span class="inline-block align-middle mr-8">
+                  La séléction du cadre est obligatoire
               </span>
-            <span class="inline-block align-middle mr-8">
-                  {{ $message }}
-              </span>
-        </div>
+    </div>
     @enderror
 
     @if($productIsAddedToCart)
-        <span id="loading-add-cart">Produit ajouté au panier !</span>
+        <div class="flex px-6 py-4 relative mb-4">
+            <span class=" text-luciledark text-3xl">Produit ajouté au panier !</span>
+        </div>
     @endif
 
-</div>
 </form>
+
+

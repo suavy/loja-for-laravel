@@ -107,13 +107,13 @@ class Order extends Model
         $this->orderStatus()->associate(OrderStatus::getSent());
     }
 
-    public static function initOrder($stripeId)
+    public static function initOrder($stripeId, $amount)
     {
         $order = self::create([
             'user_id' => Auth::id(),
             'order_status_id' => OrderStatus::$STATUS_PENDING, // pending
             'stripe_id' => $stripeId,
-            'amount' => 0,
+            'amount' => $amount,
         ]);
         // todo complete loja_order_... tables
         return $order;
