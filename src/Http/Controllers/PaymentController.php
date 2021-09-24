@@ -44,7 +44,7 @@ class PaymentController extends Controller
             'cancel_url' => route('loja.payment.cancel').'?session_id={CHECKOUT_SESSION_ID}',
         ]);
 
-        Order::initOrder($checkoutSession->id,\Cart::getTotal());
+        Order::initOrder($checkoutSession->id, \Cart::getTotal());
 
         return response()->json(['id' => $checkoutSession->id]);
     }

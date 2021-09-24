@@ -71,6 +71,7 @@ class Collection extends Model
 
     /**
      * Get cover of collection.
+     *
      * @return string
      */
     public function getCover()
