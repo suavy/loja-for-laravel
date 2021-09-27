@@ -116,6 +116,7 @@ class Order extends Model
             'amount' => $amount,
         ]);
 
+        /*
         foreach($items as $item) {
 
             $orderProduct = new OrderProduct([
@@ -129,6 +130,7 @@ class Order extends Model
 
             $orderProduct->attributeValues()->attach($item->attributes->keys());
         }
+        */
 
         return $order;
     }
