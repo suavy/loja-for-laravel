@@ -83,6 +83,11 @@ class Product extends Model
         //return $this->name.
     }
 
+    public function getUrlAttribute()
+    {
+        return route('loja.product.show', $this);
+    }
+
     /*
     |--------------------------------------------------------------------------
     | Mutators
