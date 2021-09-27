@@ -36,10 +36,6 @@ class PaymentController extends Controller
             ];
         }
 
-        dd($lineItems);
-
-        Log::info('test', $lineItems);
-
         $checkoutSession = Session::create([
             'customer_email' => \Auth::user()->email,
             'payment_method_types' => ['card'],
