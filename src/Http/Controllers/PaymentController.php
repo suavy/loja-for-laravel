@@ -3,6 +3,7 @@
 namespace Suavy\LojaForLaravel\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Stripe\Checkout\Session;
 use Stripe\Event;
 use Stripe\Stripe;
@@ -34,6 +35,8 @@ class PaymentController extends Controller
                 'quantity' => (int) $item->quantity,
             ];
         }
+
+        Log::info('test',$lineItems);
 
         $checkoutSession = Session::create([
             'customer_email' => \Auth::user()->email,
