@@ -28,7 +28,7 @@ class PaymentController extends Controller
                     'unit_amount' => $item->price,
                     'product_data' => [
                         'name' => $item->name,
-                        'images' => [$item->associatedModel->cover],
+                        'images' => [urlencode($item->associatedModel->cover)],
                     ],
                 ],
                 'quantity' => (int) $item->quantity,
