@@ -36,7 +36,7 @@ class PaymentController extends Controller
             ];
         }
 
-        Log::info('test',$lineItems);
+        Log::info('test', $lineItems);
 
         $checkoutSession = Session::create([
             'customer_email' => \Auth::user()->email,
