@@ -116,8 +116,7 @@ class Order extends Model
             'amount' => $amount,
         ]);
 
-        foreach($items as $item) {
-
+        foreach ($items as $item) {
             $orderProduct = new OrderProduct([
                 'order_id'      => $order->id,
                 'product_id'    => $item->associatedModel->id,
