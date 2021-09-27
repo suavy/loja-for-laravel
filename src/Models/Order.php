@@ -107,7 +107,7 @@ class Order extends Model
         $this->orderStatus()->associate(OrderStatus::getSent());
     }
 
-    public static function initOrder($stripeId, $amount)
+    public static function initOrder($stripeId, $amount, $items)
     {
         $order = self::create([
             'user_id' => Auth::id(),
@@ -115,7 +115,21 @@ class Order extends Model
             'stripe_id' => $stripeId,
             'amount' => $amount,
         ]);
-        // todo complete loja_order_... tables
+
+        foreach($items as $item) {
+
+            $orderProduct = new OrderProduct([
+                'order_id'      => $order->id,
+                'product_id'    => $item->associatedModel->id,
+                'quantity'      => $item->quantity,
+                'price'         => $item->price,
+            ]);
+
+            $orderProduct->save();
+
+            $orderProduct->attributeValues()->attach($item->attributes->keys());
+        }
+
         return $order;
     }
 

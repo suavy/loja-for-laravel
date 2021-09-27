@@ -55,21 +55,21 @@
                         <ul class="list-group">
                             <li class="list-group-item list-group-item-primary">
                                 <div class="row">
-                                    <dt class="col-sm-1">Quantité</dt>
                                     <dt class="col-sm-3">Produit</dt>
                                     <dt class="col-sm-6">Attributes</dt>
+                                    <dt class="col-sm-1">Quantité</dt>
                                     <dt class="col-sm-2">Prix</dt>
                                 </div>
                             </li>
                             @foreach($order->orderProducts as $product)
                                 <li class="list-group-item">
                                     <div class="row">
-                                        <dd class="col-sm-1">{{$product->quantity}}</dd>
                                         <dd class="col-sm-3">{{ $product->product->name }}</dd>
                                         <dd class="col-sm-6">{{ $product->readable_attribute_value_bold }}</dd>
+                                        <dd class="col-sm-1">{{$product->quantity}}</dd>
                                         <dd class="col-sm-2">
                                             <span class="badge badge-primary badge-pill"><b>
-                                                {{ $product->readable_price_qty }} €
+                                                {{ loja_price_readable($product->readable_price_qty) }} €
                                             </b></span>
                                         </dd>
                                     </div>
@@ -77,8 +77,9 @@
                             @endforeach
                         </ul>
 
+
                     {{-- User data--}}
-                    <h2 class="card-title">Le client</h2>
+                    <h2 class="card-title mt-2">Le client</h2>
                     @php $user = $order->user; @endphp
                     <ul class="list-group">
                         <li class="list-group-item">
