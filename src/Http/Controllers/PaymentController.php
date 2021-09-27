@@ -40,8 +40,8 @@ class PaymentController extends Controller
             'payment_method_types' => ['card'],
             'line_items' => $lineItems,
             'mode' => 'payment',
-            'success_url' => route('loja.payment.success').'?session_id={CHECKOUT_SESSION_ID}',
-            'cancel_url' => route('loja.payment.cancel').'?session_id={CHECKOUT_SESSION_ID}',
+            'success_url' => urlencode(route('loja.payment.success').'?session_id={CHECKOUT_SESSION_ID}'),
+            'cancel_url' => urlencode(route('loja.payment.cancel').'?session_id={CHECKOUT_SESSION_ID}'),
         ]);
 
         Order::initOrder($checkoutSession->id, \Cart::getTotal(), \Cart::session(session()->getId())->getContent());
