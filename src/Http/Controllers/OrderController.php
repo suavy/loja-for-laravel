@@ -8,7 +8,7 @@ class OrderController extends Controller
 {
     public function index()
     {
-        $orders = Order::query()->where('user_id',auth()->user()->id)->get();
+        $orders = Order::query()->where('user_id', auth()->user()->id)->get();
 
         return view('loja::order.index', compact('orders'));
     }
