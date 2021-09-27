@@ -36,6 +36,8 @@ class PaymentController extends Controller
             ];
         }
 
+        dd($lineItems);
+
         Log::info('test',$lineItems);
 
         $checkoutSession = Session::create([
