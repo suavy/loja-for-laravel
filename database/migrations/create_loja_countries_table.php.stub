@@ -16,6 +16,7 @@ class CreateLojaCountriesTable extends Migration
             $table->string('cca2',3)->unique();
             $table->string('name')->unique();
             $table->boolean('delivery')->default(false);
+            $table->unsignedBigInteger('delivery_price')->after('delivery')->default(0);
             $table->timestamps();
         });
         Country::countriesSeed();

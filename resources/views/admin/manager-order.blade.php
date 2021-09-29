@@ -90,6 +90,12 @@
                         </li>
                         <li class="list-group-item">
                             <div class="row">
+                                <dt class="col-sm-3">Email</dt>
+                                <dd class="col-sm-9">{{ $user->email }}</dd>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="row">
                                 <dt class="col-sm-3">Téléphone</dt>
                                 <dd class="col-sm-9">{{ optional($user->address())->phone }}</dd>
                             </div>
@@ -119,9 +125,9 @@
                     <form method="POST" action="{{ route('admin.confirm.order') }}">
                         @csrf
                         <input type="hidden" name="order" value="{{ $order->id }}">
-                        <label for="basic-url" class="form-label">Lien de suivi*</label>
+                        <label for="basic-url" class="form-label">Numéro de suivi*</label>
                         <div class="input-group mb-3">
-                            <input name="delivery_tracking" type="url" class="form-control"  pattern="https://.*" placeholder="https://example.com" required>
+                            <input name="delivery_tracking" class="form-control"   placeholder="" required>
                         </div>
 
                         <div class="d-grid gap-2">

@@ -24,19 +24,20 @@ class CountryDeliveryCrudController extends CrudController
         $this->crud->setRoute('admin/country-delivery');
         $this->crud->setEntityNameStrings('pays de livraison', 'pays de livraisons');
 
-        $this->crud->addButtonFromView('line', 'toggleCountry', 'toggle-country', 'beginning');
     }
 
     protected function setupListOperation()
     {
         $this->crud->removeButton('delete');
         $this->crud->removeButton('show');
-        $this->crud->removeButton('update');
-        $this->crud->orderBy('delivery');
 
         $this->crud->column('id')->label('#');
         $this->crud->column('name')->label('Nom');
         $this->crud->column('delivery')->type('check')->label('Livraison Disponible ?');
+        $this->crud->column('readable_price')->label('Prix');
+
+        $this->crud->addClause('orderBy', 'delivery', 'desc');
+
     }
 
     public function toggleCountry($id)
@@ -50,9 +51,17 @@ class CountryDeliveryCrudController extends CrudController
 
     protected function setupCreateOperation()
     {
-        $this->crud->field('disabled')
+        $this->crud->field('delivery')
             ->type('checkbox')
             ->label('Autoriser la livraison');
+
+        $this->crud->field('backoffice_price')
+            ->type('number')
+            ->label('Prix de la livraison')
+            ->hint('Mettre 0 ou laisser vide pour une livraison gratuite')
+            ->attributes(['step'=>'0.01'])
+            ->suffix('€')
+            ->wrapper(['class'=>'form-group col-md-6']);
     }
 
     protected function setupUpdateOperation()

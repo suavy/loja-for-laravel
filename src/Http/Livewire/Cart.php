@@ -24,6 +24,11 @@ class Cart extends Component
 
     public $optionsCountries;
 
+    public $delivery_price = null;
+
+    public $country;
+
+
     public $email;
     public $password;
     public $isLogged = false;
@@ -40,10 +45,9 @@ class Cart extends Component
 
     public function mount(): void
     {
-        $this->updateItems();
 
         if (auth()->check()) {
-            $this->optionsCountries = Country::query()->where('cca2', 'FR')->get()->pluck('name', 'id')->toArray();
+            $this->optionsCountries = Country::forSelect()->toArray();
 
             if (auth()->user()->address() !== null) {
                 $this->addressFirstname = auth()->user()->address()->firstname;
@@ -54,11 +58,15 @@ class Cart extends Component
                 $this->addressZipCode = auth()->user()->address()->zip_code;
                 $this->addressOther = auth()->user()->address()->other;
                 $this->addressCountry = auth()->user()->address()->country->id;
+                $this->country = auth()->user()->address()->country;
+                $this->delivery_price = $this->country->delivery_price;
             } else {
                 $this->addressFirstname = auth()->user()->firstname;
                 $this->addressLastname = auth()->user()->lastname;
             }
         }
+
+        $this->updateItems();
     }
 
     public function render()
@@ -88,17 +96,29 @@ class Cart extends Component
         $this->updateItems();
     }
 
+    public function updatedAddressCountry($country)
+    {
+        $country = Country::query()->find($country);
+        $this->country = $country;
+        $this->delivery_price = $country->delivery_price;
+
+        $this->totalPrice = \Cart::getTotal() + $this->country->delivery_price;
+    }
+
     public function updateItems()
     {
         if (\Cart::session(session()->getId())->isEmpty()) {
             $this->cartHasItems = false;
             $this->cartItems = [];
             $this->totalPrice = 0;
+            $this->subTotalPrice = 0;
         } else {
             $this->cartHasItems = true;
             $this->cartItems = \Cart::session(session()->getId())->getContent();
             $this->totalPrice = \Cart::getTotal();
+            $this->subTotalPrice = \Cart::getTotal();
         }
+
 
         $this->emit('updateQuantityProduct');
     }
