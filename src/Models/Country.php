@@ -14,9 +14,7 @@ class Country extends Model
     // Disable Laravel's mass assignment protection
     //protected $guarded = [];
 
-    protected $fillable = ['id', 'name', 'delivery', 'delivery_price','backoffice_price'];
-
-
+    protected $fillable = ['id', 'name', 'delivery', 'delivery_price', 'backoffice_price'];
 
     public function getReadablePriceAttribute()
     {
@@ -49,7 +47,8 @@ class Country extends Model
             $query = $query->where('delivery', 1)->orWhere('cca2','FR')->get();
         }
         */
-        return self::query()->where('delivery', 1)->orWhere('cca2','FR')->get()->pluck('name', 'id');
+        return self::query()->where('delivery', 1)->orWhere('cca2', 'FR')->get()->pluck('name', 'id');
+
         return $query->pluck('name', 'id');
     }
 

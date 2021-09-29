@@ -28,7 +28,6 @@ class Cart extends Component
 
     public $country;
 
-
     public $email;
     public $password;
     public $isLogged = false;
@@ -45,7 +44,6 @@ class Cart extends Component
 
     public function mount(): void
     {
-
         if (auth()->check()) {
             $this->optionsCountries = Country::forSelect()->toArray();
 
@@ -118,7 +116,6 @@ class Cart extends Component
             $this->totalPrice = \Cart::getTotal();
             $this->subTotalPrice = \Cart::getTotal();
         }
-
 
         $this->emit('updateQuantityProduct');
     }

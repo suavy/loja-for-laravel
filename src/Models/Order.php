@@ -71,8 +71,7 @@ class Order extends Model
     public function getDeliveryTrackingReadableAttribute()
     {
         //todo save address in order
-        return "https://www.chronopost.fr/expedier/inputLTNumbersNoJahia.do?listeNumeros=".$this->delivery_tracking;
-
+        return 'https://www.chronopost.fr/expedier/inputLTNumbersNoJahia.do?listeNumeros='.$this->delivery_tracking;
     }
 
     /*
@@ -116,7 +115,7 @@ class Order extends Model
 
     public function isSent()
     {
-        return !is_null($this->orderStatus) && $this->orderStatus->slug == "sent";
+        return ! is_null($this->orderStatus) && $this->orderStatus->slug == 'sent';
     }
 
     public static function initOrder($stripeId, $amount, $items)
