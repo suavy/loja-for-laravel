@@ -115,7 +115,7 @@ class Cart extends Component
             $this->cartItems = \Cart::session(session()->getId())->getContent();
             $this->totalPrice = \Cart::getTotal();
             $this->subTotalPrice = \Cart::getTotal();
-            if(!is_null($this->delivery_price)){
+            if (! is_null($this->delivery_price)) {
                 $this->totalPrice = $this->totalPrice + $this->delivery_price;
             }
         }
