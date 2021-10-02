@@ -36,13 +36,13 @@ class PaymentController extends Controller
         }
 
         //todo améliorer
-        if(\Auth::user()->address()->country->delivery_price != 0) {
+        if (\Auth::user()->address()->country->delivery_price != 0) {
             $lineItems[] = [
                 'price_data' => [
                     'currency' => 'eur',
                     'unit_amount' => \Auth::user()->address()->country->delivery_price,
                     'product_data' => [
-                        'name' => "Livraison",
+                        'name' => 'Livraison',
                     ],
                 ],
                 'quantity' => (int) 1,

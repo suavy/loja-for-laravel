@@ -23,7 +23,6 @@ class CountryDeliveryCrudController extends CrudController
         $this->crud->setModel(Country::class);
         $this->crud->setRoute('admin/country-delivery');
         $this->crud->setEntityNameStrings('pays de livraison', 'pays de livraisons');
-
     }
 
     protected function setupListOperation()
@@ -37,7 +36,6 @@ class CountryDeliveryCrudController extends CrudController
         $this->crud->column('readable_price')->label('Prix');
 
         $this->crud->addClause('orderBy', 'delivery', 'desc');
-
     }
 
     public function toggleCountry($id)
