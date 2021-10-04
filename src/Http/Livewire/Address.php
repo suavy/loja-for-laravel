@@ -32,7 +32,7 @@ class Address extends Component
 
     public function mount(): void
     {
-        $this->optionsCountries = Country::query()->where('cca2', 'FR')->get()->pluck('name', 'id')->toArray();
+        $this->optionsCountries = Country::forSelect()->toArray();
 
         if (auth()->user()->address() !== null) {
             $this->addressFirstname = auth()->user()->address()->firstname;

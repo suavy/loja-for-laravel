@@ -35,6 +35,20 @@ class PaymentController extends Controller
             ];
         }
 
+        //todo améliorer
+        if (\Auth::user()->address()->country->delivery_price != 0) {
+            $lineItems[] = [
+                'price_data' => [
+                    'currency' => 'eur',
+                    'unit_amount' => \Auth::user()->address()->country->delivery_price,
+                    'product_data' => [
+                        'name' => 'Livraison',
+                    ],
+                ],
+                'quantity' => (int) 1,
+            ];
+        }
+
         $checkoutSession = Session::create([
             'customer_email' => \Auth::user()->email,
             'payment_method_types' => ['card'],

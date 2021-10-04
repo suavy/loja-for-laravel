@@ -108,7 +108,7 @@
                                 <div class="p-4">
                                     <div class="flex justify-between border-b">
                                         <div class="lg:px-4 lg:py-2 m-2 text-lg font-bold text-center text-gray-800">@lang('loja::cart.details.subtotal')</div>
-                                        <div class="lg:px-4 lg:py-2 m-2 lg:text-lg font-bold text-center text-gray-900">{{ loja_price_readable($totalPrice) }}€</div>
+                                        <div class="lg:px-4 lg:py-2 m-2 lg:text-lg font-bold text-center text-gray-900">{{ loja_price_readable($subTotalPrice) }}€</div>
                                     </div>
                                     {{-- Coupon Code
                                     <div class="flex justify-between pt-4 border-b">
@@ -127,7 +127,15 @@
                                     --}}
                                     <div class="flex justify-between pt-4 border-b">
                                         <div class="lg:px-4 lg:py-2 m-2 text-lg font-semibold text-center text-gray-800">@lang('loja::cart.details.shipping-cost')</div>
-                                        <div class="lg:px-4 lg:py-2 m-2 lg:text-lg font-bold text-center text-gray-900">@lang('loja::cart.details.free-shipping')</div>
+                                        <div class="lg:px-4 lg:py-2 m-2 lg:text-lg font-bold text-center text-gray-900">
+                                            @if(is_null($delivery_price))
+                                                Sélectionnez d'abord un pays
+                                            @elseif($delivery_price == "0.00")
+                                                @lang('loja::cart.details.free-shipping')
+                                            @else
+                                                {{ loja_price_readable($delivery_price) }}€
+                                            @endif
+                                        </div>
                                     </div>
                                     <div class="flex justify-between pt-4 border-b">
                                         <div class="lg:px-4 lg:py-2 m-2 text-lg font-semibold text-center text-gray-800">@lang('loja::cart.details.total')</div>
