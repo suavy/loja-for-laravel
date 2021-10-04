@@ -17,11 +17,11 @@ Route::group([
     /*
      * Product, Category, Collection routing
      */
-    Route::get('/product/{product}', [ProductController::class, 'show'])->name('loja.product.show');
+    Route::get('/product/{product:slug}', [ProductController::class, 'show'])->name('loja.product.show');
     Route::get('/categories', [CategoryController::class, 'index'])->name('loja.category.index');
-    Route::get('/category/{category}', [CategoryController::class, 'show'])->name('loja.category.show');
+    Route::get('/category/{category:slug}', [CategoryController::class, 'show'])->name('loja.category.show');
     Route::get('/collections', [CollectionController::class, 'index'])->name('loja.collection.index');
-    Route::get('/collection/{collection}', [CollectionController::class, 'show'])->name('loja.collection.show');
+    Route::get('/collection/{collection:slug}', [CollectionController::class, 'show'])->name('loja.collection.show');
     Route::get('/search', [SearchController::class, 'index'])->name('loja.search');
 
     /*
