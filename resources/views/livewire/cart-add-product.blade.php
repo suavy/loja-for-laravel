@@ -35,7 +35,7 @@
             Ajouter au panier
         </button>
     @else
-        <h2 class="mb-2 leading-tight tracking-tight text-gray-800 text-2xl md:text-3xl">Rupture de stock</h2>
+        <h2 class="mb-2 leading-tight tracking-tight text-gray-800 text-2xl md:text-3xl">Vendu</h2>
     @endif
 
 </div>
