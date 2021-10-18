@@ -28,7 +28,7 @@ class AdminController extends Controller
 
         $order->user->notify(new OrderSent($order));
 
-        return redirect(backpack_url('new-order')) //http://lucilevilaine.local/admin/order?status=2
+        return redirect(backpack_url('order?status=2')) //http://lucilevilaine.local/admin/order?status=2
             ->with('success', 'La commande a bien été confirmé');
     }
 }
