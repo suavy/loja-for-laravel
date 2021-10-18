@@ -50,6 +50,10 @@ class OrderCrudController extends CrudController
             ->format('Y/MM/DD HH:mm')
             ->label('Date');
 
+        $this->crud->column('delivery_tracking')
+            ->type('text')
+            ->label('N suivi');
+
         $this->crud->addFilter([
             'name' => 'status',
             'type' => 'select2',
