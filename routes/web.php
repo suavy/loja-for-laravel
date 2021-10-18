@@ -17,23 +17,23 @@ Route::group([
     /*
      * Product, Category, Collection routing
      */
-    Route::get('/product/{product}', [ProductController::class, 'show'])->name('loja.product.show');
+    Route::get('/produit/{product:slug}', [ProductController::class, 'show'])->name('loja.product.show');
     Route::get('/categories', [CategoryController::class, 'index'])->name('loja.category.index');
-    Route::get('/category/{category}', [CategoryController::class, 'show'])->name('loja.category.show');
+    Route::get('/category/{category:slug}', [CategoryController::class, 'show'])->name('loja.category.show');
     Route::get('/collections', [CollectionController::class, 'index'])->name('loja.collection.index');
-    Route::get('/collection/{collection}', [CollectionController::class, 'show'])->name('loja.collection.show');
+    Route::get('/collection/{collection:slug}', [CollectionController::class, 'show'])->name('loja.collection.show');
     Route::get('/search', [SearchController::class, 'index'])->name('loja.search');
 
     /*
      * Order routing
      */
-    Route::get('/orders', [OrderController::class, 'index'])->name('loja.order.index');
-    Route::get('/order/{order}', [OrderController::class, 'show'])->name('loja.order.show');
+    Route::get('/commandes', [OrderController::class, 'index'])->name('loja.order.index');
+    Route::get('/commande/{order}', [OrderController::class, 'show'])->name('loja.order.show');
 
     /*
      * Cart routing
      */
-    Route::get('/cart', [CartController::class, 'index'])->name('loja.cart.index');
+    Route::get('/panier', [CartController::class, 'index'])->name('loja.cart.index');
     Route::post('/cart/add/{product}', [CartController::class, 'productAdd'])->name('loja.cart.product.add');
     Route::post('/cart/update/{product}', [CartController::class, 'productUpdateQuantity'])->name('loja.cart.product.update.quantity');
     Route::post('/cart/remove/{product}', [CartController::class, 'productRemove'])->name('loja.cart.product.remove');
