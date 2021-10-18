@@ -48,6 +48,9 @@
                         <h5 class="card-title pt-2">Prix total de la commande
                             <span class="badge badge-primary badge-pill"><b>{{ loja_price_readable($order->amount) }} € </b></span>
                         </h5>
+                        @if(!is_null($order->delivery_tracking))
+                            Numéro de suivi : {{ $order->delivery_tracking }} - Lien : <a href="{{ $order->delivery_tracking_readable }}" target="_blank" >Suivre</a>
+                        @endif
                     </div>
 
                     {{-- Order data--}}
