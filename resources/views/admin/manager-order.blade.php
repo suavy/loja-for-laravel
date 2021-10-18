@@ -49,7 +49,9 @@
                             <span class="badge badge-primary badge-pill"><b>{{ loja_price_readable($order->amount) }} € </b></span>
                         </h5>
                         @if(!is_null($order->delivery_tracking))
+                            <h5>
                             Numéro de suivi : {{ $order->delivery_tracking }} - Lien : <a href="{{ $order->delivery_tracking_readable }}" target="_blank" >Suivre</a>
+                            </h5>
                         @endif
                     </div>
 
