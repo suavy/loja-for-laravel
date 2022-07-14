@@ -64,11 +64,13 @@ class Cart extends Component
             }
         }
 
-        $this->updateItems();
+        //$this->updateItems();
     }
 
     public function render()
     {
+        $this->updateItems();
+
         return view('loja::livewire.cart');
     }
 
@@ -77,7 +79,7 @@ class Cart extends Component
         \Cart::session(session()->getId())->update($id, [
             'quantity' => -1,
         ]);
-        $this->updateItems();
+        //$this->updateItems();
     }
 
     public function addQuantity($id)
@@ -85,13 +87,13 @@ class Cart extends Component
         \Cart::session(session()->getId())->update($id, [
             'quantity' => +1,
         ]);
-        $this->updateItems();
+        //$this->updateItems();
     }
 
     public function removeProduct($id)
     {
         \Cart::session(session()->getId())->remove($id);
-        $this->updateItems();
+        //$this->updateItems();
     }
 
     public function updatedAddressCountry($country)
@@ -112,7 +114,8 @@ class Cart extends Component
             $this->subTotalPrice = 0;
         } else {
             $this->cartHasItems = true;
-            $this->cartItems = \Cart::session(session()->getId())->getContent();
+            //$this->cartItems = \Cart::session(session()->getId())->getContent();
+            $this->cartItems = \Cart::getContent();
             $this->totalPrice = \Cart::getTotal();
             $this->subTotalPrice = \Cart::getTotal();
             if (! is_null($this->delivery_price)) {
@@ -137,14 +140,14 @@ class Cart extends Component
 
     public function updated($propertyName)
     {
-        $this->updateItems();
+        //$this->updateItems();
 
         $this->validateOnly($propertyName);
     }
 
     public function saveAddress()
     {
-        $this->updateItems();
+        //$this->updateItems();
 
         $this->validate();
 
